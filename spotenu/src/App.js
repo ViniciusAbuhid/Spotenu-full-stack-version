@@ -40,9 +40,7 @@ function App() {
   return (
     <Provider store={store}>
       <MuiThemeProvider theme={theme}>
-        <div>
           <Router history={history} />
-        </div>
       </MuiThemeProvider>
     </Provider>
   );
