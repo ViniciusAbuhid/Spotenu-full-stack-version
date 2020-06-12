@@ -1,11 +1,11 @@
 import React from 'react'
 
-function AlmbumInfo(){
+function MusicGrouper(){
     return(
         <div>
-            AlmbumInfo
+            MusicGrouper
         </div>
     )
 }
 
-export default AlmbumInfo
+export default MusicGrouper
