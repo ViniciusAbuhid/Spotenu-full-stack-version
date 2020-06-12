@@ -3,8 +3,8 @@ import { Provider } from "react-redux";
 import { createBrowserHistory } from "history";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import Router from "../Router";
-import { generateReducers } from "../../reducers";
+import Router from "./router/index";
+import { generateReducers } from "../src/reducers/index";
 import { routerMiddleware } from "connected-react-router";
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core'
 
@@ -42,7 +42,6 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <div>
           <Router history={history} />
-          'oi'
         </div>
       </MuiThemeProvider>
     </Provider>
