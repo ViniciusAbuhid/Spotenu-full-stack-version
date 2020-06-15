@@ -13,7 +13,6 @@ function Signup(props) {
     function saveUserData(e) {
         const { name, value } = e.target
         setUserData({ ...userData, [name]: value })
-        console.log(userData)
     }
 
     function sendSubscription(e) {
@@ -23,7 +22,7 @@ function Signup(props) {
 
     return (
         <S.PageWrapper>
-            <S.ContentWrapper>
+            <S.ContentWrapper elevation={10}>
                 <S.FormWrapper onSubmit={sendSubscription}>
                     <S.ImgWrapper src={logo}></S.ImgWrapper>
                     {role === 'admin' ? 

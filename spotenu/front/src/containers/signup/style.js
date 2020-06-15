@@ -1,7 +1,9 @@
 import styled from 'styled-components'
-import {Paper} from '@material-ui/core'
+import { Paper } from '@material-ui/core'
 
 export const PageWrapper = styled.div`
+    box-sizing: border-box
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
