@@ -6,21 +6,22 @@ import thunk from "redux-thunk";
 import Router from "./router/index";
 import { generateReducers } from "../src/reducers/index";
 import { routerMiddleware } from "connected-react-router";
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 
 const theme = createMuiTheme({
-  pallete: {
-    primary: {
-      // light: será calculada com base em palette.primary.main,
-      main: '#ff4400',
-      // dark: será calculada com base em palette.primary.main,
+  palette: {
+    primary: 
+    {
+      // light: '#FE9934',
+      main: '#FE7E02'
+      // dark: '#CB6601'
       // contrastText: será calculada para contrastar com palette.primary.main
     },
     secondary: {
-      light: '#0066ff',
-      main: '#0044ff',
-      // dark: será calculada com base palette.secondary.main,
-      contrastText: '#ffcc00',
+      // light: '#0087E0',
+      main: '#0063a5'
+      // dark: '#00253D',
+      // contrastText: '#ffcc00'
     }
   }
 })
@@ -39,9 +40,9 @@ const store = createStore(generateReducers(history), compose(...middlewares));
 function App() {
   return (
     <Provider store={store}>
-      <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
           <Router history={history} />
-      </MuiThemeProvider>
+      </ThemeProvider>
     </Provider>
   );
 }
