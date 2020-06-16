@@ -1,7 +1,51 @@
 ul {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+/* 
+approvals
+
+export const PageWrapper = styled.div`
+    box-sizing: border-box;
+    min-height: 100vh;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FE7E02;
+    justify-content: space-between;
+`
+export const ContentWrapper = styled(Paper)`
+    box-sizing: border-box;
+    width: 40%;
+    padding: 15px;
+
+    margin: 50px 0
+` */
+
+/* signup
+
+export const PageWrapper = styled.div`
+    box-sizing: border-box
+    max-width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    list-style: ;
-}
+    background-color: #FE7E02
+`
+
+export const ContentWrapper = styled(Paper)`
+    box-sizing: border-box;
+    width: 40%;
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+` */

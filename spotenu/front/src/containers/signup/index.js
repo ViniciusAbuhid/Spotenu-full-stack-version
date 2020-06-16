@@ -23,63 +23,65 @@ function Signup(props) {
     return (
         <S.PageWrapper>
             <S.ContentWrapper elevation={10}>
-                <S.FormWrapper onSubmit={sendSubscription}>
-                    <S.ImgWrapper src={logo}></S.ImgWrapper>
-                    {role === 'admin' ?
-                        <Typography variant='h4'>Cadastro de novo administrador</Typography> :
-                        <div>
-                            <Typography variant='h3' align='center'>Cadastro</Typography>
-                            <Typography align='center'>Desejo me cadastrar como:</Typography>
-                            <Box mt={2}>
-                                <ButtonGroup color="secondary" aria-label="outlined primary button group">
-                                    <Button variant="contained"
-                                        onClick={() => setRole('payer-user')}>Ouvinte pagante</Button>
-                                    <Button variant="contained"
-                                        onClick={() => setRole('normal-user')}>Ouvinte não pagante</Button>
-                                    <Button variant="contained"
-                                        onClick={() => setRole('artist')}>Banda</Button>
-                                </ButtonGroup>
-                            </Box>
-                        </div>
-                    }
-                    <TextField
-                        color='secondary'
-                        label='Nome'
-                        name='name'
-                        // required
-                        onChange={saveUserData} />
-                    <TextField
-                        color='secondary'
-                        label='E-mail'
-                        type='email'
-                        name='email'
-                        // required
-                        onChange={saveUserData} />
-                    <TextField
-                        color='secondary'
-                        label='Nickname'
-                        name='nickname'
-                        // required
-                        onChange={saveUserData} />
-                    <TextField
-                        color='secondary'
-                        label='Senha'
-                        type='password'
-                        name='password'
-                        required
-                        onChage={saveUserData}
-                        inputProps={role === 'admin' ? { minLength: 10 } : { minLength: 6 }} />
-                    {role === 'artist' ?
+                <S.ImgWrapper src={logo}></S.ImgWrapper>
+                {role === 'admin' ?
+                    <Typography variant='h4'>Cadastro de novo administrador</Typography> :
+                    <div>
+                        <Typography variant='h3' align='center'>Cadastro</Typography>
+                        <Typography align='center'>Desejo me cadastrar como:</Typography>
+                        <Box mt={2}>
+                            <ButtonGroup color="secondary" aria-label="outlined primary button group">
+                                <Button variant="contained"
+                                    onClick={() => setRole('payer-user')}>Ouvinte pagante</Button>
+                                <Button variant="contained"
+                                    onClick={() => setRole('normal-user')}>Ouvinte não pagante</Button>
+                                <Button variant="contained"
+                                    onClick={() => setRole('artist')}>Banda</Button>
+                            </ButtonGroup>
+                        </Box>
+                    </div>
+                }
+                {role !== '' ?
+                    <S.FormWrapper onSubmit={sendSubscription}>
                         <TextField
                             color='secondary'
-                            label='Descrição'
-                            name='description'
-                            onChange={saveUserData}></TextField> : ''
-                    }
-                    <Box mt={4} >
-                        <Button variant="contained" color='secondary' type='onSubmit'>cadastrar</Button>
-                    </Box>
-                </S.FormWrapper>
+                            label='Nome'
+                            name='name'
+                            required
+                            onChange={saveUserData} />
+                        <TextField
+                            color='secondary'
+                            label='E-mail'
+                            type='email'
+                            name='email'
+                            required
+                            onChange={saveUserData} />
+                        <TextField
+                            color='secondary'
+                            label='Nickname'
+                            name='nickname'
+                            required
+                            onChange={saveUserData} />
+                        <TextField
+                            color='secondary'
+                            label='Senha'
+                            type='password'
+                            name='password'
+                            required
+                            onChage={saveUserData}
+                            inputProps={role === 'admin' ? { minLength: 10 } : { minLength: 6 }} />
+                        {role === 'artist' ?
+                            <TextField
+                                color='secondary'
+                                label='Descrição'
+                                name='description'
+                                onChange={saveUserData}></TextField> : ''
+                        }
+                        <Box mt={4} >
+                            <Button variant="contained" color='secondary' type='onSubmit'>cadastrar</Button>
+                        </Box>
+                    </S.FormWrapper>
+                    : ''}
             </S.ContentWrapper>
         </S.PageWrapper>
     )

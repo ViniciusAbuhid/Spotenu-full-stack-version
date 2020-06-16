@@ -3,22 +3,22 @@ import { Paper } from '@material-ui/core'
 
 export const PageWrapper = styled.div`
     box-sizing: border-box;
-    height: 100vh;
+    min-height: 100vh;
     max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #FE7E02;
-    position: relative;
+    justify-content: space-between;
 `
 export const ContentWrapper = styled(Paper)`
     box-sizing: border-box;
-    width: 60%;
-    margin-top: 60px;
-    padding: 20px
+    width: 40%;
+    padding: 15px;
+    margin: 50px 0
 `
 export const StyledList = styled.ul`
-    list-style: none
+    list-style: none;
 `
 export const ListWrapper = styled.ul`
     padding-left: 15px;
