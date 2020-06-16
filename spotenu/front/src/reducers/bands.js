@@ -1,20 +1,20 @@
 const initialState = {
-    newBands: [{
-        name: 'banda1',
-        nickname: 'banda1',
-        email: 'banda1@email.com',
-        description: 'somos uma banda muito massa!'
-    }]
+    newBands: []
 }
 
-export const bands = (state = initialState, action)=>{
-    switch(action.type){
-        case action.type = 'SHOW_ALBUNS':
-        return {
-            ...state,
-            albuns: action.type.payload
-        }
+export const bands = (state = initialState, action) => {
+    console.log('to no reduceraa')
+    console.log(action.type)
+    console.log(action.payload)
+    switch (action.type) {
+        case 'SET_NEW_BANDS':
+            console.log('to aqui no reducerr na opção certa')
+            return {
+                ...state,
+                newBands: action.payload.newBands
+            }
         default:
+            console.log('to no defo')
             return state
     }
 }

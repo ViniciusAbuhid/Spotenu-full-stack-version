@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../assets/SPOTENU.png'
+import logo from '../../assets/SPOTENU-HEADER.png'
 import * as S from './style'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import { connect } from 'react-redux'

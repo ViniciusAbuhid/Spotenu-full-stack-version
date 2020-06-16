@@ -25,8 +25,8 @@ function Signup(props) {
             <S.ContentWrapper elevation={10}>
                 <S.FormWrapper onSubmit={sendSubscription}>
                     <S.ImgWrapper src={logo}></S.ImgWrapper>
-                    {role === 'admin' ? 
-                        <Typography variant='h4'>Cadastro de novo administrador</Typography> : 
+                    {role === 'admin' ?
+                        <Typography variant='h4'>Cadastro de novo administrador</Typography> :
                         <div>
                             <Typography variant='h3' align='center'>Cadastro</Typography>
                             <Typography align='center'>Desejo me cadastrar como:</Typography>

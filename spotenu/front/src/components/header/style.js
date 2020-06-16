@@ -6,9 +6,8 @@ export const Header = styled.div`
     justify-content: space-between;
     padding: 15px;
     align-items: center;
-    border: 1px #FE7E02 solid;
     box-sizing: border-box;
-    background-color: white
+    background-color: #0063a5
 `
 
 export const ImgWrapper = styled.img`
