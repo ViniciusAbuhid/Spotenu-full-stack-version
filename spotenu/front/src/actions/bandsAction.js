@@ -18,6 +18,19 @@ export const getAllNewBands = () => dispatch => {
                 nickname: 'banda1',
                 email: 'banda1@email.com',
                 description: 'somos uma banda muito massa!'
+            
+            },
+            {
+                name: 'banda1',
+                nickname: 'banda1',
+                email: 'banda1@email.com',
+                description: 'somos uma banda muito massa!'
+            },
+            {
+                name: 'banda1',
+                nickname: 'banda1',
+                email: 'banda1@email.com',
+                description: 'somos uma banda muito massa!'
             }]
         ))
     }

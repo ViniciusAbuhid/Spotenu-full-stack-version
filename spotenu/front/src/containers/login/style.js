@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Paper } from '@material-ui/core'
+import { Paper, Typography } from '@material-ui/core'
+import { music } from '../../assets/music.png'
 
 export const PageWrapper = styled.div`
     box-sizing: border-box
@@ -11,7 +12,6 @@ export const PageWrapper = styled.div`
     align-items: center;
     background-color: #FE7E02
 `
-
 export const ContentWrapper = styled(Paper)`
     box-sizing: border-box;
     width: 40%;
@@ -21,15 +21,19 @@ export const ContentWrapper = styled(Paper)`
     justify-content: center;
     align-items: center;
 `
-
+export const ImgWrapper = styled.img`
+    width: 300px;
+    height: 100px
+`
 export const FormWrapper = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 `
-
-export const ImgWrapper = styled.img`
-    width: 300px;
-    height: 100px
+export const Invitation = styled(Typography)`
+    &:hover {
+    color: #0063a5;
+    cursor: pointer
+        }
 `
