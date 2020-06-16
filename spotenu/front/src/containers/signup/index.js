@@ -61,6 +61,7 @@ function Signup(props) {
                             label='Nickname'
                             name='nickname'
                             required
+                            inputProps={{ pattern: "^[a-zA-Z0-9]*$" }}
                             onChange={saveUserData} />
                         <TextField
                             color='secondary'

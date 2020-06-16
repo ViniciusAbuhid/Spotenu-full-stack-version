@@ -11,14 +11,12 @@ export const sendUserData =  (userData) => async(dispatch) =>{
     }
 }
 
-// export const sendSubscriptionData = (userInfo, tripId) => async(dispatch) => {
-//     try {
-//         const result = await axios.post(`${baseURL}/trips/${tripId}/apply`, userInfo)
-//         console.log(result.data)
-//         dispatch(replace(routes.subscriptionDone))
-//     }
-//     catch(error){
-//         console.log(error)
-//         alert('Cadastro não efetivado. Tente novamente mais tarde...')
-//     }
-// }
+export const sendLoginData = (userData) => async(dispatch) => {
+    try {
+        // axios.post('link', 'info')
+        dispatch(push(routes.home))
+    }
+    catch (err) {
+        alert('Não foi possível realizar o seu login. Tente novamente mais tarde...')
+    }
+}
