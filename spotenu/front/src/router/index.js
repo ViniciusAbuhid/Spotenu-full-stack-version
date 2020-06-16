@@ -21,7 +21,7 @@ export const routes = {
   form: '/create/form',
   album: '/profile/info-album',
   playlist:'/profile/info-playlist',
-  approvals: '/staff/approvals',
+  approvals: '/bands/approvals',
   genres: '/genres'
 }
 
