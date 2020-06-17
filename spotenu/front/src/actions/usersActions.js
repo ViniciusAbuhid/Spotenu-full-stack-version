@@ -1,9 +1,11 @@
 import {routes} from '../router/index'
 import { push } from 'connected-react-router'
 
-export const sendUserData =  (userData) => async(dispatch) =>{
+export const sendSignupData =  (userData) => async(dispatch) =>{
     try{
-        // await axios.post('link', userData)
+        // const result = await axios.post('link', userData)
+        // const token = result.data.token
+        // window.localStorage.setItem('token', token)
         dispatch(push(routes.home))
     }
     catch (err) {
@@ -13,7 +15,9 @@ export const sendUserData =  (userData) => async(dispatch) =>{
 
 export const sendLoginData = (userData) => async(dispatch) => {
     try {
-        // axios.post('link', 'info')
+        // const result = await axios.post('link', userData)
+        // const token = result.data.token
+        // window.localStorage.setItem('token', token)
         dispatch(push(routes.home))
     }
     catch (err) {

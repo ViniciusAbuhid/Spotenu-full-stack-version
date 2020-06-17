@@ -8,10 +8,6 @@ import { routes } from '../../router/index'
 
 function Header(props){
 
-    function goHome(){
-        props.goToHomePage()
-    }
-
     function logout(){
         const result = window.confirm('Tem certeza que deseja sair?')
         result && props.logout()
@@ -19,7 +15,7 @@ function Header(props){
 
     return(
         <S.Header>
-            <S.ImgWrapper src={logo} onClick={goHome} />
+            <S.ImgWrapper src={logo} onClick={props.goToHomePage} />
             <S.Logout onClick={logout}>
             <AccountCircleIcon fontSize="large"/>
             Logout
