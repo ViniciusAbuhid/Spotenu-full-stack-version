@@ -11,11 +11,7 @@ import { sendLoginData } from '../../actions/usersActions'
 function Login(props) {
 
     const [userData, setUserData] = useState({})
-
-    function goToSignup() {
-        props.goToSignup()
-    }
-
+    
     function saveUserData(e) {
         const { name, value } = e.target
         setUserData({ ...userData, [name]: value })
@@ -42,7 +38,7 @@ function Login(props) {
 
     return (
         <S.PageWrapper>
-            <S.ContentWrapper>
+            <S.ContentWrapper elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 <S.FormWrapper onSubmit={sendLoginData}>
                     <Typography variant='h3' align='center'>Login</Typography>
@@ -63,7 +59,7 @@ function Login(props) {
                         <Button variant="contained" color='secondary' type='onSubmit'>Enviar</Button>
                     </Box>
                 </S.FormWrapper>
-                <S.Invitation onClick={goToSignup}>Não tem cadastro? Clique aqui para fazer parte da nossa jam</S.Invitation>
+                <S.Invitation onClick={props.goToSignup}>Não tem cadastro? Clique aqui para fazer parte da nossa jam</S.Invitation>
             </S.ContentWrapper>
         </S.PageWrapper>
     )

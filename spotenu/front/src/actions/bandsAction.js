@@ -1,5 +1,4 @@
 export const setAllNewBands = (newBands) => {
-    console.log('cheguei na action')
     return {
         type: 'SET_NEW_BANDS',
         payload: {
@@ -10,7 +9,6 @@ export const setAllNewBands = (newBands) => {
 
 export const getAllNewBands = () => dispatch => {
     try {
-        console.log('cheguei no actions')
         // axios.get('link', 'headers')
         dispatch(setAllNewBands([
             {

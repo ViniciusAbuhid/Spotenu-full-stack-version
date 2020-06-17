@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { TextField, Typography, Button, ButtonGroup, Box } from '@material-ui/core'
 import * as S from './style'
 import logo from '../../assets/SPOTENU.png'
 import { connect } from 'react-redux'
-import { sendUserData } from '../../actions/usersActions'
+import { sendSignupData } from '../../actions/usersActions'
 
 function Signup(props) {
+
+    useEffect(() => {
+        // if (token.role){
+        //   this.props.goToLogin()
+        // role = admin
+    }, [])
 
     const [role, setRole] = useState('')
     const [userData, setUserData] = useState({})
@@ -15,9 +21,9 @@ function Signup(props) {
         setUserData({ ...userData, [name]: value })
     }
 
-    function sendSubscription(e) {
+    function sendSignupData(e) {
         e.preventDefault()
-        props.sendUserData(userData)
+        props.sendSignupData(userData)
     }
 
     return (
@@ -42,7 +48,7 @@ function Signup(props) {
                     </div>
                 }
                 {role !== '' ?
-                    <S.FormWrapper onSubmit={sendSubscription}>
+                    <S.FormWrapper onSubmit={sendSignupData}>
                         <TextField
                             color='secondary'
                             label='Nome'
@@ -90,7 +96,7 @@ function Signup(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        sendUserData: (userData) => dispatch(sendUserData(userData))
+        sendSignupData: (userData) => dispatch(sendSignupData(userData))
     }
 }
 

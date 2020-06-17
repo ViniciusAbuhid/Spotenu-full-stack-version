@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Header from '../../components/header/index'
 import * as S from './style'
-import { Typography, Button, ButtonGroup } from '@material-ui/core'
+import { Typography, Button, ButtonGroup, Box } from '@material-ui/core'
 import { connect } from 'react-redux'
 import { getAllNewBands, approveBand, disapproveBand } from '../../actions/bandsAction'
 import Footer from '../../components/footer'
@@ -9,8 +9,10 @@ import Footer from '../../components/footer'
 function Approvals(props) {
 
     useEffect(() => {
+        // if (!window.localStorage.getItem('token') || !token.role){
+        //   this.props.goToLogin()
+        // }
         props.getAllNewBands()
-        console.log(props.newBandsList)
     }, [])
 
     function approveBand(e) {
@@ -31,7 +33,9 @@ function Approvals(props) {
                 <S.StyledList>
                     {props.newBandsList.length > 0 ? props.newBandsList.map(band => {
                         return <li>
-                            <Typography variant='h5'>{band.name}</Typography>
+                            <Box mt={2}>
+                                <Typography variant='h5'>{band.name}</Typography>
+                            </Box>
                             <S.ListWrapper>
                                 <li><Typography>{band.nickname}</Typography></li>
                                 <li><Typography>{band.description}</Typography></li>
@@ -56,7 +60,7 @@ function Approvals(props) {
                     }
                 </S.StyledList>
             </S.ContentWrapper>
-            <Footer/>
+            <Footer />
         </S.PageWrapper>
     )
 }
