@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
-import { albuns, playLists } from './music'
+import { albuns, playLists, genres } from './music'
 import { bands } from './bands'
 
 export const generateReducers = history =>
@@ -8,5 +8,6 @@ export const generateReducers = history =>
     router: connectRouter(history),
     albuns,
     playLists,
-    bands
+    bands,
+    genres
   });

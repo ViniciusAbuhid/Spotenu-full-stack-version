@@ -4,6 +4,9 @@ import { Typography, Button, Box } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete';
 import Switch from '@material-ui/core/Switch' 
 import logo from '../../assets/SPOTENU.png'
+import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
+import { routes } from '../../router/index'
 
 function ArtistMenu(props) {
 
@@ -34,12 +37,6 @@ function ArtistMenu(props) {
                                         onClick={() => setAlbumId('')}>
                                         Recolher Álbum
                                     </Button>
-                                    <Box
-                                        display="flex"
-                                        alignItems='center'>
-                                        <Typography>Tornar Álbum público</Typography>
-                                        <Switch color='primary' />
-                                    </Box>
                                     <Box>
                                         <Button
                                             color='primary'
@@ -71,7 +68,8 @@ function ArtistMenu(props) {
                 mb={3}>
                 <Button
                     variant='contained'
-                    color='secondary'>
+                    color='secondary'
+                    onClick={props.goToForm}>
                         Adicionar álbum
                 </Button>
             </Box>
@@ -79,4 +77,10 @@ function ArtistMenu(props) {
     )
 }
 
-export default ArtistMenu
+const mapDispatchToProps = dispatch => {
+    return {
+        goToForm: () => dispatch(push(routes.form))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ArtistMenu)
