@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Paper, Button } from '@material-ui/core'
+import { Paper, Button, TextField } from '@material-ui/core'
 
 export const PageWrapper = styled.div`
     box-sizing: border-box;
@@ -26,10 +26,6 @@ export const ImgWrapper = styled.img`
 export const StyledList = styled.ul`
     list-style: none;
 `
-
-// export const ContentWrapper = styled(Paper)`
-//     box-sizing: border-box;
-//     width: 40%;
-//     padding: 15px;
-//     margin: 50px 0
-// `
+export const StyledTextField = styled(TextField)`
+    width: 300px
+`

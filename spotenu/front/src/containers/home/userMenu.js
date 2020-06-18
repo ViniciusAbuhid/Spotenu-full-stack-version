@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import * as S from './style'
 import { Typography, Button, Box } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete';
-import Switch from '@material-ui/core/Switch'
+import Switch from '@material-ui/core/Switch' 
+import logo from '../../assets/SPOTENU.png'
 
 function UserMenu(props) {
 
@@ -10,11 +11,12 @@ function UserMenu(props) {
 
     return (
         <div>
+            <S.ImgWrapper src={logo}></S.ImgWrapper>
             <Typography variant='h4' align='center'>
                 Minhas playlists
             </Typography>
             <S.StyledList>
-                {props.playlitsList ? props.playlitsList.map(pl => {
+                {props.playlitsList.length >= 1 ? props.playlitsList.map(pl => {
                     return (
                         <li>
                             <Box
@@ -26,18 +28,18 @@ function UserMenu(props) {
                             </Box>
                             {plId === pl.id ? (
                                 <div>
+                                <Button
+                                    color='primary'
+                                    size='small'
+                                    onClick={() => setPlId('')}>
+                                    Recolher Playlist
+                                </Button>
                                     <Box
                                         display="flex"
                                         alignItems='center'>
                                         <Typography>Tornar Playlist pública</Typography>
                                         <Switch color='primary' />
                                     </Box>
-                                    <Button
-                                        color='primary'
-                                        size='small'
-                                        onClick={() => setPlId('')}>
-                                        Recolher Playlist
-                                    </Button>
                                     <Box>
                                         <Button
                                             color='primary'

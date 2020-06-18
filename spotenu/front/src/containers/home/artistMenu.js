@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import * as S from './style'
 import { Typography, Button, Box } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete';
-import Switch from '@material-ui/core/Switch'
+import Switch from '@material-ui/core/Switch' 
+import logo from '../../assets/SPOTENU.png'
 
 function ArtistMenu(props) {
 
@@ -10,11 +11,12 @@ function ArtistMenu(props) {
 
     return (
         <div>
+            <S.ImgWrapper src={logo}></S.ImgWrapper>
             <Typography variant='h4' align='center'>
                 Meus álbuns
             </Typography>
             <S.StyledList>
-                {props.albunsList? props.albunsList.map(album => {
+                {props.albunsList.length >=1? props.albunsList.map(album => {
                     return (
                         <li>
                             <Box
@@ -26,18 +28,18 @@ function ArtistMenu(props) {
                             </Box>
                             {albumId === album.id ? (
                                 <div>
-                                    <Box
-                                        display="flex"
-                                        alignItems='center'>
-                                        <Typography>Tornar Playlist pública</Typography>
-                                        <Switch color='primary' />
-                                    </Box>
                                     <Button
                                         color='primary'
                                         size='small'
                                         onClick={() => setAlbumId('')}>
-                                        Recolher Playlist
+                                        Recolher Álbum
                                     </Button>
+                                    <Box
+                                        display="flex"
+                                        alignItems='center'>
+                                        <Typography>Tornar Álbum público</Typography>
+                                        <Switch color='primary' />
+                                    </Box>
                                     <Box>
                                         <Button
                                             color='primary'
@@ -58,7 +60,7 @@ function ArtistMenu(props) {
                 }) :
                     <Typography
                         variant='h5'
-                        align='center'>Você não tem nenhum álbum
+                        align='center'>Você não tem nenhum álbum até o momento...
                     </Typography>
                 }
             </S.StyledList>

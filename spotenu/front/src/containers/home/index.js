@@ -8,8 +8,10 @@ import { getAllPls } from '../../actions/playListsAction'
 import { getAllAlbuns } from '../../actions/albunsAction'
 import UserMenu from './userMenu'
 import ArtistMenu from './artistMenu'
-
-
+import SearchBar from '../../components/searchBar/index'
+import {Box, IconButton} from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search';
+import logo from '../../assets/SPOTENU.png'
 
 function Home(props) {
 
@@ -28,13 +30,28 @@ function Home(props) {
     const defineContent = () => {
         switch (role) {
             case 'admin':
-                return <MenuAdmin/>
+                return (
+                    <S.ContentWrapper elevation={10}>
+                        <MenuAdmin />
+                    </S.ContentWrapper>
+                )
             case 'payer-user':
-                return <UserMenu playlitsList = {props.playLists} role='payer-user'/>
+                return (
+                    <S.ContentWrapper elevation={10}>
+                        <UserMenu playlitsList={props.playLists} role='payer-user' />
+                    </S.ContentWrapper>)
             case 'artist':
-                return <ArtistMenu albunsList = {props.albuns}/>
+                return (
+                    <S.ContentWrapper elevation={10}>
+                        <ArtistMenu albunsList={props.albuns} />
+                    </S.ContentWrapper>)
             default:
-                return 'defo'
+                return (
+                    <S.ContentWrapper elevation={10}>
+                        <S.ImgWrapper src={logo}></S.ImgWrapper>
+                        <SearchBar/>
+                    </S.ContentWrapper>
+                )
         }
 
     }
@@ -43,9 +60,8 @@ function Home(props) {
     return (
         <S.PageWrapper>
             <Header />
-            <S.ContentWrapper elevation={10}>
-                {defineContent()}
-            </S.ContentWrapper>
+            {role && <SearchBar/> }
+            {defineContent()}
             <Footer />
         </S.PageWrapper>
     )
@@ -60,8 +76,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllPls: ()=> dispatch(getAllPls()),
-        getAllAlbuns: ()=> dispatch(getAllAlbuns())
+        getAllPls: () => dispatch(getAllPls()),
+        getAllAlbuns: () => dispatch(getAllAlbuns())
     }
 }
 
