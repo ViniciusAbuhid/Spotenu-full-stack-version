@@ -1,7 +1,8 @@
 const initialState = {
     albunsList: [],
     allPlayLists: [],
-    allGenres: []
+    allGenres: [],
+    albumMusics: []
 }
 
 export const albuns = (state = initialState, action) => {
@@ -19,7 +20,6 @@ export const albuns = (state = initialState, action) => {
 export const playLists = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_PLAYLISTS':
-            console.log('oii')
             return {
                 ...state,
                 allPlayLists: action.payload.playLists
@@ -32,11 +32,22 @@ export const playLists = (state = initialState, action) => {
 export const genres = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_GENRES':
-            console.log('olha o que chega o nos', action.payload.genresList)
             return {
                 ...state,
                 allGenres: action.payload.genresList
             }
+        default:
+            return state
+    }
+}
+
+export const music = (state = initialState, action) => {
+    switch (action.type) {
+        case 'SET_MUSIC_ALBUM_RELATIONS':
+            console.log(action.payload.musicsList)
+        return {
+            ...state, albumMusics: action.payload.musicsList
+        }
         default:
             return state
     }

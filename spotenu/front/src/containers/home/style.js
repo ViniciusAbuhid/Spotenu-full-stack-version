@@ -29,3 +29,7 @@ export const StyledList = styled.ul`
 export const StyledTextField = styled(TextField)`
     width: 300px
 `
+export const FormWrapper = styled.form`
+    display: flex;
+    justify-content: space-around;
+`
