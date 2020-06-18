@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import * as S from './style'
-import { Typography, Button, Box } from '@material-ui/core'
+import { Typography, Button, Box, TextField, Tooltip } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete';
-import Switch from '@material-ui/core/Switch' 
 import logo from '../../assets/SPOTENU.png'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
+import MusicMenu from './musicMenu'
 
 function ArtistMenu(props) {
 
     const [albumId, setAlbumId] = useState('')
+    const [musicCreator, setMusicCreator] = useState('')
 
     return (
         <div>
@@ -19,7 +20,7 @@ function ArtistMenu(props) {
                 Meus álbuns
             </Typography>
             <S.StyledList>
-                {props.albunsList.length >=1? props.albunsList.map(album => {
+                {props.albunsList.length >= 1 ? props.albunsList.map(album => {
                     return (
                         <li>
                             <Box
@@ -27,7 +28,7 @@ function ArtistMenu(props) {
                                 justifyContent='space-between'
                                 mt={3}>
                                 <Typography variant='h5'>{album.name}</Typography>
-                                <DeleteIcon size='small' />
+                                <DeleteIcon size='big' color='disabled'/>
                             </Box>
                             {albumId === album.id ? (
                                 <div>
@@ -37,13 +38,7 @@ function ArtistMenu(props) {
                                         onClick={() => setAlbumId('')}>
                                         Recolher Álbum
                                     </Button>
-                                    <Box>
-                                        <Button
-                                            color='primary'
-                                            size='small'>
-                                            Adicionar música
-                                        </Button>
-                                    </Box>
+                                    <MusicMenu albumName = {album.name} />
                                 </div>
                             ) : (
                                     <Button
@@ -70,7 +65,7 @@ function ArtistMenu(props) {
                     variant='contained'
                     color='secondary'
                     onClick={props.goToForm}>
-                        Adicionar álbum
+                    Adicionar álbum
                 </Button>
             </Box>
         </div>
