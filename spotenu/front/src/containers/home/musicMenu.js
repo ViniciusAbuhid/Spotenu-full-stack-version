@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Box, Typography, Button, TextField, Grid, Paper } from '@material-ui/core'
 import * as S from './style'
-import { getAlbumMusics, addMusic, deleteMusic } from '../../actions/musicsAction'
+import { getMusicList, addMusic, deleteMusic } from '../../actions/musicsAction'
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 function MusicMenu(props) {
 
     useEffect(() => {
-        props.getAlbumMusics(props.albumName)
+        props.getMusicList(props.componentInfo)
     }, [])
 
     const [musicData, setMusicData] = useState({})
@@ -22,15 +22,16 @@ function MusicMenu(props) {
 
     function sendMusicData(e) {
         e.preventDefault()
-        props.addMusic(musicData)
+        console.log({ ...props.componentInfo, ...musicData })
+        props.addMusic({ ...props.componentInfo, ...musicData })
     }
 
     return (
 
         <div>
-            {props.albumMusics.length >= 1 ? (
+            {props.MusicList.length >= 1 ? (
                 <div>
-                    {props.albumMusics.map(relation => {
+                    {props.MusicList.map(relation => {
                         return (
                             <Box
                                 mb={2}
@@ -43,7 +44,10 @@ function MusicMenu(props) {
                                 <DeleteIcon
                                     size='small'
                                     color='disabled'
-                                    onClick={()=> props.deleteMusic(relation.music)} />
+                                    onClick={() => props.deleteMusic({
+                                        ...props.componentInfo,
+                                        name: relation.music
+                                    })} />
                             </Box>)
                     })}
                     <Box>
@@ -56,13 +60,17 @@ function MusicMenu(props) {
                     </Box>
                     {toggleMusic && (
                         <S.FormWrapper onSubmit={sendMusicData}>
-                            <TextField placeholder='Nome da música'
+                            <TextField
+                                placeholder='Nome da música'
+                                color='secondary'
                                 size='small'
                                 name='name'
                                 required
                                 value={musicData.name || ''}
                                 onChange={saveMusicData} />
-                            <TextField placeholder='Link'
+                            <TextField
+                                color='secondary'
+                                placeholder='Link'
                                 size='small'
                                 name='link'
                                 required
@@ -87,15 +95,15 @@ function MusicMenu(props) {
 
 const mapStateToProps = state => {
     return {
-        albumMusics: state.music.albumMusics
+        MusicList: state.music.MusicList
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAlbumMusics: (albumName) => dispatch(getAlbumMusics(albumName)),
+        getMusicList: (componentInfo) => dispatch(getMusicList(componentInfo)),
         addMusic: (musicData) => dispatch(addMusic(musicData)),
-        deleteMusic: (musicName) => dispatch(deleteMusic(musicName))
+        deleteMusic: (musicData) => dispatch(deleteMusic(musicData))
     }
 }
 

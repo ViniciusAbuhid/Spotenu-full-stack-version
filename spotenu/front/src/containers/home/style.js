@@ -27,9 +27,13 @@ export const StyledList = styled.ul`
     list-style: none;
 `
 export const StyledTextField = styled(TextField)`
-    width: 300px
+    width: 300px;
 `
 export const FormWrapper = styled.form`
     display: flex;
     justify-content: space-around;
+`
+export const StyledLogo = styled.img`
+    width: 400px;
+    height: 133px
 `

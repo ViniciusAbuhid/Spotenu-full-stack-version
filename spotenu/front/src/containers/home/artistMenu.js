@@ -28,7 +28,9 @@ function ArtistMenu(props) {
                                 justifyContent='space-between'
                                 mt={3}>
                                 <Typography variant='h5'>{album.name}</Typography>
-                                <DeleteIcon size='big' color='disabled'/>
+                                <DeleteIcon 
+                                size='big' 
+                                color='disabled'/>
                             </Box>
                             {albumId === album.id ? (
                                 <div>
@@ -38,7 +40,7 @@ function ArtistMenu(props) {
                                         onClick={() => setAlbumId('')}>
                                         Recolher Álbum
                                     </Button>
-                                    <MusicMenu albumName = {album.name} />
+                                    <MusicMenu componentInfo = {{component: 'album', componentName: album.name}} />
                                 </div>
                             ) : (
                                     <Button

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import * as S from './style'
 import Header from '../../components/header/index'
 import Footer from '../../components/footer/index'
-import SearchBar from '../../components/searchBar/index'
 import { connect } from 'react-redux'
 import { getAllGenres, deleteGenre, addNewGenre } from '../../actions/genresAction'
 import { Typography, Box, Button, TextField } from '@material-ui/core'
@@ -36,7 +35,6 @@ function Genres(props) {
     return (
         <S.PageWrapper>
             <Header />
-            <SearchBar />
             <S.ContentWrapper>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 <Typography variant='h4' align='center'>Gêneros musicais</Typography>
@@ -80,6 +78,7 @@ function Genres(props) {
                         mt={2}
                         mb={3}>
                         <TextField
+                            color='secondary'
                             placeholder='novo gênero...'
                             onChange={saveNewGenre}
                             value={newGenre.name || ''}

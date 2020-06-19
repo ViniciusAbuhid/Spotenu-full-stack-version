@@ -47,6 +47,7 @@ function Login(props) {
                         label='Email ou nickname'
                         name='credential'
                         required
+                        value={userData.credential || ''}
                         onChange={saveUserData} />
                     <TextField
                         color='secondary'
@@ -54,6 +55,7 @@ function Login(props) {
                         type='password'
                         name='password'
                         required
+                        value={userData.password || ''}
                         onChange={saveUserData} />
                     <Box mt={4} mb={3} >
                         <Button variant="contained" color='secondary' type='onSubmit'>Enviar</Button>
