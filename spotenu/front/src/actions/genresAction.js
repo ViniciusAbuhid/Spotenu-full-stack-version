@@ -7,7 +7,8 @@ export const setAllGenres = (genresList) =>{
     }
 } 
 
-const mockedGenres = ['forro', 'samba', 'reaggae', 'cumbia colombiana']
+const mockedGenres = []
+// ['forro', 'samba', 'reaggae', 'cumbia colombiana']
 
 export const getAllGenres = () => dispatch => {
     try {

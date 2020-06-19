@@ -35,7 +35,7 @@ function Signup(props) {
                     <div>
                         <Typography variant='h3' align='center'>Cadastro</Typography>
                         <Typography align='center'>Desejo me cadastrar como:</Typography>
-                        <Box mt={2}>
+                        <Box mt={2} mb={1}>
                             <ButtonGroup color="secondary" aria-label="outlined primary button group">
                                 <Button variant="contained"
                                     onClick={() => setRole('payer-user')}>Ouvinte pagante</Button>
@@ -54,6 +54,7 @@ function Signup(props) {
                             label='Nome'
                             name='name'
                             required
+                            value={userData.name || ''}
                             onChange={saveUserData} />
                         <TextField
                             color='secondary'
@@ -61,6 +62,7 @@ function Signup(props) {
                             type='email'
                             name='email'
                             required
+                            value={userData.email || ''}
                             onChange={saveUserData} />
                         <TextField
                             color='secondary'
@@ -68,6 +70,7 @@ function Signup(props) {
                             name='nickname'
                             required
                             inputProps={{ pattern: "^[a-zA-Z0-9]*$" }}
+                            value={userData.nickname || ''}
                             onChange={saveUserData} />
                         <TextField
                             color='secondary'
@@ -75,6 +78,7 @@ function Signup(props) {
                             type='password'
                             name='password'
                             required
+                            // value={userData.password || ''}
                             onChage={saveUserData}
                             inputProps={role === 'admin' ? { minLength: 10 } : { minLength: 6 }} />
                         {role === 'artist' ?
@@ -82,6 +86,7 @@ function Signup(props) {
                                 color='secondary'
                                 label='Descrição'
                                 name='description'
+                                value={userData.desciption || ''}
                                 onChange={saveUserData}></TextField> : ''
                         }
                         <Box mt={4} >

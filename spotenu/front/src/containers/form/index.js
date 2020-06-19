@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import * as S from './style'
 import Header from '../../components/header/index'
-import SearchBar from '../../components/searchBar/index'
 import Footer from '../../components/footer/index'
 import { TextField, Typography, Box, Button } from '@material-ui/core'
 import logo from '../../assets/SPOTENU.png'
@@ -27,7 +26,6 @@ function Form(props) {
     return (
         <S.PageWrapper>
             <Header/>
-            <SearchBar/>
             <S.ContentWrapper elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 <S.FormWrapper onSubmit={sendAlbumData}>
@@ -37,11 +35,13 @@ function Form(props) {
                         label='Nome do álbum'
                         name='name'
                         required
+                        value={albumData.name || ''}
                         onChange={saveAlbumData} />
                     <TextField
                         color='secondary'
                         label='Gênero predominante'
                         name='genre'
+                        value={albumData.genre || ''}
                         required
                         onChange={saveAlbumData} />
                     <Box mt={4} mb={3} >

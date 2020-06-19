@@ -2,7 +2,7 @@ const initialState = {
     albunsList: [],
     allPlayLists: [],
     allGenres: [],
-    albumMusics: []
+    MusicList: []
 }
 
 export const albuns = (state = initialState, action) => {
@@ -46,7 +46,7 @@ export const music = (state = initialState, action) => {
         case 'SET_MUSIC_ALBUM_RELATIONS':
             console.log(action.payload.musicsList)
         return {
-            ...state, albumMusics: action.payload.musicsList
+            ...state, MusicList: action.payload.musicsList
         }
         default:
             return state

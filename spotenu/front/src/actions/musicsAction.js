@@ -1,4 +1,6 @@
-export const setAlbumMusics = (musicsList) => {
+import { music } from "../reducers/music"
+
+export const setMusicList = (musicsList) => {
     console.log('to no actio propriamente dita', musicsList)
     return {
         type: 'SET_MUSIC_ALBUM_RELATIONS',
@@ -8,7 +10,7 @@ export const setAlbumMusics = (musicsList) => {
     }
 }
 
-const mockedRelations = [{
+const mockedAlbumRelations = [{
     music: 'music1',
     album: 'album1'
 },
@@ -21,11 +23,24 @@ const mockedRelations = [{
     album: 'album1'
 },]
 
-export const getAlbumMusics = (albumName) => dispatch => {
+const mockedPlRelations = [{
+    music: 'music4',
+    pl: 'pl1'
+},
+{
+    music: 'music5',
+    pl: 'pl1'
+},
+{
+    music: 'music6',
+    pl: 'pl1'
+},]
+
+export const getMusicList = (componentInfo) => dispatch => {
     try {
-        console.log('to no action')
         // const reult = axios.get('link', 'info')
-        dispatch(setAlbumMusics(mockedRelations))
+        componentInfo.component === 'album'? dispatch(setMusicList(mockedAlbumRelations)) :
+        dispatch(setMusicList(mockedPlRelations))
     }
     catch (err) {
         alert('não foi possível carregar as músicas neste momento, tente novamente mais tarde')
@@ -35,26 +50,34 @@ export const getAlbumMusics = (albumName) => dispatch => {
 export const addMusic = (musicData) => dispatch => {
     try {
         // axios.put('link', 'info')
-        const pushingMock = [...mockedRelations, {
+        let pushingMock = []
+        musicData.component === 'album'? pushingMock = [...mockedAlbumRelations, {
             music: musicData.name,
-            album: 'album1'
+            album: musicData.name
+        }] : 
+        pushingMock = [...mockedPlRelations, {
+            music: musicData.name,
+            album: 'Pl1'
         }]
-        dispatch(setAlbumMusics(pushingMock))
+        dispatch(setMusicList(pushingMock))
     }
     catch (err) {
         alert('não foi adicionar essa música neste momento, tente novamente mais tarde')
     }
 }
 
-export const deleteMusic = (musicName) => dispatch => {
-    console.log(musicName)
+export const deleteMusic = (musicData) => dispatch => {
+    console.log(musicData)
     try {
         // axios.delete('link', 'req')
-        const filteredMock = mockedRelations.filter(relation => {
-            return relation.music !== musicName
+        let filteredMock = []
+        musicData.component === 'album'? filteredMock = mockedAlbumRelations.filter(relation => {
+            return relation.music !== musicData.name
+        }) :
+        filteredMock = mockedPlRelations.filter(relation => {
+            return relation.music !== musicData.name
         })
-        console.log('to no mideuér e vou mandar isso p action', filteredMock)
-        dispatch(setAlbumMusics(filteredMock))
+        dispatch(setMusicList(filteredMock))
     }
     catch (err) {
         alert('não foi deletar essa música neste momento, tente novamente mais tarde')

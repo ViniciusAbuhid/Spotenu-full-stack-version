@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import * as S from './style'
 import { Typography, Button, Box } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete';
-import Switch from '@material-ui/core/Switch' 
+import Switch from '@material-ui/core/Switch'
 import logo from '../../assets/SPOTENU.png'
+import MusicMenu from './musicMenu'
 
 function UserMenu(props) {
 
@@ -24,29 +25,25 @@ function UserMenu(props) {
                                 justifyContent='space-between'
                                 mt={3}>
                                 <Typography variant='h5'>{pl.name}</Typography>
-                                <DeleteIcon size='small' />
+                                <DeleteIcon size='big'
+                                    color='disabled' />
                             </Box>
                             {plId === pl.id ? (
                                 <div>
-                                <Button
-                                    color='primary'
-                                    size='small'
-                                    onClick={() => setPlId('')}>
-                                    Recolher Playlist
+                                    <Button
+                                        color='primary'
+                                        size='small'
+                                        onClick={() => setPlId('')}>
+                                        Recolher Playlist
                                 </Button>
                                     <Box
                                         display="flex"
-                                        alignItems='center'>
+                                        alignItems='center'
+                                        mb={2}>
                                         <Typography>Tornar Playlist pública</Typography>
                                         <Switch color='primary' />
                                     </Box>
-                                    <Box>
-                                        <Button
-                                            color='primary'
-                                            size='small'>
-                                            Adicionar música
-                                        </Button>
-                                    </Box>
+                                    <MusicMenu componentInfo={{ component: 'pl', componentName: pl.name }} />
                                 </div>
                             ) : (
                                     <Button

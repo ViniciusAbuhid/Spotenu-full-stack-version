@@ -8,10 +8,10 @@ import { getAllPls } from '../../actions/playListsAction'
 import { getAllAlbuns } from '../../actions/albunsAction'
 import UserMenu from './userMenu'
 import ArtistMenu from './artistMenu'
-import SearchBar from '../../components/searchBar/index'
-import {Box, IconButton} from '@material-ui/core'
+import { Box, IconButton, Typography } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import logo from '../../assets/SPOTENU.png'
+import alternativeLogo from '../../assets/SPOTENU3.png'
 
 function Home(props) {
 
@@ -25,7 +25,7 @@ function Home(props) {
         console.log(props.playLists)
     }, [])
 
-    const [role, setRole] = useState('artist')
+    const [role, setRole] = useState('')
 
     const defineContent = () => {
         switch (role) {
@@ -47,10 +47,18 @@ function Home(props) {
                     </S.ContentWrapper>)
             default:
                 return (
-                    <S.ContentWrapper elevation={10}>
-                        <S.ImgWrapper src={logo}></S.ImgWrapper>
-                        <SearchBar/>
-                    </S.ContentWrapper>
+                    <Box display='flex' flexDirection='column' alignItems='center'>
+                        <S.StyledLogo src={alternativeLogo} />
+                        <Box mt={3}>
+                            <S.StyledTextField
+                                color='secondary'
+                                defaultValue='O que você quer escutar?'
+                                autoFocus='true' />
+                            <IconButton type="submit" aria-label="search" color='secondary'>
+                                <SearchIcon />
+                            </IconButton>
+                        </Box>
+                    </Box>
                 )
         }
 
@@ -59,8 +67,7 @@ function Home(props) {
 
     return (
         <S.PageWrapper>
-            <Header />
-            {role && <SearchBar/> }
+            <Header showSearch={role ? null : true} />
             {defineContent()}
             <Footer />
         </S.PageWrapper>
