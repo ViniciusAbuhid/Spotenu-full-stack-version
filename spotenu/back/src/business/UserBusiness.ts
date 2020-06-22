@@ -15,8 +15,43 @@ export default class UserBusiness {
         const hash = await this.hashGenerator.hashGenerator(password)
         await this.userDataBase.addUser(name, email, nickname, hash, id, role, description)
         const result = await this.userDataBase.getUserById(id)
-        const accessToken = this.tokenGenerator.generateToken({id, role})
-        console.log('token gerado', accessToken)
-        return accessToken
+        const accessToken = this.tokenGenerator.generateToken({ id, role })
+        return { accessToken, role }
+    }
+
+    public async getAllBands() {
+        return await this.userDataBase.getAllBands()
+    }
+
+    public async approveBand(id: string) {
+        await this.userDataBase.approveBand(id)
+        const checkingApproval = await this.userDataBase.getBandById(id)
+        console.log('olha o que volta', checkingApproval)
+        if (checkingApproval[0].approved) {
+            throw new Error('Essa banda já estava aprovada')
+        }
+    }
+
+    public async reproveBand(id: string) {
+        await this.userDataBase.reproveBand(id)
+        const checkingApproval = await this.userDataBase.getBandById(id)
+        console.log('olha o que volta', checkingApproval)
+        if (checkingApproval.length = 0) {
+            throw new Error('Essa banda já estava reprovada')
+        }
+    }
+
+    public async getUserByCredential(credential: string, password: string) {
+        console.log('olha o que chegou no bisnes', credential)
+        const result = await this.userDataBase.getUserByCredential(credential)
+        if (result.length <= 0) {
+            throw new Error('infomações inválidas')
+        }
+        const checkingPassword = await this.hashGenerator.verify(password, result[0].password)
+        if (!checkingPassword) {
+            throw new Error('infomações inválidas')
+        }
+        const accessToken = this.tokenGenerator.generateToken({ id: result[0].id, role: result[0].role })
+        return { accessToken, role: result[0].role }
     }
 }
