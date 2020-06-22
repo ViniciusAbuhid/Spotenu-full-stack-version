@@ -1,3 +1,7 @@
+import axios from 'axios'
+
+const baseURL = 'http://localhost:3001/'
+
 export const setAllNewBands = (newBands) => {
     return {
         type: 'SET_NEW_BANDS',
@@ -7,52 +11,38 @@ export const setAllNewBands = (newBands) => {
     }
 }
 
-export const getAllNewBands = () => dispatch => {
+export const getAllNewBands = () => async (dispatch) => {
     try {
-        // axios.get('link', 'headers')
-        dispatch(setAllNewBands([
-            {
-                name: 'banda1',
-                nickname: 'banda1',
-                email: 'banda1@email.com',
-                description: 'somos uma banda muito massa!'
-            
-            },
-            {
-                name: 'banda1',
-                nickname: 'banda1',
-                email: 'banda1@email.com',
-                description: 'somos uma banda muito massa!'
-            },
-            {
-                name: 'banda1',
-                nickname: 'banda1',
-                email: 'banda1@email.com',
-                description: 'somos uma banda muito massa!'
-            }]
-        ))
+        const result = await axios.get(`${baseURL}user/allBands`)
+        dispatch(setAllNewBands(result.data.message))
     }
     catch (err) {
-
+        alert('Não foi possível carregar todas as bandas no momento, tente novamente mais tarde...')
+        console.log(err.message)
     }
 }
 
-export const approveBand = () => dispatch => {
+export const approveBand = (id) => async (dispatch) => {
     try{
-        // axios.post('link', 'info')
-        console.log('banda aprovada com sucesso')
+        console.log()
+        const result = await axios.put(`${baseURL}'approve/${id}`)
+        alert('banda aprovada com sucesso')
+        dispatch(getAllNewBands())
     }
     catch (err) {
-
+        alert('Não foi possível aprovar esta banda no momento, tente novamente mais tarde')
+        console.log(err.message)
     }
 }
 
-export const disapproveBand = () => dispatch => {
+export const disapproveBand = (id) => dispatch => {
     try{
-        // axios.post('link', 'info')
+        const result = axios.delete(`${baseURL}reprove/${id}`)
         console.log('banda reprovada com sucesso')
+        dispatch(getAllNewBands())
     }
     catch (err) {
-
+        alert('Não foi possível reprovar esta banda no momento, tente novamente mais tarde...')
+        console.log(err.message)
     }
 }

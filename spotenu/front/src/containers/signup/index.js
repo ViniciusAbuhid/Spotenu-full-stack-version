@@ -4,33 +4,42 @@ import * as S from './style'
 import logo from '../../assets/SPOTENU.png'
 import { connect } from 'react-redux'
 import { sendSignupData } from '../../actions/usersActions'
+import { push } from 'connected-react-router'
+import { routes } from '../../router/index'
 
 function Signup(props) {
 
     useEffect(() => {
-        // if (token.role){
-        //   this.props.goToLogin()
-        // role = admin
+        // if(!window.localStorage.getItem('token')){
+        //     props.goToLogin()
+        // }
+        if (window.localStorage.getItem('role' === 'ADMIN')){
+            setRole('ADMIN')
+          }
     }, [])
 
     const [role, setRole] = useState('')
-    const [userData, setUserData] = useState({})
+    const [userData, setUserData] = useState({email: '', password: ''})
 
     function saveUserData(e) {
         const { name, value } = e.target
         setUserData({ ...userData, [name]: value })
+        console.log(userData)
     }
 
     function sendSignupData(e) {
         e.preventDefault()
-        props.sendSignupData(userData)
+        const updatedUserData = {
+            ...userData, role
+        }
+        props.sendSignupData(updatedUserData)
     }
 
     return (
         <S.PageWrapper>
             <S.ContentWrapper elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
-                {role === 'admin' ?
+                {role === 'ADMIN'?
                     <Typography variant='h4'>Cadastro de novo administrador</Typography> :
                     <div>
                         <Typography variant='h3' align='center'>Cadastro</Typography>
@@ -38,11 +47,11 @@ function Signup(props) {
                         <Box mt={2} mb={1}>
                             <ButtonGroup color="secondary" aria-label="outlined primary button group">
                                 <Button variant="contained"
-                                    onClick={() => setRole('payer-user')}>Ouvinte pagante</Button>
+                                    onClick={() => setRole('OUVINTE PAGANTE')}>Ouvinte pagante</Button>
                                 <Button variant="contained"
-                                    onClick={() => setRole('normal-user')}>Ouvinte não pagante</Button>
+                                    onClick={() => setRole('OUVINTE NAO PAGANTE')}>Ouvinte não pagante</Button>
                                 <Button variant="contained"
-                                    onClick={() => setRole('artist')}>Banda</Button>
+                                    onClick={() => setRole('BANDA')}>Banda</Button>
                             </ButtonGroup>
                         </Box>
                     </div>
@@ -78,16 +87,18 @@ function Signup(props) {
                             type='password'
                             name='password'
                             required
-                            // value={userData.password || ''}
-                            onChage={saveUserData}
-                            inputProps={role === 'admin' ? { minLength: 10 } : { minLength: 6 }} />
-                        {role === 'artist' ?
+                            value={userData.password}
+                            onChange={saveUserData}
+                            inputProps={role === 'admin' ? { minLength: 10 } : { minLength: 6 }}
+                        />
+                        {role === 'BANDA' ?
                             <TextField
                                 color='secondary'
                                 label='Descrição'
                                 name='description'
-                                value={userData.desciption || ''}
-                                onChange={saveUserData}></TextField> : ''
+                                value={userData.description || ''}
+                                onChange={saveUserData}>
+                            </TextField> : ''
                         }
                         <Box mt={4} >
                             <Button variant="contained" color='secondary' type='onSubmit'>cadastrar</Button>
@@ -101,7 +112,8 @@ function Signup(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        sendSignupData: (userData) => dispatch(sendSignupData(userData))
+        sendSignupData: (updatedUserData) => dispatch(sendSignupData(updatedUserData)),
+        goToLogin: ()=> dispatch(push(routes.login))
     }
 }
 

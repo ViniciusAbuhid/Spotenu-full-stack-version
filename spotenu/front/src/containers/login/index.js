@@ -33,7 +33,7 @@ function Login(props) {
             }
         }
         console.log(updatedUserData)
-        props.sendLoginData(userData)
+        props.sendLoginData(updatedUserData)
     }
 
     return (
@@ -70,7 +70,7 @@ function Login(props) {
 const mapDispatchToProps = dispatch => {
     return {
         goToSignup: () => dispatch(push(routes.signup)),
-        sendLoginData: (userData) => dispatch(sendLoginData(userData))
+        sendLoginData: (updatedUserData) => dispatch(sendLoginData(updatedUserData))
     }
 }
 

@@ -21,9 +21,9 @@ class UserBusiness {
             const id = this.idGenerator.idGenerator();
             const hash = yield this.hashGenerator.hashGenerator(password);
             yield this.userDataBase.addUser(name, email, nickname, hash, id, role, description);
-            const result = this.userDataBase.getUserById(id);
+            const result = yield this.userDataBase.getUserById(id);
             const accessToken = this.tokenGenerator.generateToken({ id, role });
-            return accessToken;
+            return { accessToken, role };
         });
     }
 }

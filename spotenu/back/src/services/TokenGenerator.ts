@@ -3,7 +3,6 @@ export default class TokenGenerator {
     static expiresIn = '10h'
     
     public generateToken(input: AuthenticationData): string {
-        console.log(TokenGenerator.expiresIn)
         const token = jwt.sign(
             {
                 id: input.id,

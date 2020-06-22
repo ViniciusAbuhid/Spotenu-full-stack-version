@@ -23,15 +23,16 @@ class UserDataBase extends BaseDataBase_1.default {
         return __awaiter(this, void 0, void 0, function* () {
             let approved = role === UserModel_1.UserRoles.BANDA ? 0 : 1;
             yield this.getConnection().insert({
-                name, email, nickname, password, id, role, description
+                name, email, nickname, password, id, role, approved, description
             }).into(this.tableName);
         });
     }
     getUserById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield this.getConnection().select('*').where({ id });
+            const result = yield this.getConnection().select('*').from(this.tableName).where({ id });
+            console.log('resultado da query de busca', result);
             if (result.length === 0) {
-                throw new Error('Banda não encontrada');
+                throw new Error('Não foi possível realizar o cadastro agora, tente novamente mais tarde');
             }
             const user = new UserModel_1.UserModel(result[0].name, result[0].email, result[0].nickname, result[0].password, result[0].id, result[0].role, result[0].approved, result[0].description);
             return result;
