@@ -43,4 +43,23 @@ export class MusicController {
             await MusicDataBase.destroy()
         }
     }
+
+    public async createAlbum(req: Request, res: Response){
+        try {
+            const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization as string) as any
+            const result = MusicController.musicBusiness.
+            createAlbum(req.body.name, verifyToken.id, req.body.list)
+            res.status(200).send({
+                message: result
+            })
+        }
+        catch (err) {
+            res.status(400).send({
+                message: err.message
+            })
+        }
+        finally {
+            await BaseDataBase.destroy()
+        }
+    }
 }
