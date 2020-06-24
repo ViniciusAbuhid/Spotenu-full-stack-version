@@ -1,4 +1,7 @@
 import { music } from "../reducers/music"
+import axios from 'axios'
+
+const baseURL = 'http://localhost:3001/music'
 
 export const setMusicList = (musicsList) => {
     console.log('to no actio propriamente dita', musicsList)
@@ -36,50 +39,42 @@ const mockedPlRelations = [{
     pl: 'pl1'
 },]
 
-export const getMusicList = (componentInfo) => dispatch => {
+export const getMusicList = (componentInfo) => async (dispatch) => {
     try {
-        // const reult = axios.get('link', 'info')
-        componentInfo.component === 'album'? dispatch(setMusicList(mockedAlbumRelations)) :
-        dispatch(setMusicList(mockedPlRelations))
+        console.log(componentInfo)
+        const result = await axios.get(`${baseURL}/allMusics/${componentInfo.componentId}`)
+        dispatch(setMusicList(result.data))
     }
     catch (err) {
         alert('não foi possível carregar as músicas neste momento, tente novamente mais tarde')
     }
 }
 
-export const addMusic = (musicData) => dispatch => {
+export const addMusic = (musicData) => async(dispatch) => {
     try {
-        // axios.put('link', 'info')
-        let pushingMock = []
-        musicData.component === 'album'? pushingMock = [...mockedAlbumRelations, {
-            music: musicData.name,
-            album: musicData.name
-        }] : 
-        pushingMock = [...mockedPlRelations, {
-            music: musicData.name,
-            album: 'Pl1'
-        }]
-        dispatch(setMusicList(pushingMock))
+        console.log(musicData)
+        const result = await axios.put(`${baseURL}/addMusic`, musicData, {
+            headers: {
+                authorization: window.localStorage.getItem("token")
+            }
+        } )
+        dispatch(getMusicList({component: musicData.component, componentId: musicData.componentId}))
     }
     catch (err) {
-        alert('não foi adicionar essa música neste momento, tente novamente mais tarde')
+        console.log(err.message)
+        alert('não foi possível adicionar essa música neste momento, tente novamente mais tarde')
     }
 }
 
-export const deleteMusic = (musicData) => dispatch => {
+export const deleteMusic = (musicData) => async(dispatch) => {
     console.log(musicData)
     try {
-        // axios.delete('link', 'req')
-        let filteredMock = []
-        musicData.component === 'album'? filteredMock = mockedAlbumRelations.filter(relation => {
-            return relation.music !== musicData.name
-        }) :
-        filteredMock = mockedPlRelations.filter(relation => {
-            return relation.music !== musicData.name
-        })
-        dispatch(setMusicList(filteredMock))
+        const result = await axios.delete(`${baseURL}/delete/music/${musicData.id}`)
+        alert('música deletada com sucesso')
+        dispatch(getMusicList({component: musicData.component, componentId: musicData.componentId}))
     }
     catch (err) {
-        alert('não foi deletar essa música neste momento, tente novamente mais tarde')
+        console.log(err.message)
+        alert('não foi possível deletar essa música neste momento, tente novamente mais tarde')
     }
 }

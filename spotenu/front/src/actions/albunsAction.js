@@ -1,5 +1,8 @@
 import { push } from 'connected-react-router'
 import { routes } from '../router/index'
+import axios from 'axios'
+
+const baseURL = 'http://localhost:3001/music'
 
 export const setAlbuns = (albunsList) => {
     console.log(albunsList)
@@ -11,36 +14,31 @@ export const setAlbuns = (albunsList) => {
     }
 }
 
-const mockedAlbuns = [{
-    name: 'Album 1',
-    genres: ['samba','forro','reaggae'],
-    id: 1
-},{
-    name: 'Album 2',
-    genres: ['rock','pop','phunk'],
-    id: 2
-},{
-    name: 'Album 3',
-    genres: ['pagode','samba-raíz'],
-    id: 3
-}]
-
-export const getAllAlbuns = () => dispatch => {
+export const getAllAlbuns = () => async(dispatch) => {
     try{
-        // const result = axios.get('lin', 'req')
-        dispatch(setAlbuns(mockedAlbuns))
+        const result = await axios.get(`${baseURL}/allAlbuns`, {
+            headers: {
+                authorization: window.localStorage.getItem('token')
+            }
+        })
+        dispatch(setAlbuns(result.data))
     }
     catch (err) {
+        console.log(err.message)
         alert('Não foi possível carregar os seus álbuns, tente novamente mais tarde...')
     }
 }
 
-export const createAlbum = (albumData) => dispatch => {
+export const createAlbum = (albumData) => async(dispatch) => {
+    console.log(albumData)
     try {
-        // axios.put('link', 'req')
-        console.log(albumData)
+        const result = await axios.post(`${baseURL}/create/album`, albumData, {
+            headers: {
+                authorization: window.localStorage.getItem('token')
+            }
+        })
+        console.log(result.data)
         alert('Álbum adicionado com sucesso')
-        mockedAlbuns.push(albumData)
         dispatch(push(routes.home))
     }
     catch (err) {

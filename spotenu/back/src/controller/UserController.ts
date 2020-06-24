@@ -41,7 +41,8 @@ export default class UserController {
                 }
             }
             else if (userInfo.role !== UserRoles.OUVINTE_NAO_PAGANTE &&
-                userInfo.role !== UserRoles.OUVINTE_PAGANTE && userInfo.role !== UserRoles.BANDA) {
+                userInfo.role !== UserRoles.OUVINTE_PAGANTE && userInfo.role !== UserRoles.BANDA &&
+                userInfo.role !== UserRoles.ADMIN) {
                 userInfo.role = UserRoles.OUVINTE_NAO_PAGANTE
             }
             const result = await UserController.userBusiness.addUser(userInfo.name, userInfo.email, userInfo.nickname,
@@ -79,10 +80,10 @@ export default class UserController {
 
     public async getAllBands(req: Request, res: Response) {
         try {
-            // const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization as string) as any
-            // if(req.headers.authorization !== UserRoles.ADMIN){
-            //     throw new Error('Apenas administradores tem acesso a essas informações')
-            // }
+            const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization as string) as any
+            if(verifyToken.role !== UserRoles.ADMIN){
+                throw new Error('Apenas administradores tem acesso a essas informações')
+            }
             const result = await UserController.userBusiness.getAllBands()
             res.status(200).send({
                 message: result

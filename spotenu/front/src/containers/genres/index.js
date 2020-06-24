@@ -11,9 +11,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 function Genres(props) {
     useEffect(() => {
         props.getAllGenres()
+        window.localStorage.getItem('role') === 'ADIMN' || setRole('ADMIN')
     }, [])
 
-    const [role, setRole] = useState('admin')
+    const [role, setRole] = useState('')
     const [toggleGenre, setToggleGenre] = useState(false)
     const [newGenre, setNewGenre] = useState({})
 
@@ -29,7 +30,6 @@ function Genres(props) {
 
     function saveNewGenre(e) {
         setNewGenre({ ...newGenre, name: e.target.value })
-        console.log(newGenre)
     }
 
     return (
@@ -46,10 +46,10 @@ function Genres(props) {
                                     display="flex"
                                     justifyContent='space-between'
                                     mt={3}>
-                                    <Typography variant='h5'>{genre}</Typography>
-                                    {role && <DeleteIcon
+                                    <Typography variant='h5'>{genre.name}</Typography>
+                                    {role === 'ADMIN' && <DeleteIcon
                                         size='small'
-                                        onClick={() => props.deleteGenre(genre)} />
+                                        onClick={() => props.deleteGenre(genre.id)} />
                                     }
                                 </Box>
                             </li>
@@ -101,7 +101,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getAllGenres: () => dispatch(getAllGenres()),
-        deleteGenre: (genre) => dispatch(deleteGenre(genre)),
+        deleteGenre: (genreId) => dispatch(deleteGenre(genreId)),
         addNewGenre: (newGenre) => dispatch(addNewGenre(newGenre))
     }
 }

@@ -40,7 +40,7 @@ function ArtistMenu(props) {
                                         onClick={() => setAlbumId('')}>
                                         Recolher Álbum
                                     </Button>
-                                    <MusicMenu componentInfo = {{component: 'album', componentName: album.name}} />
+                                    <MusicMenu componentInfo = {{component: 'album', componentId: album.id}} />
                                 </div>
                             ) : (
                                     <Button

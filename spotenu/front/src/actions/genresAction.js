@@ -11,35 +11,34 @@ export const setAllGenres = (genresList) =>{
     }
 } 
 
-const mockedGenres = []
-// ['forro', 'samba', 'reaggae', 'cumbia colombiana']
-
-export const getAllGenres = () => dispatch => {
+export const getAllGenres = () => async (dispatch) => {
     try {
-        const result = axios.get(`${baseURL}/allGenres`)
-        dispatch(setAllGenres(result))
+        const result = await axios.get(`${baseURL}/allGenres`, {headers:{
+            authorization: window.localStorage.getItem('token')
+        }})
+        console.log(result)
+        dispatch(setAllGenres(result.data))
     }
     catch (err) {
-        alert('Não foi possível carregar os gÊneros, tente novamente mais tarde...')
+        alert('Não foi possível carregar os gêneros, tente novamente mais tarde...')
     }
 }
 
-export const deleteGenre = (genreName) => dispatch => {
+export const deleteGenre = (genreId) => async(dispatch) => {
     try{
-        // axios.delete('link', 'req')
-        const filteredMock = mockedGenres.filter(genre => {
-            return genre !== genreName
-        })
-        dispatch(setAllGenres(filteredMock))
+        const result = await axios.delete(`${baseURL}/delete/genre/${genreId}`)
+        dispatch(getAllGenres())
+        console.log(result.data)
     }
     catch (err) {
         alert('Não foi possível deletar o gênero escolhido, tente novamente mais tarde...')
     }
 }
 
-export const addNewGenre = (genreName) => dispatch => {
+export const addNewGenre = (genreName) => async (dispatch) => {
     try {
-        const result = axios.put(`${baseURL}/addGenres`, genreName)
+        const result = await axios.put(`${baseURL}/addGenre`, genreName)
+        console.log(result)
         dispatch(getAllGenres())
     }
     catch (err) {

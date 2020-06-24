@@ -6,15 +6,24 @@ const baseURL = 'http://localhost:3001/user'
 
 export const sendSignupData = (updatedUserData) => async (dispatch) => {
     try {
-        const result = await axios.post(`${baseURL}/signup`, updatedUserData)
-        const { token, role } = result.data
-        console.log(token)
-        console.log(role)
-        window.localStorage.setItem('token', token, 'role', role)
+        const headers = {
+            headers: {
+                authorization: window.localStorage.getItem('token')
+            }
+        }
+        const result = updatedUserData.role === 'ADMIN' ?
+            await axios.post(`${baseURL}/signup`, updatedUserData, headers) :
+            await axios.post(`${baseURL}/signup`, updatedUserData)
+
+        const { accessToken, role } = result.data
+        role !== 'ADMIN' && window.localStorage.setItem('token', accessToken)
+        role !== 'ADMIN' && window.localStorage.setItem('role', role)
+        role === 'ADMIN' && alert('Administrador cadastrado com sucesso')
+
         dispatch(push(routes.home))
     }
     catch (err) {
-        console.log(err)
+        console.log(err.message)
         alert('Cadastro não efetivado. Tente novamente mais tarde...')
     }
 }
@@ -22,8 +31,9 @@ export const sendSignupData = (updatedUserData) => async (dispatch) => {
 export const sendLoginData = (updatedUserData) => async (dispatch) => {
     try {
         const result = await axios.post(`${baseURL}/login`, updatedUserData)
-        const token = result.data.accessToken
-        window.localStorage.setItem('token', token)
+        const { accessToken, role } = result.data
+        window.localStorage.setItem('token', accessToken)
+        window.localStorage.setItem('role', role)
         dispatch(push(routes.home))
     }
     catch (err) {
