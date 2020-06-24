@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import * as S from './style'
 import Header from '../../components/header/index'
+import Footer from '../../components/footer/index'
 import { TextField, Typography, Box, Button } from '@material-ui/core'
 import logo from '../../assets/SPOTENU.png'
 import { connect } from 'react-redux'
@@ -38,6 +39,9 @@ function Login(props) {
 
     return (
         <S.PageWrapper>
+            <Header 
+            showSearch={true}
+            logoutIcon={true} />
             <S.ContentWrapper elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 <S.FormWrapper onSubmit={sendLoginData}>
@@ -63,6 +67,7 @@ function Login(props) {
                 </S.FormWrapper>
                 <S.Invitation onClick={props.goToSignup}>Não tem cadastro? Clique aqui para fazer parte da nossa jam</S.Invitation>
             </S.ContentWrapper>
+            <Footer/>
         </S.PageWrapper>
     )
 }

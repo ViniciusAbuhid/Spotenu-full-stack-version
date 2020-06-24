@@ -12,35 +12,35 @@ import { Box, IconButton, Typography } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import logo from '../../assets/SPOTENU.png'
 import alternativeLogo from '../../assets/SPOTENU3.png'
+import { push } from 'connected-react-router'
+import {routes} from '../../router/index'
 
 function Home(props) {
 
     useEffect(() => {
-        // if (!window.localStorage.getItem('token') || !token.role){
-        //   this.props.goToLogin()
-        // }
-        // setRole('role')
-        props.getAllPls()
-        props.getAllAlbuns()
-        console.log(props.playLists)
+        if (!window.localStorage.getItem('role')){
+          props.goToLogin()
+        }
+        setRole(window.localStorage.getItem('role'))
+        role === 'BANDA' ?  props.getAllPls() : props.getAllAlbuns()
     }, [])
 
     const [role, setRole] = useState('')
 
     const defineContent = () => {
         switch (role) {
-            case 'admin':
+            case 'ADMIN':
                 return (
                     <S.ContentWrapper elevation={10}>
                         <MenuAdmin />
                     </S.ContentWrapper>
                 )
-            case 'payer-user':
+            case 'OUVINTE PAGANTE':
                 return (
                     <S.ContentWrapper elevation={10}>
                         <UserMenu playlitsList={props.playLists} role='payer-user' />
                     </S.ContentWrapper>)
-            case 'artist':
+            case 'BANDA':
                 return (
                     <S.ContentWrapper elevation={10}>
                         <ArtistMenu albunsList={props.albuns} />
@@ -67,7 +67,9 @@ function Home(props) {
 
     return (
         <S.PageWrapper>
-            <Header showSearch={role ? null : true} />
+            <Header 
+            showSearch={role ? null : true}
+            logoutIcon={null} />
             {defineContent()}
             <Footer />
         </S.PageWrapper>
@@ -84,7 +86,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getAllPls: () => dispatch(getAllPls()),
-        getAllAlbuns: () => dispatch(getAllAlbuns())
+        getAllAlbuns: () => dispatch(getAllAlbuns()),
+        goToLogin: ()=> dispatch(push(routes.login))
     }
 }
 

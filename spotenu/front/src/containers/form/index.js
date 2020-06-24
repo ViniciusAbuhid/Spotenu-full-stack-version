@@ -20,6 +20,7 @@ function Form(props) {
     }
 
     function sendAlbumData(e) {
+        e.preventDefault()
         props.createAlbum(albumData)
     }
 
@@ -40,8 +41,8 @@ function Form(props) {
                     <TextField
                         color='secondary'
                         label='Gênero predominante'
-                        name='genre'
-                        value={albumData.genre || ''}
+                        name='list'
+                        value={albumData.list || ''}
                         required
                         onChange={saveAlbumData} />
                     <Box mt={4} mb={3} >

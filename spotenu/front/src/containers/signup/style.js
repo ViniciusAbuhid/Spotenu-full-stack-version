@@ -4,10 +4,10 @@ import { Paper } from '@material-ui/core'
 export const PageWrapper = styled.div`
     box-sizing: border-box
     max-width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: #FE7E02
 `
@@ -20,6 +20,7 @@ export const ContentWrapper = styled(Paper)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 50px 0
 `
 
 export const FormWrapper = styled.form`

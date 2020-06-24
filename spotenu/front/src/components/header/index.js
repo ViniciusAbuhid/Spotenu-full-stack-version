@@ -12,6 +12,8 @@ function Header(props) {
 
     function logout() {
         const result = window.confirm('Tem certeza que deseja sair?')
+        result && window.localStorage.removeItem('token')
+        result && window.localStorage.removeItem('role')
         result && props.logout()
     }
 
@@ -19,10 +21,11 @@ function Header(props) {
         <S.ComponentWrapper>
             <S.Header>
                 <S.ImgWrapper src={logo} onClick={props.goToHomePage} />
-                <S.Logout onClick={logout}>
-                    <AccountCircleIcon fontSize="large" />
-            Logout
-            </S.Logout>
+                {props.logoutIcon || (
+                    <S.Logout onClick={logout}>
+                        <AccountCircleIcon fontSize="large" />
+                            Logout
+                    </S.Logout>)}
             </S.Header>
             {props.showSearch || (
                 <S.BarWrapper>

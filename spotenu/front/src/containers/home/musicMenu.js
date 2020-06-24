@@ -31,7 +31,7 @@ function MusicMenu(props) {
         <div>
             {props.MusicList.length >= 1 ? (
                 <div>
-                    {props.MusicList.map(relation => {
+                    {props.MusicList.map(music => {
                         return (
                             <Box
                                 mb={2}
@@ -39,56 +39,56 @@ function MusicMenu(props) {
                                 justifyContent='space-between'>
                                 <Box display='flex'>
                                     <PlayCircleFilledIcon />
-                                    <Typography>{relation.music}</Typography>
+                                    <Typography>{music.name}</Typography>
                                 </Box>
                                 <DeleteIcon
                                     size='small'
                                     color='disabled'
                                     onClick={() => props.deleteMusic({
                                         ...props.componentInfo,
-                                        name: relation.music
+                                        id: music.id
                                     })} />
                             </Box>)
                     })}
-                    <Box>
-                        <Button
-                            color='primary'
-                            size='small'
-                            onClick={() => setToggleMusic(!toggleMusic)}>
-                            Adicionar música
-                </Button>
-                    </Box>
-                    {toggleMusic && (
-                        <S.FormWrapper onSubmit={sendMusicData}>
-                            <TextField
-                                placeholder='Nome da música'
-                                color='secondary'
-                                size='small'
-                                name='name'
-                                required
-                                value={musicData.name || ''}
-                                onChange={saveMusicData} />
-                            <TextField
-                                color='secondary'
-                                placeholder='Link'
-                                size='small'
-                                name='link'
-                                required
-                                value={musicData.link || ''}
-                                onChange={saveMusicData} />
-                            <Button
-                                variant='contained'
-                                color='secondary'
-                                size='small'
-                                type='onSubmit' >
-                                Adicionar
-                </Button>
-                        </S.FormWrapper>)}
                 </div>) : (
                     <Typography
                         align='center'>Albúm vazio...
                     </Typography>
                 )}
+            <Box>
+                <Button
+                    color='primary'
+                    size='small'
+                    onClick={() => setToggleMusic(!toggleMusic)}>
+                    Adicionar música
+                </Button>
+            </Box>
+            {toggleMusic && (
+                <S.FormWrapper onSubmit={sendMusicData}>
+                    <TextField
+                        placeholder='Nome da música'
+                        color='secondary'
+                        size='small'
+                        name='name'
+                        required
+                        value={musicData.name || ''}
+                        onChange={saveMusicData} />
+                    <TextField
+                        color='secondary'
+                        placeholder='Link'
+                        size='small'
+                        name='link'
+                        required
+                        value={musicData.link || ''}
+                        onChange={saveMusicData} />
+                    <Button
+                        variant='contained'
+                        color='secondary'
+                        size='small'
+                        type='onSubmit' >
+                        Adicionar
+                    </Button>
+                </S.FormWrapper>)}
         </div>
     )
 }

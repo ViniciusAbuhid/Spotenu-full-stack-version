@@ -8,7 +8,7 @@ export const PageWrapper = styled.div`
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: #FE7E02
 `
@@ -20,6 +20,7 @@ export const ContentWrapper = styled(Paper)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 50px 0
 `
 export const ImgWrapper = styled.img`
     width: 300px;

@@ -6,16 +6,15 @@ import { connect } from 'react-redux'
 import { sendSignupData } from '../../actions/usersActions'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
+import Header from '../../components/header/index'
+import Footer from '../../components/footer/index'
 
 function Signup(props) {
 
     useEffect(() => {
-        // if(!window.localStorage.getItem('token')){
-        //     props.goToLogin()
-        // }
-        if (window.localStorage.getItem('role' === 'ADMIN')){
-            setRole('ADMIN')
-          }
+        if (window.localStorage.getItem('role') === "ADMIN"){
+          setRole('ADMIN')
+        }
     }, [])
 
     const [role, setRole] = useState('')
@@ -37,6 +36,9 @@ function Signup(props) {
 
     return (
         <S.PageWrapper>
+            <Header 
+            showSearch={true}
+            logoutIcon={true} />
             <S.ContentWrapper elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 {role === 'ADMIN'?
@@ -44,7 +46,7 @@ function Signup(props) {
                     <div>
                         <Typography variant='h3' align='center'>Cadastro</Typography>
                         <Typography align='center'>Desejo me cadastrar como:</Typography>
-                        <Box mt={2} mb={1}>
+                        <Box mt={2} mb={role === ''? 5 : 1}>
                             <ButtonGroup color="secondary" aria-label="outlined primary button group">
                                 <Button variant="contained"
                                     onClick={() => setRole('OUVINTE PAGANTE')}>Ouvinte pagante</Button>
@@ -89,7 +91,7 @@ function Signup(props) {
                             required
                             value={userData.password}
                             onChange={saveUserData}
-                            inputProps={role === 'admin' ? { minLength: 10 } : { minLength: 6 }}
+                            inputProps={role === 'ADMIN' ? { minLength: 10 } : { minLength: 6 }}
                         />
                         {role === 'BANDA' ?
                             <TextField
@@ -106,6 +108,7 @@ function Signup(props) {
                     </S.FormWrapper>
                     : ''}
             </S.ContentWrapper>
+            <Footer/>
         </S.PageWrapper>
     )
 }

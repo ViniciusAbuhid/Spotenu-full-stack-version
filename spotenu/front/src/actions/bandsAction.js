@@ -1,20 +1,23 @@
 import axios from 'axios'
+import header from '../components/header'
 
 const baseURL = 'http://localhost:3001/'
 
-export const setAllNewBands = (newBands) => {
+export const setBands = (bands) => {
     return {
-        type: 'SET_NEW_BANDS',
+        type: 'SET_BANDS',
         payload: {
-            newBands
+            bands
         }
     }
 }
 
-export const getAllNewBands = () => async (dispatch) => {
+export const getAllBands = () => async (dispatch) => {
     try {
-        const result = await axios.get(`${baseURL}user/allBands`)
-        dispatch(setAllNewBands(result.data.message))
+        const result = await axios.get(`${baseURL}user/allBands`, {headers:{
+            authorization: window.localStorage.getItem('token')
+        }})
+        dispatch(setBands(result.data.message))
     }
     catch (err) {
         alert('Não foi possível carregar todas as bandas no momento, tente novamente mais tarde...')
@@ -25,9 +28,10 @@ export const getAllNewBands = () => async (dispatch) => {
 export const approveBand = (id) => async (dispatch) => {
     try{
         console.log()
-        const result = await axios.put(`${baseURL}'approve/${id}`)
+        const result = await axios.put(`${baseURL}user/approve/${id}`)
+        console.log('deu bom, meu')
         alert('banda aprovada com sucesso')
-        dispatch(getAllNewBands())
+        dispatch(getAllBands())
     }
     catch (err) {
         alert('Não foi possível aprovar esta banda no momento, tente novamente mais tarde')
@@ -37,9 +41,9 @@ export const approveBand = (id) => async (dispatch) => {
 
 export const disapproveBand = (id) => dispatch => {
     try{
-        const result = axios.delete(`${baseURL}reprove/${id}`)
+        const result = axios.delete(`${baseURL}user/reprove/${id}`)
         console.log('banda reprovada com sucesso')
-        dispatch(getAllNewBands())
+        dispatch(getAllBands())
     }
     catch (err) {
         alert('Não foi possível reprovar esta banda no momento, tente novamente mais tarde...')

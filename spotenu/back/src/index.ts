@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(cors())
 
 app.use('/user', userRouter)
+
 app.use('/music', musicRouter)
 
 const server = app.listen(3001, () => {

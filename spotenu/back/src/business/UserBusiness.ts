@@ -28,7 +28,7 @@ export default class UserBusiness {
         const checkingApproval = await this.userDataBase.getBandById(id)
         console.log('olha o que volta', checkingApproval)
         if (checkingApproval[0].approved) {
-            throw new Error('Essa banda já estava aprovada')
+            throw new Error('Não foi possível aprovar esta banda agora, tente novamente mais tarde...')
         }
     }
 
@@ -36,13 +36,12 @@ export default class UserBusiness {
         await this.userDataBase.reproveBand(id)
         const checkingApproval = await this.userDataBase.getBandById(id)
         console.log('olha o que volta', checkingApproval)
-        if (checkingApproval.length = 0) {
-            throw new Error('Essa banda já estava reprovada')
+        if (checkingApproval.length > 0) {
+            throw new Error('Não foi possível reprovar esta banda agora, tente novamente mais tarde...')
         }
     }
 
     public async getUserByCredential(credential: string, password: string) {
-        console.log('olha o que chegou no bisnes', credential)
         const result = await this.userDataBase.getUserByCredential(credential)
         if (result.length <= 0) {
             throw new Error('infomações inválidas')
