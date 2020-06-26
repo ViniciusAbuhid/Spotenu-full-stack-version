@@ -2,11 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserRoles = exports.UserModel = void 0;
 class UserModel {
-    constructor(name, email, nickname, password, id, role, approved, description) {
+    constructor(name, email, nickname, id, role, approved, description) {
         this.name = name;
         this.email = email;
         this.nickname = nickname;
-        this.password = password;
         this.id = id;
         this.role = role;
         this.approved = approved;
@@ -28,7 +27,15 @@ class UserModel {
         return this.description;
     }
     getApproval() {
-        return this.approved;
+        return this.seTApproval(this.approved);
+    }
+    seTApproval(status) {
+        if (status === 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
 exports.UserModel = UserModel;

@@ -22,7 +22,6 @@ const BaseDataBase_1 = __importDefault(require("../data/BaseDataBase"));
 class UserController {
     addUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('que comecem os jogos');
             try {
                 const userInfo = {
                     name: req.body.name,
@@ -50,7 +49,8 @@ class UserController {
                     }
                 }
                 else if (userInfo.role !== UserModel_1.UserRoles.OUVINTE_NAO_PAGANTE &&
-                    userInfo.role !== UserModel_1.UserRoles.OUVINTE_PAGANTE && userInfo.role !== UserModel_1.UserRoles.BANDA) {
+                    userInfo.role !== UserModel_1.UserRoles.OUVINTE_PAGANTE && userInfo.role !== UserModel_1.UserRoles.BANDA &&
+                    userInfo.role !== UserModel_1.UserRoles.ADMIN) {
                     userInfo.role = UserModel_1.UserRoles.OUVINTE_NAO_PAGANTE;
                 }
                 const result = yield UserController.userBusiness.addUser(userInfo.name, userInfo.email, userInfo.nickname, userInfo.password, userInfo.role, userInfo.description);
@@ -62,7 +62,84 @@ class UserController {
                 });
             }
             finally {
-                BaseDataBase_1.default.destroy();
+                yield BaseDataBase_1.default.destroy();
+            }
+        });
+    }
+    login(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (!req.body.password || (!req.body.email && !req.body.nickname)) {
+                    throw new Error('Por favor preencha as informações adequadamente para prosseguir');
+                }
+                const result = yield UserController.userBusiness.getUserByCredential((req.body.email || req.body.nickname), req.body.password);
+                res.status(200).send(result);
+            }
+            catch (err) {
+                res.status(400).send({
+                    message: err.message
+                });
+            }
+            finally {
+                yield UserDataBase_1.default.destroy;
+            }
+        });
+    }
+    getAllBands(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const verifyToken = new TokenGenerator_1.default().verifyToken(req.headers.authorization);
+                if (verifyToken.role !== UserModel_1.UserRoles.ADMIN) {
+                    throw new Error('Apenas administradores tem acesso a essas informações');
+                }
+                const result = yield UserController.userBusiness.getAllBands();
+                res.status(200).send({
+                    message: result
+                });
+            }
+            catch (err) {
+                res.status(400).send({
+                    message: err.message
+                });
+            }
+            finally {
+                yield BaseDataBase_1.default.destroy();
+            }
+        });
+    }
+    approveBand(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                // const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization as string) as any
+                // if(req.headers.authorization !== UserRoles.ADMIN){
+                //     throw new Error('Apenas administradores tem acesso a essas informações')
+                // }
+                yield UserController.userBusiness.approveBand(req.params.id);
+                res.status(200).send("banda aprovada com sucesso");
+            }
+            catch (err) {
+                res.status(400).send({
+                    message: err.message
+                });
+            }
+            finally {
+                yield BaseDataBase_1.default.destroy();
+            }
+        });
+    }
+    reproveBand(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield UserController.userBusiness.reproveBand(req.params.id);
+                res.status(200).send("banda reprovada com sucesso");
+            }
+            catch (err) {
+                res.status(400).send({
+                    message: err.message
+                });
+            }
+            finally {
+                yield BaseDataBase_1.default.destroy();
             }
         });
     }

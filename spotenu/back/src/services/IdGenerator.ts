@@ -1,7 +1,7 @@
-import {v4} from 'uuid'
+import { v4 } from 'uuid'
 
 export default class IdGenerator {
-    public idGenerator(){
+    public idGenerator() {
         return v4()
     }
 }

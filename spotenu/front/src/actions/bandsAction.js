@@ -1,5 +1,4 @@
 import axios from 'axios'
-import header from '../components/header'
 
 const baseURL = 'http://localhost:3001/'
 
@@ -14,9 +13,11 @@ export const setBands = (bands) => {
 
 export const getAllBands = () => async (dispatch) => {
     try {
-        const result = await axios.get(`${baseURL}user/allBands`, {headers:{
-            authorization: window.localStorage.getItem('token')
-        }})
+        const result = await axios.get(`${baseURL}user/allBands`, {
+            headers: {
+                authorization: window.localStorage.getItem('token')
+            }
+        })
         dispatch(setBands(result.data.message))
     }
     catch (err) {
@@ -26,7 +27,7 @@ export const getAllBands = () => async (dispatch) => {
 }
 
 export const approveBand = (id) => async (dispatch) => {
-    try{
+    try {
         console.log()
         const result = await axios.put(`${baseURL}user/approve/${id}`)
         console.log('deu bom, meu')
@@ -40,7 +41,7 @@ export const approveBand = (id) => async (dispatch) => {
 }
 
 export const disapproveBand = (id) => dispatch => {
-    try{
+    try {
         const result = axios.delete(`${baseURL}user/reprove/${id}`)
         console.log('banda reprovada com sucesso')
         dispatch(getAllBands())

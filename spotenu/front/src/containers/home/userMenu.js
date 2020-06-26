@@ -17,9 +17,9 @@ function UserMenu(props) {
                 Minhas playlists
             </Typography>
             <S.StyledList>
-                {props.playlitsList.length >= 1 ? props.playlitsList.map(pl => {
+                {props.playlitsList.length >= 1 ? props.playlitsList.map((pl, index) => {
                     return (
-                        <li>
+                        <li key={index}>
                             <Box
                                 display="flex"
                                 justifyContent='space-between'

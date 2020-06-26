@@ -8,21 +8,19 @@ import { getAllPls } from '../../actions/playListsAction'
 import { getAllAlbuns } from '../../actions/albunsAction'
 import UserMenu from './userMenu'
 import ArtistMenu from './artistMenu'
-import { Box, IconButton, Typography } from '@material-ui/core'
+import { Box, IconButton } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
-import logo from '../../assets/SPOTENU.png'
 import alternativeLogo from '../../assets/SPOTENU3.png'
 import { push } from 'connected-react-router'
-import {routes} from '../../router/index'
+import { routes } from '../../router/index'
 
 function Home(props) {
 
     useEffect(() => {
-        if (!window.localStorage.getItem('role')){
-          props.goToLogin()
+        if (!window.localStorage.getItem('role')) {
+            props.goToLogin()
         }
         setRole(window.localStorage.getItem('role'))
-        role === 'BANDA' ?  props.getAllPls() : props.getAllAlbuns()
     }, [])
 
     const [role, setRole] = useState('')
@@ -36,11 +34,13 @@ function Home(props) {
                     </S.ContentWrapper>
                 )
             case 'OUVINTE PAGANTE':
+                props.getAllPls()
                 return (
                     <S.ContentWrapper elevation={10}>
                         <UserMenu playlitsList={props.playLists} role='payer-user' />
                     </S.ContentWrapper>)
             case 'BANDA':
+                props.getAllAlbuns()
                 return (
                     <S.ContentWrapper elevation={10}>
                         <ArtistMenu albunsList={props.albuns} />
@@ -67,9 +67,9 @@ function Home(props) {
 
     return (
         <S.PageWrapper>
-            <Header 
-            showSearch={role ? null : true}
-            logoutIcon={null} />
+            <Header
+                showSearch={role ? null : true}
+                logoutIcon={null} />
             {defineContent()}
             <Footer />
         </S.PageWrapper>
@@ -87,7 +87,7 @@ const mapDispatchToProps = dispatch => {
     return {
         getAllPls: () => dispatch(getAllPls()),
         getAllAlbuns: () => dispatch(getAllAlbuns()),
-        goToLogin: ()=> dispatch(push(routes.login))
+        goToLogin: () => dispatch(push(routes.login))
     }
 }
 

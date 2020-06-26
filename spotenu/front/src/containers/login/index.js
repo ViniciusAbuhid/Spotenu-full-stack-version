@@ -12,7 +12,7 @@ import { sendLoginData } from '../../actions/usersActions'
 function Login(props) {
 
     const [userData, setUserData] = useState({})
-    
+
     function saveUserData(e) {
         const { name, value } = e.target
         setUserData({ ...userData, [name]: value })
@@ -39,9 +39,9 @@ function Login(props) {
 
     return (
         <S.PageWrapper>
-            <Header 
-            showSearch={true}
-            logoutIcon={true} />
+            <Header
+                showSearch={true}
+                logoutIcon={true} />
             <S.ContentWrapper elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 <S.FormWrapper onSubmit={sendLoginData}>
@@ -67,7 +67,7 @@ function Login(props) {
                 </S.FormWrapper>
                 <S.Invitation onClick={props.goToSignup}>Não tem cadastro? Clique aqui para fazer parte da nossa jam</S.Invitation>
             </S.ContentWrapper>
-            <Footer/>
+            <Footer />
         </S.PageWrapper>
     )
 }

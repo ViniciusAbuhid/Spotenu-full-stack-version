@@ -120,10 +120,6 @@ export default class UserController {
 
     public async reproveBand(req: Request, res: Response) {
         try {
-            // const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization as string) as any
-            // if(req.headers.authorization !== UserRoles.ADMIN){
-            //     throw new Error('Apenas administradores tem acesso a essas informações')
-            // }
             await UserController.userBusiness.reproveBand(req.params.id)
             res.status(200).send("banda reprovada com sucesso")
         }
