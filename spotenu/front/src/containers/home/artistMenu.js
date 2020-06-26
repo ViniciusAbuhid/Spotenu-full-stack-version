@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import * as S from './style'
-import { Typography, Button, Box, TextField, Tooltip } from '@material-ui/core'
+import { Typography, Button, Box } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete';
 import logo from '../../assets/SPOTENU.png'
 import { connect } from 'react-redux'
@@ -11,7 +11,6 @@ import MusicMenu from './musicMenu'
 function ArtistMenu(props) {
 
     const [albumId, setAlbumId] = useState('')
-    const [musicCreator, setMusicCreator] = useState('')
 
     return (
         <div>
@@ -20,17 +19,17 @@ function ArtistMenu(props) {
                 Meus álbuns
             </Typography>
             <S.StyledList>
-                {props.albunsList.length >= 1 ? props.albunsList.map(album => {
+                {props.albunsList.length >= 1 ? props.albunsList.map((album, index) => {
                     return (
-                        <li>
+                        <li key={index} >
                             <Box
                                 display="flex"
                                 justifyContent='space-between'
                                 mt={3}>
                                 <Typography variant='h5'>{album.name}</Typography>
-                                <DeleteIcon 
-                                size='big' 
-                                color='disabled'/>
+                                <DeleteIcon
+                                    size='big'
+                                    color='disabled' />
                             </Box>
                             {albumId === album.id ? (
                                 <div>
@@ -40,7 +39,7 @@ function ArtistMenu(props) {
                                         onClick={() => setAlbumId('')}>
                                         Recolher Álbum
                                     </Button>
-                                    <MusicMenu componentInfo = {{component: 'album', componentId: album.id}} />
+                                    <MusicMenu componentInfo={{ component: 'album', componentId: album.id }} />
                                 </div>
                             ) : (
                                     <Button

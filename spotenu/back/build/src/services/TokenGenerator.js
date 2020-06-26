@@ -22,7 +22,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jwt = __importStar(require("jsonwebtoken"));
 class TokenGenerator {
     generateToken(input) {
-        console.log(TokenGenerator.expiresIn);
         const token = jwt.sign({
             id: input.id,
             role: input.role

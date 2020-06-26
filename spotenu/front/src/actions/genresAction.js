@@ -2,20 +2,22 @@ import axios from 'axios'
 
 const baseURL = 'http://localhost:3001/music'
 
-export const setAllGenres = (genresList) =>{
+export const setAllGenres = (genresList) => {
     return {
         type: 'SET_GENRES',
         payload: {
             genresList
         }
     }
-} 
+}
 
 export const getAllGenres = () => async (dispatch) => {
     try {
-        const result = await axios.get(`${baseURL}/allGenres`, {headers:{
-            authorization: window.localStorage.getItem('token')
-        }})
+        const result = await axios.get(`${baseURL}/allGenres`, {
+            headers: {
+                authorization: window.localStorage.getItem('token')
+            }
+        })
         console.log(result)
         dispatch(setAllGenres(result.data))
     }
@@ -24,8 +26,8 @@ export const getAllGenres = () => async (dispatch) => {
     }
 }
 
-export const deleteGenre = (genreId) => async(dispatch) => {
-    try{
+export const deleteGenre = (genreId) => async (dispatch) => {
+    try {
         const result = await axios.delete(`${baseURL}/delete/genre/${genreId}`)
         dispatch(getAllGenres())
         console.log(result.data)

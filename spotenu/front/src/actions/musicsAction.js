@@ -1,4 +1,3 @@
-import { music } from "../reducers/music"
 import axios from 'axios'
 
 const baseURL = 'http://localhost:3001/music'
@@ -50,15 +49,15 @@ export const getMusicList = (componentInfo) => async (dispatch) => {
     }
 }
 
-export const addMusic = (musicData) => async(dispatch) => {
+export const addMusic = (musicData) => async (dispatch) => {
     try {
         console.log(musicData)
         const result = await axios.put(`${baseURL}/addMusic`, musicData, {
             headers: {
                 authorization: window.localStorage.getItem("token")
             }
-        } )
-        dispatch(getMusicList({component: musicData.component, componentId: musicData.componentId}))
+        })
+        dispatch(getMusicList({ component: musicData.component, componentId: musicData.componentId }))
     }
     catch (err) {
         console.log(err.message)
@@ -66,12 +65,12 @@ export const addMusic = (musicData) => async(dispatch) => {
     }
 }
 
-export const deleteMusic = (musicData) => async(dispatch) => {
+export const deleteMusic = (musicData) => async (dispatch) => {
     console.log(musicData)
     try {
         const result = await axios.delete(`${baseURL}/delete/music/${musicData.id}`)
         alert('música deletada com sucesso')
-        dispatch(getMusicList({component: musicData.component, componentId: musicData.componentId}))
+        dispatch(getMusicList({ component: musicData.component, componentId: musicData.componentId }))
     }
     catch (err) {
         console.log(err.message)

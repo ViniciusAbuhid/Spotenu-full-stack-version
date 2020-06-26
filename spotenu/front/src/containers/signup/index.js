@@ -12,13 +12,13 @@ import Footer from '../../components/footer/index'
 function Signup(props) {
 
     useEffect(() => {
-        if (window.localStorage.getItem('role') === "ADMIN"){
-          setRole('ADMIN')
+        if (window.localStorage.getItem('role') === "ADMIN") {
+            setRole('ADMIN')
         }
     }, [])
 
     const [role, setRole] = useState('')
-    const [userData, setUserData] = useState({email: '', password: ''})
+    const [userData, setUserData] = useState({ email: '', password: '' })
 
     function saveUserData(e) {
         const { name, value } = e.target
@@ -36,17 +36,17 @@ function Signup(props) {
 
     return (
         <S.PageWrapper>
-            <Header 
-            showSearch={true}
-            logoutIcon={true} />
+            <Header
+                showSearch={true}
+                logoutIcon={true} />
             <S.ContentWrapper elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
-                {role === 'ADMIN'?
+                {role === 'ADMIN' ?
                     <Typography variant='h4'>Cadastro de novo administrador</Typography> :
                     <div>
                         <Typography variant='h3' align='center'>Cadastro</Typography>
                         <Typography align='center'>Desejo me cadastrar como:</Typography>
-                        <Box mt={2} mb={role === ''? 5 : 1}>
+                        <Box mt={2} mb={role === '' ? 5 : 1}>
                             <ButtonGroup color="secondary" aria-label="outlined primary button group">
                                 <Button variant="contained"
                                     onClick={() => setRole('OUVINTE PAGANTE')}>Ouvinte pagante</Button>
@@ -108,7 +108,7 @@ function Signup(props) {
                     </S.FormWrapper>
                     : ''}
             </S.ContentWrapper>
-            <Footer/>
+            <Footer />
         </S.PageWrapper>
     )
 }
@@ -116,7 +116,7 @@ function Signup(props) {
 const mapDispatchToProps = dispatch => {
     return {
         sendSignupData: (updatedUserData) => dispatch(sendSignupData(updatedUserData)),
-        goToLogin: ()=> dispatch(push(routes.login))
+        goToLogin: () => dispatch(push(routes.login))
     }
 }
 

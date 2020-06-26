@@ -30,27 +30,49 @@ class UserDataBase extends BaseDataBase_1.default {
     getUserById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield this.getConnection().select('*').from(this.tableName).where({ id });
-            console.log('resultado da query de busca', result);
             if (result.length === 0) {
                 throw new Error('Não foi possível realizar o cadastro agora, tente novamente mais tarde');
             }
-            const user = new UserModel_1.UserModel(result[0].name, result[0].email, result[0].nickname, result[0].password, result[0].id, result[0].role, result[0].approved, result[0].description);
+            return result;
+        });
+    }
+    getAllBands() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield this.getConnection().select("*").from(this.tableName)
+                .where({ role: UserModel_1.UserRoles.BANDA });
+            const filteredResult = result.map(band => {
+                return new UserModel_1.UserModel(band.name, band.email, band.nickname, band.id, band.role, band.approved, band.description);
+            });
+            return filteredResult;
+        });
+    }
+    approveBand(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.getConnection().raw(`
+        UPDATE ${this.tableName}
+        SET approved = 1
+        WHERE id = '${id}'
+        `);
+        });
+    }
+    getBandById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield this.getConnection().select('*').where({ id }).from(this.tableName);
+            return result;
+        });
+    }
+    reproveBand(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.getConnection().delete().from(this.tableName).where({ id });
+        });
+    }
+    getUserByCredential(credential) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = credential.includes('@') ?
+                yield this.getConnection().select('*').where({ email: credential }).from(this.tableName) :
+                yield this.getConnection().select('*').where({ nickname: credential }).from(this.tableName);
             return result;
         });
     }
 }
 exports.default = UserDataBase;
-// public async signUp(id: string, name: string, email: string, nickname: string,
-//     password: string, role: string, description?: string) {
-//     let approved = role === UserRoles.BANDA ? 0 : 1
-//     const result = await this.getConnection().insert({
-//         id,
-//         name,
-//         email,
-//         nickname,
-//         password,
-//         role,
-//         description,
-//         approved
-//     }).into(this.tableName)
-// }

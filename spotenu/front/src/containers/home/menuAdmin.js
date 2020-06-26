@@ -15,11 +15,11 @@ function MenuAdmin(props) {
                 Olá, administrador, o que deseja fazer?
             </Typography>
             <Box mt={2} mb={3}>
-            <ButtonGroup color="secondary" aria-label="outlined primary button group" variant='contained'>
-                <Button onClick={props.goToBandsApprovals}>Gerenciar bandas</Button>
-                <Button onClick={props.goToGenresPage} >Adicionar gêneros</Button>
-                <Button onClick={props.goToSignupAdmin}>Cadastrar administrador</Button>
-            </ButtonGroup>
+                <ButtonGroup color="secondary" aria-label="outlined primary button group" variant='contained'>
+                    <Button onClick={props.goToBandsApprovals}>Gerenciar bandas</Button>
+                    <Button onClick={props.goToGenresPage} >Gerenciar gêneros</Button>
+                    <Button onClick={props.goToSignupAdmin}>Cadastrar administrador</Button>
+                </ButtonGroup>
             </Box>
         </div>
     )

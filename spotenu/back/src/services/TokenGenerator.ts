@@ -1,7 +1,7 @@
 import * as jwt from 'jsonwebtoken'
 export default class TokenGenerator {
     static expiresIn = '10h'
-    
+
     public generateToken(input: AuthenticationData): string {
         const token = jwt.sign(
             {

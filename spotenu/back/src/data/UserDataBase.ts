@@ -30,7 +30,7 @@ export default class UserDataBase extends BaseDataBase {
         return filteredResult
     }
 
-    public async approveBand(id: string){
+    public async approveBand(id: string) {
         await this.getConnection().raw(`
         UPDATE ${this.tableName}
         SET approved = 1
@@ -38,19 +38,19 @@ export default class UserDataBase extends BaseDataBase {
         `)
     }
 
-    public async getBandById(id: string){
-        const result = await this.getConnection().select('*').where({id}).from(this.tableName)
+    public async getBandById(id: string) {
+        const result = await this.getConnection().select('*').where({ id }).from(this.tableName)
         return result
     }
 
-    public async reproveBand(id:string){
-        await this.getConnection().delete().from(this.tableName).where({id})
+    public async reproveBand(id: string) {
+        await this.getConnection().delete().from(this.tableName).where({ id })
     }
 
-    public async getUserByCredential(credential: string){
+    public async getUserByCredential(credential: string) {
         const result = credential.includes('@') ?
-        await this.getConnection().select('*').where({email: credential}).from(this.tableName) :
-        await this.getConnection().select('*').where({nickname: credential}).from(this.tableName)
+            await this.getConnection().select('*').where({ email: credential }).from(this.tableName) :
+            await this.getConnection().select('*').where({ nickname: credential }).from(this.tableName)
         return result
     }
 }

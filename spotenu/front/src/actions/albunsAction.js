@@ -14,8 +14,8 @@ export const setAlbuns = (albunsList) => {
     }
 }
 
-export const getAllAlbuns = () => async(dispatch) => {
-    try{
+export const getAllAlbuns = () => async (dispatch) => {
+    try {
         const result = await axios.get(`${baseURL}/allAlbuns`, {
             headers: {
                 authorization: window.localStorage.getItem('token')
@@ -29,7 +29,7 @@ export const getAllAlbuns = () => async(dispatch) => {
     }
 }
 
-export const createAlbum = (albumData) => async(dispatch) => {
+export const createAlbum = (albumData) => async (dispatch) => {
     console.log(albumData)
     try {
         const result = await axios.post(`${baseURL}/create/album`, albumData, {

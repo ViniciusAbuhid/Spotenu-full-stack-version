@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Box, Typography, Button, TextField, Grid, Paper } from '@material-ui/core'
+import { Box, Typography, Button, TextField } from '@material-ui/core'
 import * as S from './style'
 import { getMusicList, addMusic, deleteMusic } from '../../actions/musicsAction'
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
@@ -31,9 +31,10 @@ function MusicMenu(props) {
         <div>
             {props.MusicList.length >= 1 ? (
                 <div>
-                    {props.MusicList.map(music => {
+                    {props.MusicList.map((music, index) => {
                         return (
                             <Box
+                                key={index}
                                 mb={2}
                                 display='flex'
                                 justifyContent='space-between'>

@@ -10,8 +10,6 @@ import { push } from 'connected-react-router'
 
 function Approvals(props) {
 
-    const [loading, setLoading] = useState(true)
-
     useEffect(() => {
         if (window.localStorage.getItem('role') !== "ADMIN") {
             props.goToHomePage()
@@ -36,8 +34,8 @@ function Approvals(props) {
                     Bandas cadastradas
                 </Typography>
                 <S.StyledList>
-                    {props.bandsList.length > 0 ? props.bandsList.map(band => {
-                        return <li>
+                    {props.bandsList.length > 0 ? props.bandsList.map((band, index)=> {
+                        return <li key={index}>
                             <Box mt={2}>
                                 <Typography variant='h5'>{band.name}</Typography>
                             </Box>
@@ -46,19 +44,19 @@ function Approvals(props) {
                                 <li><Typography>{band.description}</Typography></li>
                                 <li><Typography>{band.email}</Typography></li>
                             </S.ListWrapper>
-                            {band.approved? '' : (
-                            <ButtonGroup color="secondary" aria-label="outlined primary button group">
-                                <Button
-                                    onClick={() => approveBand(band.id)}
-                                    variant='contained'>
-                                    Aprovar
+                            {band.approved ? '' : (
+                                <ButtonGroup color="secondary" aria-label="outlined primary button group">
+                                    <Button
+                                        onClick={() => approveBand(band.id)}
+                                        variant='contained'>
+                                        Aprovar
                                 </Button>
-                                <Button
-                                    onClick={() => disapproveBand(band.id)}
-                                    variant='contained'>
-                                    Reprovar
+                                    <Button
+                                        onClick={() => disapproveBand(band.id)}
+                                        variant='contained'>
+                                        Reprovar
                                 </Button>
-                            </ButtonGroup>)} 
+                                </ButtonGroup>)}
                         </li>
                     }) :
                         <Typography variant='h5' align='center'>Nenhuma até o momento...

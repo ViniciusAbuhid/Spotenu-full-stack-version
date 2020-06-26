@@ -19,7 +19,7 @@ function Genres(props) {
     const [newGenre, setNewGenre] = useState({})
 
     function addNewGenre(e) {
-        if(!toggleGenre){
+        if (!toggleGenre) {
             setToggleGenre(true)
         }
         else if (toggleGenre && (!e.keyCode || e.keyCode === 13)) {
@@ -39,9 +39,9 @@ function Genres(props) {
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 <Typography variant='h4' align='center'>Gêneros musicais</Typography>
                 <S.StyledList>
-                    {props.genres ? props.genres.map(genre => {
+                    {props.genres ? props.genres.map((genre, index) => {
                         return (
-                            <li>
+                            <li key={index}>
                                 <Box
                                     display="flex"
                                     justifyContent='space-between'

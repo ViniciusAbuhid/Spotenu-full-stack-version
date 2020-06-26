@@ -4,7 +4,6 @@ import { MusicDataBase } from "../data/MusicDataBase";
 import IdGenerator from "../services/IdGenerator";
 import BaseDataBase from '../data/BaseDataBase';
 import TokenGenerator from '../services/TokenGenerator';
-import { send } from 'process';
 
 export class MusicController {
     public static musicBusiness = new MusicBusiness(new MusicDataBase(), new IdGenerator())
@@ -16,7 +15,6 @@ export class MusicController {
                 throw new Error('ação restrita à administradores e bandas')
             }
             const result = await MusicController.musicBusiness.getAllGenres()
-            console.log(result)
             res.status(200).send(result)
         }
         catch (err) {
@@ -79,13 +77,27 @@ export class MusicController {
 
     public async createAlbum(req: Request, res: Response) {
         try {
-            console.log('to aqui no controller')
             const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization as string) as any
             const result = await MusicController.musicBusiness.
                 createAlbum(req.body.name, verifyToken.id, req.body.list)
             res.status(200).send({
                 message: result
             })
+        }
+        catch (err) {
+            res.status(400).send({
+                message: err.message
+            })
+        }
+        finally {
+            await BaseDataBase.destroy()
+        }
+    }
+
+    public async deleteAlbum(req: Request, res: Response) {
+        try {
+            await MusicController.musicBusiness.deleteAlbum(req.params.id)
+            res.status(200).send("Album deletado com sucesso")
         }
         catch (err) {
             res.status(400).send({
