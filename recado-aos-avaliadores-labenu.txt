@@ -1,0 +1,3 @@
+- Não consegui fazer os testes e todos os desafios a tempo
+- A conexão ta estranha, pois as vezes o fron bate no endpoint e tem o retorno desejado, as vezes não. E isso no
+mesmo endpoint. Gostaria de saber se vocês conseguem identificar o motivo.
