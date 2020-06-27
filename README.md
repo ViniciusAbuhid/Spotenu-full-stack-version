@@ -13,7 +13,7 @@ Projeto Final: Spotenu
 
 <p align="center">O Spotenu é um projeto que visa facilitar o acesso a músicas pelo mundo. Bandas e usuários ouvintes podem se cadastrar e compartilhar suas paixões </p>
 
-Site do projeto: [link](https://possible-powder.surge.sh)
+Site do projeto: [link](http://spotenu.s3-website-us-east-1.amazonaws.com/)
 
 <img src="./assets/login.png" alt="login-page"></img>
 <br>
