@@ -27,6 +27,7 @@ Site do projeto: [link](http://spotenu.s3-website-us-east-1.amazonaws.com/)
 <p align="center">
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License MIT">
+    <img src="https://img.shields.io/badge/languages-4-blue" alt="License MIT">
   </a>
 </p>
 
