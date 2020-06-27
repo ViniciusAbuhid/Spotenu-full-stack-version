@@ -32,7 +32,7 @@ export default class UserController {
             }
             if (userInfo.role === UserRoles.ADMIN) {
                 const verifyToken = UserController.tokenGenerator.
-                    verifyToken(req.headers.authorization as string) as any
+                    verifyToken(req.headers.authorization || req.headers.Authorization as string) as any
                 if (verifyToken.role !== UserRoles.ADMIN) {
                     throw new Error('Só um admin pode adicionar outro admin')
                 }
@@ -80,7 +80,7 @@ export default class UserController {
 
     public async getAllBands(req: Request, res: Response) {
         try {
-            const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization as string) as any
+            const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization || req.headers.Authorization as string) as any
             if(verifyToken.role !== UserRoles.ADMIN){
                 throw new Error('Apenas administradores tem acesso a essas informações')
             }
@@ -101,8 +101,8 @@ export default class UserController {
 
     public async approveBand(req: Request, res: Response) {
         try {
-            // const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization as string) as any
-            // if(req.headers.authorization !== UserRoles.ADMIN){
+            // const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization || req.headers.Authorization as string) as any
+            // if(req.headers.authorization || req.headers.Authorization !== UserRoles.ADMIN){
             //     throw new Error('Apenas administradores tem acesso a essas informações')
             // }
             await UserController.userBusiness.approveBand(req.params.id)

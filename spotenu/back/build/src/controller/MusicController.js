@@ -22,7 +22,7 @@ class MusicController {
     getAllGenres(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const verifyToken = new TokenGenerator_1.default().verifyToken(req.headers.authorization);
+                const verifyToken = new TokenGenerator_1.default().verifyToken(req.headers.authorization || req.headers.Authorization);
                 if (verifyToken.role !== 'ADMIN' && verifyToken.role !== 'BANDA') {
                     throw new Error('ação restrita à administradores e bandas');
                 }
@@ -76,7 +76,7 @@ class MusicController {
     getAllAlbuns(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const verifyToken = new TokenGenerator_1.default().verifyToken(req.headers.authorization);
+                const verifyToken = new TokenGenerator_1.default().verifyToken(req.headers.authorization || req.headers.Authorization);
                 const result = yield new MusicDataBase_1.MusicDataBase().getAllAlbunsById(verifyToken.id);
                 res.status(200).send(result);
             }
@@ -93,7 +93,7 @@ class MusicController {
     createAlbum(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const verifyToken = new TokenGenerator_1.default().verifyToken(req.headers.authorization);
+                const verifyToken = new TokenGenerator_1.default().verifyToken(req.headers.authorization || req.headers.Authorization);
                 const result = yield MusicController.musicBusiness.
                     createAlbum(req.body.name, verifyToken.id, req.body.list);
                 res.status(200).send({
@@ -145,7 +145,7 @@ class MusicController {
     addMusic(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const verifyToken = new TokenGenerator_1.default().verifyToken(req.headers.authorization);
+                const verifyToken = new TokenGenerator_1.default().verifyToken(req.headers.authorization || req.headers.Authorization);
                 if (verifyToken.role !== 'BANDA') {
                     throw new Error('função exclusiva para as bandas');
                 }

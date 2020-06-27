@@ -10,7 +10,7 @@ export class MusicController {
 
     public async getAllGenres(req: Request, res: Response) {
         try {
-            const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization as string) as any
+            const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization || req.headers.Authorization as string) as any
             if (verifyToken.role !== 'ADMIN' && verifyToken.role !== 'BANDA') {
                 throw new Error('ação restrita à administradores e bandas')
             }
@@ -61,7 +61,8 @@ export class MusicController {
 
     public async getAllAlbuns(req: Request, res: Response) {
         try {
-            const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization as string) as any
+            const verifyToken = new TokenGenerator().
+            verifyToken(req.headers.authorization as string || req.headers.Authorization as string) as any
             const result = await new MusicDataBase().getAllAlbunsById(verifyToken.id)
             res.status(200).send(result)
         }
@@ -77,7 +78,7 @@ export class MusicController {
 
     public async createAlbum(req: Request, res: Response) {
         try {
-            const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization as string) as any
+            const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization || req.headers.Authorization as string) as any
             const result = await MusicController.musicBusiness.
                 createAlbum(req.body.name, verifyToken.id, req.body.list)
             res.status(200).send({
@@ -126,7 +127,7 @@ export class MusicController {
 
     public async addMusic(req: Request, res: Response) {
         try {
-            const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization as string) as any
+            const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization || req.headers.Authorization as string) as any
             if (verifyToken.role !== 'BANDA') {
                 throw new Error('função exclusiva para as bandas')
             }

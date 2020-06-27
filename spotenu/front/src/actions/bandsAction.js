@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = 'http://localhost:3001/'
+const baseURL = ' https://z5jpax4x95.execute-api.us-east-1.amazonaws.com/v2'
 
 export const setBands = (bands) => {
     return {

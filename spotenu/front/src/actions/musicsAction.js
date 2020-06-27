@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = 'http://localhost:3001/music'
+const baseURL = ' https://z5jpax4x95.execute-api.us-east-1.amazonaws.com/v2/music'
 
 export const setMusicList = (musicsList) => {
     console.log('to no actio propriamente dita', musicsList)

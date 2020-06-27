@@ -2,7 +2,7 @@ import { push } from 'connected-react-router'
 import { routes } from '../router/index'
 import axios from 'axios'
 
-const baseURL = 'http://localhost:3001/music'
+const baseURL = ' https://z5jpax4x95.execute-api.us-east-1.amazonaws.com/v2/music'
 
 export const setAlbuns = (albunsList) => {
     console.log(albunsList)
