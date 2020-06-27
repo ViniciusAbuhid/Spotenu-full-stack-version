@@ -9,11 +9,19 @@
 Projeto Final: Spotenu
 </h1>
 
-<p align="center"><img src="./assets/SPOTENU.png" alt="login-page"></img></p>
+<p align="center"><img src="./assets/SPOTENU.png" alt="login-page" width="300px"></img></p>
 
 <p align="center">O Spotenu é um projeto que visa facilitar o acesso a músicas pelo mundo. Bandas e usuários ouvintes podem se cadastrar e compartilhar suas paixões </p>
 
-Site do projeto: [link](https://possible-powder.surge.sh)
+<p align="center">
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License MIT">
+    <img src="https://img.shields.io/badge/languages-4-blue" alt="License MIT">
+    <img src="https://img.shields.io/badge/commit%20activity-21%2Fweek-blue" alt="License MIT">
+  </a>
+</p>
+
+Site do projeto: [link](http://spotenu.s3-website-us-east-1.amazonaws.com/)
 
 <img src="./assets/login.png" alt="login-page"></img>
 <br>
@@ -23,12 +31,6 @@ Site do projeto: [link](https://possible-powder.surge.sh)
 <img src="./assets/amazonapigateway.png" alt="awsinfrastructure"></img>
 <img src="./assets/awslambda.png" alt="awsinfrastructure"></img>
 <img src="./assets/awss3.png" alt="awsinfrastructure"></img>
-
-<p align="center">
-  <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License MIT">
-  </a>
-</p>
 
 ## Ferramentas :wrench:
 Principais ferramentas utilizadas na construção da aplicação
