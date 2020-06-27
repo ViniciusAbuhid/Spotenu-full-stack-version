@@ -9,7 +9,7 @@
 Projeto Final: Spotenu
 </h1>
 
-<p align="center"><img src="./assets/SPOTENU.png" alt="login-page"></img></p>
+<p align="center"><img src="./assets/SPOTENU.png" alt="login-page" width="200px"></img></p>
 
 <p align="center">O Spotenu é um projeto que visa facilitar o acesso a músicas pelo mundo. Bandas e usuários ouvintes podem se cadastrar e compartilhar suas paixões </p>
 
