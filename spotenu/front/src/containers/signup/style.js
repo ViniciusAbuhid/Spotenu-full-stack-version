@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Paper } from '@material-ui/core'
+import { Paper, Typography } from '@material-ui/core'
 
 export const PageWrapper = styled.div`
     box-sizing: border-box
@@ -22,6 +22,9 @@ export const ContentWrapper = styled(Paper)`
     align-items: center;
     margin: 50px 0
 `
+export const RolesWrapper = styled.div`
+    width: 100%
+`
 
 export const FormWrapper = styled.form`
     display: flex;
@@ -33,4 +36,10 @@ export const FormWrapper = styled.form`
 export const ImgWrapper = styled.img`
     width: 300px;
     height: 100px
+`
+export const BackButton = styled(Typography)`
+    &:hover {
+    color: #0063a5;
+    cursor: pointer
+        }
 `

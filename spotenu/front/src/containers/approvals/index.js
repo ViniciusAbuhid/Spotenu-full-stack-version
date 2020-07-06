@@ -18,12 +18,30 @@ function Approvals(props) {
         console.log(props.bandsList)
     }, [])
 
+    const [filter, setFilter] = useState('')
+
     function approveBand(id) {
         props.approveBand(id)
     }
 
     function disapproveBand(id) {
         props.disapproveBand(id)
+    }
+
+    function filterBands(bandsList) {
+        if (filter === 'approved') {
+            return props.bandsList.filter((band, index) => {
+                return band.approved
+            })
+        }
+        else if (filter === 'not approved') {
+            return props.bandsList.filter((band, index) => {
+                return !band.approved
+            })
+        }
+        else {
+            return bandsList
+        }
     }
 
     return (
@@ -33,16 +51,33 @@ function Approvals(props) {
                 <Typography variant='h4' align='center'>
                     Bandas cadastradas
                 </Typography>
+                <Box display='flex' justifyContent='space-evenly' mt={2}>
+                    <Typography
+                        onClick={() => setFilter('approved')}
+                        color={filter === 'approved' ? 'secondary' : ''} >
+                        Aprovadas
+                    </Typography>
+                    <Typography
+                        onClick={() => setFilter('not approved')}
+                        color={filter === 'not approved' ? 'secondary' : ''} >
+                        Aguardando aprovação
+                    </Typography>
+                    <Typography
+                        onClick={() => setFilter('')}
+                        color={filter === '' ? 'secondary' : ''} >
+                        Todas
+                    </Typography>
+                </Box>
                 <S.StyledList>
-                    {props.bandsList.length > 0 ? props.bandsList.map((band, index)=> {
+                    {props.bandsList.length > 0 ? filterBands(props.bandsList).map((band, index) => {
                         return <li key={index}>
                             <Box mt={2}>
                                 <Typography variant='h5'>{band.name}</Typography>
                             </Box>
                             <S.ListWrapper>
                                 <li><Typography>{band.nickname}</Typography></li>
-                                <li><Typography>{band.description}</Typography></li>
                                 <li><Typography>{band.email}</Typography></li>
+                                {band.description && <li><Typography>{band.description}</Typography></li>}
                             </S.ListWrapper>
                             {band.approved ? '' : (
                                 <ButtonGroup color="secondary" aria-label="outlined primary button group">
@@ -63,6 +98,9 @@ function Approvals(props) {
                         </Typography>
                     }
                 </S.StyledList>
+                <S.BackButton 
+                align='center'
+                onClick={()=> props.goToHomePage()}>Voltar</S.BackButton>
             </S.ContentWrapper>
             <Footer />
         </S.PageWrapper>

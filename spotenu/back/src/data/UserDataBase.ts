@@ -27,6 +27,7 @@ export default class UserDataBase extends BaseDataBase {
             return new UserModel(band.name, band.email, band.nickname,
                 band.id, band.role, band.approved, band.description)
         })
+        console.log('olha o que eu to mandando aqui do data', filteredResult)
         return filteredResult
     }
 

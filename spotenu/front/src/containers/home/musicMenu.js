@@ -24,6 +24,7 @@ function MusicMenu(props) {
         e.preventDefault()
         console.log({ ...props.componentInfo, ...musicData })
         props.addMusic({ ...props.componentInfo, ...musicData })
+        setMusicData({})
     }
 
     return (

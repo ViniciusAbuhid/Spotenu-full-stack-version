@@ -25,6 +25,7 @@ function Genres(props) {
         else if (toggleGenre && (!e.keyCode || e.keyCode === 13)) {
             props.addNewGenre(newGenre)
             setToggleGenre(false)
+            setNewGenre({})
         }
     }
 

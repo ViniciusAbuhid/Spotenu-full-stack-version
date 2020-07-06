@@ -2,12 +2,15 @@ import IdGenerator from '../services/IdGenerator'
 import UserDataBase from '../data/UserDataBase'
 import HashGenarator from '../services/HashGenerator'
 import TokenGenerator from '../services/TokenGenerator'
+import { MusicBusiness } from './MusicBusiness'
+import { MusicDataBase } from '../data/MusicDataBase'
 
 export default class UserBusiness {
     constructor(private userDataBase: UserDataBase,
         private idGenerator: IdGenerator,
         private hashGenerator: HashGenarator,
-        private tokenGenerator: TokenGenerator) { }
+        private tokenGenerator: TokenGenerator,
+        private musicDataBase: MusicDataBase) { }
 
     public async addUser(name: string, email: string, nickname: string, password: string,
         role: string, description?: string) {
@@ -20,6 +23,7 @@ export default class UserBusiness {
     }
 
     public async getAllBands() {
+        console.log('to no bisnes')
         return await this.userDataBase.getAllBands()
     }
 
@@ -41,6 +45,10 @@ export default class UserBusiness {
 
     public async getUserByCredential(credential: string, password: string) {
         const result = await this.userDataBase.getUserByCredential(credential)
+        console.log(result[0])
+        if (!result[0].approved){
+            throw new Error('Usuário aguardando aprovação')
+        }
         if (result.length <= 0) {
             throw new Error('infomações inválidas')
         }

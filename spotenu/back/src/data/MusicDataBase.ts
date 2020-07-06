@@ -46,6 +46,10 @@ export class MusicDataBase extends BaseDataBase {
         await this.getConnection().delete().from('Albums_Spotenu').where({ id })
     }
 
+    public async deleteAlbumByArtistId(artist_id: string) {
+        await this.getConnection().delete().from('Albums_Spotenu').where({ artist_id })
+    }
+
     public async createAlbumAndGenreRelation(id_album: string, id_genre: string) {
         await this.getConnection().insert({ id_album, id_genre }).into('Albumns_Genres_Spotenu')
     }

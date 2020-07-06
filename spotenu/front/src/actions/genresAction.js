@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = ' https://z5jpax4x95.execute-api.us-east-1.amazonaws.com/v2/music'
+const baseURL = 'http://localhost:3001/music'
 
 export const setAllGenres = (genresList) => {
     return {
@@ -28,6 +28,7 @@ export const getAllGenres = () => async (dispatch) => {
 
 export const deleteGenre = (genreId) => async (dispatch) => {
     try {
+        console.log(genreId)
         const result = await axios.delete(`${baseURL}/delete/genre/${genreId}`)
         dispatch(getAllGenres())
         console.log(result.data)

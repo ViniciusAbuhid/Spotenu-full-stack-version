@@ -18,7 +18,7 @@ function Signup(props) {
     }, [])
 
     const [role, setRole] = useState('')
-    const [userData, setUserData] = useState({ email: '', password: '' })
+    const [userData, setUserData] = useState({})
 
     function saveUserData(e) {
         const { name, value } = e.target
@@ -43,20 +43,31 @@ function Signup(props) {
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 {role === 'ADMIN' ?
                     <Typography variant='h4'>Cadastro de novo administrador</Typography> :
-                    <div>
+                    <S.RolesWrapper>
                         <Typography variant='h3' align='center'>Cadastro</Typography>
-                        <Typography align='center'>Desejo me cadastrar como:</Typography>
-                        <Box mt={2} mb={role === '' ? 5 : 1}>
-                            <ButtonGroup color="secondary" aria-label="outlined primary button group">
-                                <Button variant="contained"
-                                    onClick={() => setRole('OUVINTE PAGANTE')}>Ouvinte pagante</Button>
-                                <Button variant="contained"
-                                    onClick={() => setRole('OUVINTE NAO PAGANTE')}>Ouvinte não pagante</Button>
-                                <Button variant="contained"
-                                    onClick={() => setRole('BANDA')}>Banda</Button>
-                            </ButtonGroup>
+                        <Typography align='center'>Sou um(a)</Typography>
+                        <Box
+                        mt={2} mb={role === '' ? 5 : 1} 
+                        display='flex' 
+                        justifyContent="space-evenly"
+                        >
+                            <Typography
+                                color={role === 'OUVINTE PAGANTE' ? 'secondary' : ''}
+                                onClick={() => setRole('OUVINTE PAGANTE')}>
+                                Ouvinte pagante
+                                </Typography>
+                            <Typography
+                                color={role === 'OUVINTE NAO PAGANTE' ? 'secondary' : ''}
+                                onClick={() => setRole('OUVINTE NAO PAGANTE')}>
+                                Ouvinte não pagante
+                                </Typography>
+                            <Typography
+                                color={role === 'BANDA' ? 'secondary' : ''}
+                                onClick={() => setRole('BANDA')}>
+                                Banda
+                                </Typography>
                         </Box>
-                    </div>
+                    </S.RolesWrapper>
                 }
                 {role !== '' ?
                     <S.FormWrapper onSubmit={sendSignupData}>
@@ -89,7 +100,7 @@ function Signup(props) {
                             type='password'
                             name='password'
                             required
-                            value={userData.password}
+                            value={userData.password || ''}
                             onChange={saveUserData}
                             inputProps={role === 'ADMIN' ? { minLength: 10 } : { minLength: 6 }}
                         />
@@ -102,11 +113,12 @@ function Signup(props) {
                                 onChange={saveUserData}>
                             </TextField> : ''
                         }
-                        <Box mt={4} >
+                        <Box mt={4} mb={2} >
                             <Button variant="contained" color='secondary' type='onSubmit'>cadastrar</Button>
                         </Box>
                     </S.FormWrapper>
                     : ''}
+                <S.BackButton onClick={()=> props.goHome()}>Voltar</S.BackButton>
             </S.ContentWrapper>
             <Footer />
         </S.PageWrapper>
@@ -116,7 +128,8 @@ function Signup(props) {
 const mapDispatchToProps = dispatch => {
     return {
         sendSignupData: (updatedUserData) => dispatch(sendSignupData(updatedUserData)),
-        goToLogin: () => dispatch(push(routes.login))
+        goToLogin: () => dispatch(push(routes.login)),
+        goHome: () => dispatch(push(routes.home))
     }
 }
 

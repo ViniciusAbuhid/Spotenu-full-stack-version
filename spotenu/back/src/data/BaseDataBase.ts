@@ -23,9 +23,9 @@ export default abstract class BaseDataBase {
     }
 
     public static async destroy(): Promise<void> {
-        if (BaseDataBase.connection) {
-        await BaseDataBase.connection.destroy()
-        BaseDataBase.connection = null
-        }
+        // if (BaseDataBase.connection) {
+        // await BaseDataBase.connection.destroy()
+        // BaseDataBase.connection = null
+        // }
     }
 }

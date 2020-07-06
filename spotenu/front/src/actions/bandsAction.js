@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = ' https://z5jpax4x95.execute-api.us-east-1.amazonaws.com/v2'
+const baseURL = 'http://localhost:3001/'
 
 export const setBands = (bands) => {
     return {
@@ -42,6 +42,7 @@ export const approveBand = (id) => async (dispatch) => {
 
 export const disapproveBand = (id) => dispatch => {
     try {
+        console.log('to no action paaai')
         const result = axios.delete(`${baseURL}user/reprove/${id}`)
         console.log('banda reprovada com sucesso')
         dispatch(getAllBands())

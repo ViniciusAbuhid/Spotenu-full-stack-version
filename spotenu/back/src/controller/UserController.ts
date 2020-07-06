@@ -6,10 +6,11 @@ import HashGenerator from '../services/HashGenerator'
 import TokenGenerator from '../services/TokenGenerator'
 import { UserRoles } from '../models/UserModel'
 import BaseDataBase from '../data/BaseDataBase'
+import { MusicDataBase } from '../data/MusicDataBase'
 
 export default class UserController {
     public static userBusiness = new UserBusiness(new UserDataBase, new IdGenerator,
-        new HashGenerator, new TokenGenerator)
+        new HashGenerator, new TokenGenerator, new MusicDataBase)
 
     public static tokenGenerator = new TokenGenerator()
 
@@ -79,6 +80,7 @@ export default class UserController {
     }
 
     public async getAllBands(req: Request, res: Response) {
+        console.log('to no controler')
         try {
             const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization || req.headers.Authorization as string) as any
             if(verifyToken.role !== UserRoles.ADMIN){
@@ -101,10 +103,6 @@ export default class UserController {
 
     public async approveBand(req: Request, res: Response) {
         try {
-            // const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization || req.headers.Authorization as string) as any
-            // if(req.headers.authorization || req.headers.Authorization !== UserRoles.ADMIN){
-            //     throw new Error('Apenas administradores tem acesso a essas informações')
-            // }
             await UserController.userBusiness.approveBand(req.params.id)
             res.status(200).send("banda aprovada com sucesso")
         }
@@ -120,6 +118,7 @@ export default class UserController {
 
     public async reproveBand(req: Request, res: Response) {
         try {
+            console.log('to no controleer paaai')
             await UserController.userBusiness.reproveBand(req.params.id)
             res.status(200).send("banda reprovada com sucesso")
         }

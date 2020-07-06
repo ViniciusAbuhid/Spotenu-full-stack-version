@@ -68,7 +68,7 @@ function Home(props) {
     return (
         <S.PageWrapper>
             <Header
-                showSearch={role ? null : true}
+                showSearch={role === 'OUVINTE NÃO PAGANTE'? true : null}
                 logoutIcon={null} />
             {defineContent()}
             <Footer />

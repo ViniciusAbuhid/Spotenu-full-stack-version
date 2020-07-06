@@ -2,7 +2,7 @@ import { routes } from '../router/index'
 import { push } from 'connected-react-router'
 import axios from 'axios'
 
-const baseURL = ' https://z5jpax4x95.execute-api.us-east-1.amazonaws.com/v2/user'
+const baseURL = 'http://localhost:3001/user'
 
 export const sendSignupData = (updatedUserData) => async (dispatch) => {
     try {
@@ -19,8 +19,13 @@ export const sendSignupData = (updatedUserData) => async (dispatch) => {
         role !== 'ADMIN' && window.localStorage.setItem('token', accessToken)
         role !== 'ADMIN' && window.localStorage.setItem('role', role)
         role === 'ADMIN' && alert('Administrador cadastrado com sucesso')
-
-        dispatch(push(routes.home))
+        if (updatedUserData.role === 'BANDA') {
+            alert('O seu cadastro foi enviado e será analisado em breve por nossa equipe')
+            dispatch(push(routes.login))
+        }
+        else {
+            dispatch(push(routes.home))
+        }
     }
     catch (err) {
         console.log(err.message)

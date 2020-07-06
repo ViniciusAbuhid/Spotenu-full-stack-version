@@ -8,6 +8,7 @@ export class MusicBusiness {
         const id = this.idGenerator.idGenerator()
         await this.musicDataBase.addGenre(name, id)
         const checkingGenre = await this.musicDataBase.getGenreById(id)
+        console.log(checkingGenre[0])
         if (!checkingGenre[0]) {
             throw new Error('Não foi possível adicionar este gênero agora, tente novamente mais tarde...')
         }

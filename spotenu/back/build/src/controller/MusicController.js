@@ -76,7 +76,8 @@ class MusicController {
     getAllAlbuns(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const verifyToken = new TokenGenerator_1.default().verifyToken(req.headers.authorization || req.headers.Authorization);
+                const verifyToken = new TokenGenerator_1.default().
+                    verifyToken(req.headers.authorization || req.headers.Authorization);
                 const result = yield new MusicDataBase_1.MusicDataBase().getAllAlbunsById(verifyToken.id);
                 res.status(200).send(result);
             }
