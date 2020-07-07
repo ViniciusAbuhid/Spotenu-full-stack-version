@@ -10,11 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 class UserBusiness {
-    constructor(userDataBase, idGenerator, hashGenerator, tokenGenerator) {
+    constructor(userDataBase, idGenerator, hashGenerator, tokenGenerator, musicDataBase) {
         this.userDataBase = userDataBase;
         this.idGenerator = idGenerator;
         this.hashGenerator = hashGenerator;
         this.tokenGenerator = tokenGenerator;
+        this.musicDataBase = musicDataBase;
     }
     addUser(name, email, nickname, password, role, description) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -28,6 +29,7 @@ class UserBusiness {
     }
     getAllBands() {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('to no bisnes');
             return yield this.userDataBase.getAllBands();
         });
     }
@@ -52,6 +54,10 @@ class UserBusiness {
     getUserByCredential(credential, password) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield this.userDataBase.getUserByCredential(credential);
+            console.log(result[0]);
+            if (!result[0].approved) {
+                throw new Error('Usuário aguardando aprovação');
+            }
             if (result.length <= 0) {
                 throw new Error('infomações inválidas');
             }

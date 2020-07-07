@@ -69,7 +69,6 @@ export const deleteMusic = (musicData) => async (dispatch) => {
     console.log(musicData)
     try {
         const result = await axios.delete(`${baseURL}/delete/music/${musicData.id}`)
-        alert('música deletada com sucesso')
         dispatch(getMusicList({ component: musicData.component, componentId: musicData.componentId }))
     }
     catch (err) {

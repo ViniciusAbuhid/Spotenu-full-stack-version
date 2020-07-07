@@ -1,4 +1,5 @@
 export const setAllPls = (playLists) => {
+    console.log('ola')
     return {
         type: 'SET_PLAYLISTS',
         payload : {
@@ -7,24 +8,25 @@ export const setAllPls = (playLists) => {
     }
 }
 
-const mockPl = []
-// {
-//     name: 'Playlist 1',
-//     genres: ['samba','forro','reaggae'],
-//     id: 1
-// },
-// {
-//     name: 'Playlist 2',
-//     genres: ['samba','forro','reaggae'],
-//     id: 2
-// },
-// {
-//     name: 'Playlist 3',
-//     genres: ['samba','forro','reaggae'],
-//     id: 3
-// }
+const mockPl = [
+{
+    name: 'Playlist 1',
+    genres: ['samba','forro','reaggae'],
+    id: 1
+},
+{
+    name: 'Playlist 2',
+    genres: ['samba','forro','reaggae'],
+    id: 2
+},
+{
+    name: 'Playlist 3',
+    genres: ['samba','forro','reaggae'],
+    id: 3
+}]
 
 export const getAllPls = () => dispatch => {
+    console.log('sendo chamada aqui na action')
     try {
         // result = axios.get('link', 'info')
         dispatch(setAllPls(mockPl))

@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
 import MusicMenu from './musicMenu'
+import { deleteAlbuns } from '../../actions/albunsAction'
 
 function ArtistMenu(props) {
 
@@ -28,22 +29,22 @@ function ArtistMenu(props) {
                                 mt={3}>
                                 <Typography variant='h5'>{album.name}</Typography>
                                 <DeleteIcon
+                                    onClick={()=>props.deleteAlbum(album.id)}
                                     size='big'
                                     color='disabled' />
                             </Box>
                             {albumId === album.id ? (
                                 <div>
-                                    <Button
-                                        color='primary'
+                                    <S.ClickedTypog
                                         size='small'
                                         onClick={() => setAlbumId('')}>
                                         Recolher Álbum
-                                    </Button>
+                                    </S.ClickedTypog>
                                     <MusicMenu componentInfo={{ component: 'album', componentId: album.id }} />
                                 </div>
                             ) : (
                                     <Button
-                                        color='primary'
+                                        color='secondary'
                                         size='small'
                                         onClick={() => setAlbumId(album.id)}>
                                         Ver músicas
@@ -75,6 +76,7 @@ function ArtistMenu(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
+        deleteAlbum: (albumId)=> dispatch(deleteAlbuns(albumId)),
         goToForm: () => dispatch(push(routes.form))
     }
 }

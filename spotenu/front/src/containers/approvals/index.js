@@ -52,21 +52,21 @@ function Approvals(props) {
                     Bandas cadastradas
                 </Typography>
                 <Box display='flex' justifyContent='space-evenly' mt={2}>
-                    <Typography
+                    <S.ClickedTypog
                         onClick={() => setFilter('approved')}
                         color={filter === 'approved' ? 'secondary' : ''} >
                         Aprovadas
-                    </Typography>
-                    <Typography
+                    </S.ClickedTypog>
+                    <S.ClickedTypog
                         onClick={() => setFilter('not approved')}
                         color={filter === 'not approved' ? 'secondary' : ''} >
                         Aguardando aprovação
-                    </Typography>
-                    <Typography
+                    </S.ClickedTypog>
+                    <S.ClickedTypog
                         onClick={() => setFilter('')}
                         color={filter === '' ? 'secondary' : ''} >
                         Todas
-                    </Typography>
+                    </S.ClickedTypog>
                 </Box>
                 <S.StyledList>
                     {props.bandsList.length > 0 ? filterBands(props.bandsList).map((band, index) => {
@@ -98,9 +98,9 @@ function Approvals(props) {
                         </Typography>
                     }
                 </S.StyledList>
-                <S.BackButton 
+                <S.ClickedTypog 
                 align='center'
-                onClick={()=> props.goToHomePage()}>Voltar</S.BackButton>
+                onClick={()=> props.goToHomePage()}>Voltar</S.ClickedTypog>
             </S.ContentWrapper>
             <Footer />
         </S.PageWrapper>

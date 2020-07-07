@@ -37,7 +37,7 @@ export const ImgWrapper = styled.img`
     width: 300px;
     height: 100px
 `
-export const BackButton = styled(Typography)`
+export const ClickedTypog = styled(Typography)`
     &:hover {
     color: #0063a5;
     cursor: pointer

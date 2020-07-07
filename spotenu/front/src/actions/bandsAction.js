@@ -28,7 +28,7 @@ export const getAllBands = () => async (dispatch) => {
 
 export const approveBand = (id) => async (dispatch) => {
     try {
-        console.log()
+        console.log('to no action paaai')
         const result = await axios.put(`${baseURL}user/approve/${id}`)
         console.log('deu bom, meu')
         alert('banda aprovada com sucesso')
@@ -42,7 +42,6 @@ export const approveBand = (id) => async (dispatch) => {
 
 export const disapproveBand = (id) => dispatch => {
     try {
-        console.log('to no action paaai')
         const result = axios.delete(`${baseURL}user/reprove/${id}`)
         console.log('banda reprovada com sucesso')
         dispatch(getAllBands())

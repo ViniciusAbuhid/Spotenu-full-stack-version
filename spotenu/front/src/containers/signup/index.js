@@ -45,27 +45,27 @@ function Signup(props) {
                     <Typography variant='h4'>Cadastro de novo administrador</Typography> :
                     <S.RolesWrapper>
                         <Typography variant='h3' align='center'>Cadastro</Typography>
-                        <Typography align='center'>Sou um(a)</Typography>
+                        <Typography align='center'>Quero me cadastrar como:</Typography>
                         <Box
                         mt={2} mb={role === '' ? 5 : 1} 
                         display='flex' 
                         justifyContent="space-evenly"
                         >
-                            <Typography
+                            <S.ClickedTypog
                                 color={role === 'OUVINTE PAGANTE' ? 'secondary' : ''}
                                 onClick={() => setRole('OUVINTE PAGANTE')}>
                                 Ouvinte pagante
-                                </Typography>
-                            <Typography
+                                </S.ClickedTypog>
+                            <S.ClickedTypog
                                 color={role === 'OUVINTE NAO PAGANTE' ? 'secondary' : ''}
                                 onClick={() => setRole('OUVINTE NAO PAGANTE')}>
                                 Ouvinte não pagante
-                                </Typography>
-                            <Typography
+                                </S.ClickedTypog>
+                            <S.ClickedTypog
                                 color={role === 'BANDA' ? 'secondary' : ''}
                                 onClick={() => setRole('BANDA')}>
                                 Banda
-                                </Typography>
+                                </S.ClickedTypog>
                         </Box>
                     </S.RolesWrapper>
                 }
@@ -118,7 +118,7 @@ function Signup(props) {
                         </Box>
                     </S.FormWrapper>
                     : ''}
-                <S.BackButton onClick={()=> props.goHome()}>Voltar</S.BackButton>
+                <S.ClickedTypog onClick={()=> props.goHome()}>Voltar</S.ClickedTypog>
             </S.ContentWrapper>
             <Footer />
         </S.PageWrapper>

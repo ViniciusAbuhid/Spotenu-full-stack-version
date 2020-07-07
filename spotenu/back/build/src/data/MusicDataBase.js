@@ -71,6 +71,11 @@ class MusicDataBase extends BaseDataBase_1.default {
             yield this.getConnection().delete().from('Albums_Spotenu').where({ id });
         });
     }
+    deleteAlbumByArtistId(artist_id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.getConnection().delete().from('Albums_Spotenu').where({ artist_id });
+        });
+    }
     createAlbumAndGenreRelation(id_album, id_genre) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.getConnection().insert({ id_album, id_genre }).into('Albumns_Genres_Spotenu');

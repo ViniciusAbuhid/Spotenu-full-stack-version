@@ -31,7 +31,7 @@ export const FormWrapper = styled.form`
     align-items: center;
     justify-content: center;
 `
-export const Invitation = styled(Typography)`
+export const ClickedTypog = styled(Typography)`
     &:hover {
     color: #0063a5;
     cursor: pointer

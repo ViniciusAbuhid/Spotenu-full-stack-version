@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Paper, Button, TextField } from '@material-ui/core'
+import { Paper, TextField, Typography } from '@material-ui/core'
 
 export const PageWrapper = styled.div`
     box-sizing: border-box;
@@ -36,4 +36,10 @@ export const FormWrapper = styled.form`
 export const StyledLogo = styled.img`
     width: 400px;
     height: 133px
+`
+export const ClickedTypog = styled(Typography)`
+    &:hover {
+    color: #0063a5;
+    cursor: pointer
+        }
 `

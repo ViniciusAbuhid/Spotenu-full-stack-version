@@ -31,10 +31,10 @@ class BaseDataBase {
     }
     static destroy() {
         return __awaiter(this, void 0, void 0, function* () {
-            if (BaseDataBase.connection) {
-                yield BaseDataBase.connection.destroy();
-                BaseDataBase.connection = null;
-            }
+            // if (BaseDataBase.connection) {
+            // await BaseDataBase.connection.destroy()
+            // BaseDataBase.connection = null
+            // }
         });
     }
 }

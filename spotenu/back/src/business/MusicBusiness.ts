@@ -20,10 +20,16 @@ export class MusicBusiness {
     }
 
     public async deleteGenre(id: string) {
+        await this.musicDataBase.deleteRelationBetweenGenreAndAlbum(id)
+        const checkingRelation = await this.musicDataBase.getRelationAlbumAndGenre(id)
+        if (checkingRelation.length > 0) {
+            throw new Error(`Não foi possível deletar as relações entre este gênero e os albuns
+            , tente novamente mais tarde...`)
+        }
         await this.musicDataBase.deleteGenre(id)
         const checkingDel = await this.musicDataBase.getGenreById(id)
         if (checkingDel.length > 0) {
-            throw new Error('Não foi possível reprovar este gênero agora, tente novamente mais tarde...')
+            throw new Error('Não foi possível deletar este gênero agora, tente novamente mais tarde...')
         }
     }
 
@@ -52,8 +58,20 @@ export class MusicBusiness {
     }
 
     public async deleteAlbum(id: string) {
+        await this.musicDataBase.deleteRelationAlbumMusic(id)
+        const checkingRelation = await this.musicDataBase.getAllMusicsFromCertainAlbum(id)
+        if (checkingRelation.length > 0) {
+            throw new Error('Não foi possível apagar as relações entre este album e suas músicas')
+        }
+        await this.musicDataBase.deleteRelationBetweenGenreAndAlbum(null, id)
+        const checkingAnotherRelation = await this.musicDataBase.getRelationAlbumAndGenre(id)
+        if (checkingAnotherRelation.length > 0) {
+            throw new Error(`Não foi possível deletar as relações entre este albuns e seus gêneros
+            , tente novamente mais tarde...`)
+        }
+        await this.musicDataBase.deleteAlbum(id)
         const checkingDel = await this.musicDataBase.getAlbumById(id)
-        if (!checkingDel[0]) {
+        if (checkingDel.length > 0) {
             throw new Error('Este album não existe')
         }
         await this.musicDataBase.deleteAlbum(id)
@@ -79,5 +97,9 @@ export class MusicBusiness {
             throw new Error('Essa música não existe')
         }
         await this.musicDataBase.deleteMusic(id)
+    }
+
+    public async getMusicByName(name:string) {
+        return await this.musicDataBase.getMusicByName(name)
     }
 }

@@ -22,7 +22,6 @@ function MusicMenu(props) {
 
     function sendMusicData(e) {
         e.preventDefault()
-        console.log({ ...props.componentInfo, ...musicData })
         props.addMusic({ ...props.componentInfo, ...musicData })
         setMusicData({})
     }
@@ -58,12 +57,11 @@ function MusicMenu(props) {
                     </Typography>
                 )}
             <Box>
-                <Button
-                    color='primary'
+                <S.ClickedTypog
                     size='small'
                     onClick={() => setToggleMusic(!toggleMusic)}>
                     Adicionar música
-                </Button>
+                </S.ClickedTypog>
             </Box>
             {toggleMusic && (
                 <S.FormWrapper onSubmit={sendMusicData}>
