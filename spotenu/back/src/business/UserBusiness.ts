@@ -30,7 +30,7 @@ export default class UserBusiness {
     public async approveBand(id: string) {
         await this.userDataBase.approveBand(id)
         const checkingApproval = await this.userDataBase.getBandById(id)
-        if (checkingApproval[0].approved) {
+        if (!checkingApproval[0].approved) {
             throw new Error('Não foi possível aprovar esta banda agora, tente novamente mais tarde...')
         }
     }

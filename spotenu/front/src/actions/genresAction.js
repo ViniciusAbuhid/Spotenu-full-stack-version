@@ -28,10 +28,8 @@ export const getAllGenres = () => async (dispatch) => {
 
 export const deleteGenre = (genreId) => async (dispatch) => {
     try {
-        console.log(genreId)
         const result = await axios.delete(`${baseURL}/delete/genre/${genreId}`)
         dispatch(getAllGenres())
-        console.log(result.data)
     }
     catch (err) {
         alert('Não foi possível deletar o gênero escolhido, tente novamente mais tarde...')

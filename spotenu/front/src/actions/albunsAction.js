@@ -15,6 +15,7 @@ export const setAlbuns = (albunsList) => {
 }
 
 export const getAllAlbuns = () => async (dispatch) => {
+    console.log('to sendo chamada aqui na action')
     try {
         const result = await axios.get(`${baseURL}/allAlbuns`, {
             headers: {
@@ -43,5 +44,17 @@ export const createAlbum = (albumData) => async (dispatch) => {
     }
     catch (err) {
         alert('Não foi possível adicionar este álbum agora, teste novamente mais tarde...')
+    }
+}
+
+export const deleteAlbuns = (albumId) => async (dispatch)=>{
+    console.log('to no action de delete')
+    try{
+        const result = axios.delete(`${baseURL}/delete/album/${albumId}`)
+        dispatch(getAllAlbuns())
+    }
+    catch (err) {
+        console.log(err.message)
+        alert('Não foi possível deletar este álbum agora. Tente novamente mais tarde')
     }
 }

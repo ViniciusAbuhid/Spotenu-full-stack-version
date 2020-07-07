@@ -19,6 +19,7 @@ const HashGenerator_1 = __importDefault(require("../services/HashGenerator"));
 const TokenGenerator_1 = __importDefault(require("../services/TokenGenerator"));
 const UserModel_1 = require("../models/UserModel");
 const BaseDataBase_1 = __importDefault(require("../data/BaseDataBase"));
+const MusicDataBase_1 = require("../data/MusicDataBase");
 class UserController {
     addUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -87,6 +88,7 @@ class UserController {
     }
     getAllBands(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('to no controler');
             try {
                 const verifyToken = new TokenGenerator_1.default().verifyToken(req.headers.authorization || req.headers.Authorization);
                 if (verifyToken.role !== UserModel_1.UserRoles.ADMIN) {
@@ -110,10 +112,6 @@ class UserController {
     approveBand(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                // const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization || req.headers.Authorization as string) as any
-                // if(req.headers.authorization || req.headers.Authorization !== UserRoles.ADMIN){
-                //     throw new Error('Apenas administradores tem acesso a essas informações')
-                // }
                 yield UserController.userBusiness.approveBand(req.params.id);
                 res.status(200).send("banda aprovada com sucesso");
             }
@@ -130,6 +128,7 @@ class UserController {
     reproveBand(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log('to no controleer paaai');
                 yield UserController.userBusiness.reproveBand(req.params.id);
                 res.status(200).send("banda reprovada com sucesso");
             }
@@ -145,5 +144,5 @@ class UserController {
     }
 }
 exports.default = UserController;
-UserController.userBusiness = new UserBusiness_1.default(new UserDataBase_1.default, new IdGenerator_1.default, new HashGenerator_1.default, new TokenGenerator_1.default);
+UserController.userBusiness = new UserBusiness_1.default(new UserDataBase_1.default, new IdGenerator_1.default, new HashGenerator_1.default, new TokenGenerator_1.default, new MusicDataBase_1.MusicDataBase);
 UserController.tokenGenerator = new TokenGenerator_1.default();

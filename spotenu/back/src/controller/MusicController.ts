@@ -163,4 +163,21 @@ export class MusicController {
             await BaseDataBase.destroy()
         }
     }
+
+    public async getMusicByName(req: Request, res: Response) {
+        try {
+            const result = await MusicController.musicBusiness.getMusicByName(req.query.name as string)
+            res.status(200).send({
+                message: result
+            })
+        }
+        catch (err) {
+            res.status(400).send({
+                message: err.message
+            })
+        }
+        finally {
+            await BaseDataBase.destroy()
+        }
+    }
 }

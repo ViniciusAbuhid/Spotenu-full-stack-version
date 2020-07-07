@@ -14,12 +14,10 @@ function MenuAdmin(props) {
             <Typography variant='h4' align='center'>
                 Olá, administrador, o que deseja fazer?
             </Typography>
-            <Box mt={2} mb={3}>
-                <ButtonGroup color="secondary" aria-label="outlined primary button group" variant='contained'>
-                    <Button onClick={props.goToBandsApprovals}>Gerenciar bandas</Button>
-                    <Button onClick={props.goToGenresPage} >Gerenciar gêneros</Button>
-                    <Button onClick={props.goToSignupAdmin}>Cadastrar administrador</Button>
-                </ButtonGroup>
+            <Box mt={2} mb={3} display='flex' justifyContent='space-evenly' >
+                    <S.ClickedTypog onClick={props.goToBandsApprovals}>Gerenciar bandas</S.ClickedTypog>
+                    <S.ClickedTypog onClick={props.goToGenresPage} >Gerenciar gêneros</S.ClickedTypog>
+                    <S.ClickedTypog onClick={props.goToSignupAdmin}>Cadastrar administrador</S.ClickedTypog>
             </Box>
         </div>
     )

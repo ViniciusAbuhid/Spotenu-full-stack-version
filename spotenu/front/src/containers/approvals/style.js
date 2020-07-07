@@ -24,7 +24,7 @@ export const ListWrapper = styled.ul`
     padding-left: 15px;
     margin-bottom: 10px
 `
-export const BackButton = styled(Typography)`
+export const ClickedTypog = styled(Typography)`
     &:hover {
     color: #0063a5;
     cursor: pointer

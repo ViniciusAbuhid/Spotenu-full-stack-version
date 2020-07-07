@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 import { getAllGenres } from '../../actions/genresAction'
 import { createAlbum } from '../../actions/albunsAction'
 import genres from '../genres'
+import { routes } from '../../router'
+import { push } from 'connected-react-router'
 
 function Form(props) {
     useEffect(() => {
@@ -89,6 +91,7 @@ function Form(props) {
                         <Button variant="contained" color='secondary' type='onSubmit'>Adicionar</Button>
                     </Box>
                 </S.FormWrapper>
+                <S.ClickedTypog onClick={()=>props.goToHomePage()}>Voltar</S.ClickedTypog>
             </S.ContentWrapper>
             <Footer />
         </S.PageWrapper>
@@ -104,7 +107,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         createAlbum: (albumData) => dispatch(createAlbum(albumData)),
-        getAllGenres: () => dispatch(getAllGenres())
+        getAllGenres: () => dispatch(getAllGenres()),
+        goToHomePage: () => dispatch(push(routes.home))
     }
 }
 

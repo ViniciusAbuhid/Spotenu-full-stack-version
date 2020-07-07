@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../../assets/SPOTENU-HEADER.png'
 import * as S from './style'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
@@ -10,12 +10,27 @@ import { Box, IconButton } from '@material-ui/core'
 
 function Header(props) {
 
+    const [search, setSearch] = useState({})
+
     function logout() {
         const result = window.confirm('Tem certeza que deseja sair?')
         result && window.localStorage.removeItem('token')
         result && window.localStorage.removeItem('role')
         result && props.logout()
     }
+
+    const goSearch = (e) => {
+        e.preventDefault()
+        if(!e.keyCode || e.keyCode === 13){
+            console.log('ola')
+        }
+    }
+
+    const saveInput = (e) => {
+        setSearch({ ...search, input: e.target.value })
+        console.log(search)
+    }
+
 
     return (
         <S.ComponentWrapper>
@@ -30,11 +45,20 @@ function Header(props) {
             {props.showSearch || (
                 <S.BarWrapper>
                     <Box padding={2}>
-                        <S.StyledTextField placeholder="O que você gostaria de escutar?"
-                            color='secondary' />
-                        <IconButton type="submit" aria-label="search">
-                            <SearchIcon />
-                        </IconButton>
+                        <form onSubmit={goSearch}>
+                            <S.StyledTextField
+                                onChange={saveInput}
+                                placeholder="O que você gostaria de escutar?"
+                                value={search.input || ''}
+                                onKeyDown={goSearch}
+                                color='secondary' />
+                            <IconButton
+                                type="submit"
+                                aria-label="search"
+                                onClick={goSearch} >
+                                <SearchIcon />
+                            </IconButton>
+                        </form>
                     </Box>
                 </S.BarWrapper>
             )}
