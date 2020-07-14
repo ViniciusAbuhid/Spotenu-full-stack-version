@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
 import { Box, IconButton } from '@material-ui/core'
+import { searchMusic } from '../../actions/musicsAction'
 
 function Header(props) {
 
@@ -21,9 +22,7 @@ function Header(props) {
 
     const goSearch = (e) => {
         e.preventDefault()
-        if(!e.keyCode || e.keyCode === 13){
-            console.log('ola')
-        }
+        props.searchMusic(search.input)
     }
 
     const saveInput = (e) => {
@@ -50,8 +49,8 @@ function Header(props) {
                                 onChange={saveInput}
                                 placeholder="O que você gostaria de escutar?"
                                 value={search.input || ''}
-                                onKeyDown={goSearch}
-                                color='secondary' />
+                                color='secondary'
+                                autoFocus={props.focus} />
                             <IconButton
                                 type="submit"
                                 aria-label="search"
@@ -69,7 +68,8 @@ function Header(props) {
 const mapDispatchToProps = dispatch => {
     return {
         goToHomePage: () => dispatch(push(routes.home)),
-        logout: () => dispatch(push(routes.login))
+        logout: () => dispatch(push(routes.login)),
+        searchMusic: (musicName) => dispatch(searchMusic(musicName))
     }
 }
 

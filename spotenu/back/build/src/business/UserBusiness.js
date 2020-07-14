@@ -37,7 +37,7 @@ class UserBusiness {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.userDataBase.approveBand(id);
             const checkingApproval = yield this.userDataBase.getBandById(id);
-            if (checkingApproval[0].approved) {
+            if (!checkingApproval[0].approved) {
                 throw new Error('Não foi possível aprovar esta banda agora, tente novamente mais tarde...');
             }
         });

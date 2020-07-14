@@ -7,8 +7,7 @@ import Genres from "../containers/genres";
 import Home from "../containers/home";
 import Login from "../containers/login"
 import Signup from "../containers/signup";
-
-const teste = '/signup' | '/add/admin'
+import MusicSession from "../containers/music";
 
 export const routes = {
   login: '/login',
@@ -19,7 +18,8 @@ export const routes = {
   album: '/profile/info-album',
   playlist: '/profile/info-playlist',
   approvals: '/bands/approvals',
-  genres: '/genres'
+  genres: '/genres',
+  musicSession: '/music'
 }
 
 function Router(props) {
@@ -33,6 +33,7 @@ function Router(props) {
         <Route exact path={routes.form} component={Form} />
         <Route exact path={routes.approvals} component={Approvals} />
         <Route exact path={routes.genres} component={Genres} />
+        <Route exact path={routes.music} component={MusicSession} />
       </Switch>
     </ConnectedRouter>
   );

@@ -16,6 +16,7 @@ export const setAlbuns = (albunsList) => {
 
 export const getAllAlbuns = () => async (dispatch) => {
     console.log('to sendo chamada aqui na action')
+    console.log(window.localStorage.getItem('token'))
     try {
         const result = await axios.get(`${baseURL}/allAlbuns`, {
             headers: {
@@ -26,7 +27,7 @@ export const getAllAlbuns = () => async (dispatch) => {
     }
     catch (err) {
         console.log(err.message)
-        // alert('Não foi possível carregar os seus álbuns, tente novamente mais tarde...')
+        alert('Não foi possível carregar os seus álbuns, tente novamente mais tarde...')
     }
 }
 

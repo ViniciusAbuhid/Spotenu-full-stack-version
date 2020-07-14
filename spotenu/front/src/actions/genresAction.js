@@ -18,7 +18,6 @@ export const getAllGenres = () => async (dispatch) => {
                 authorization: window.localStorage.getItem('token')
             }
         })
-        console.log(result)
         dispatch(setAllGenres(result.data))
     }
     catch (err) {

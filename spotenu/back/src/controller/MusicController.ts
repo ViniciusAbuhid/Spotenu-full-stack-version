@@ -167,9 +167,7 @@ export class MusicController {
     public async getMusicByName(req: Request, res: Response) {
         try {
             const result = await MusicController.musicBusiness.getMusicByName(req.query.name as string)
-            res.status(200).send({
-                message: result
-            })
+            res.status(200).send(result)
         }
         catch (err) {
             res.status(400).send({

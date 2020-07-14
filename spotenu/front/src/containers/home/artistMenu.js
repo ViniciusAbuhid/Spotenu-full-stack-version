@@ -34,14 +34,16 @@ function ArtistMenu(props) {
                                     color='disabled' />
                             </Box>
                             {albumId === album.id ? (
-                                <div>
+                                <Box>
+                                    <Box mb={2}>
                                     <S.ClickedTypog
                                         size='small'
                                         onClick={() => setAlbumId('')}>
                                         Recolher Álbum
                                     </S.ClickedTypog>
+                                    </Box>
                                     <MusicMenu componentInfo={{ component: 'album', componentId: album.id }} />
-                                </div>
+                                </Box>
                             ) : (
                                     <Button
                                         color='secondary'

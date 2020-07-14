@@ -43,7 +43,6 @@ class UserDataBase extends BaseDataBase_1.default {
             const filteredResult = result.map(band => {
                 return new UserModel_1.UserModel(band.name, band.email, band.nickname, band.id, band.role, band.approved, band.description);
             });
-            console.log('olha o que eu to mandando aqui do data', filteredResult);
             return filteredResult;
         });
     }

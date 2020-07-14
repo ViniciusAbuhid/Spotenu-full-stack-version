@@ -13,6 +13,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import alternativeLogo from '../../assets/SPOTENU3.png'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
+import { albuns } from '../../reducers/music'
 
 function Home(props) {
 
@@ -20,33 +21,36 @@ function Home(props) {
         if (!window.localStorage.getItem('role')) {
             props.goToLogin()
         }
-        setRole(window.localStorage.getItem('role'))
+        if (window.localStorage.getItem('role') === 'OUVINTE PAGANTE') {
+            props.getAllPls()
+        }
+        if (window.localStorage.getItem('role') === 'BANDA') {
+            props.getAllAlbuns()
+        }
+        defineContent()
     }, [])
 
-    const [role, setRole] = useState('')
 
     const defineContent = () => {
-        switch (role) {
+        switch (window.localStorage.getItem('role')) {
             case 'ADMIN':
-                return (
+                return(
                     <S.ContentWrapper elevation={10}>
                         <MenuAdmin />
                     </S.ContentWrapper>
                 )
             case 'OUVINTE PAGANTE':
-                props.getAllPls()
-                return (
+                return(
                     <S.ContentWrapper elevation={10}>
                         <UserMenu playlitsList={props.playLists} role='payer-user' />
                     </S.ContentWrapper>)
             case 'BANDA':
-                props.getAllAlbuns()
-                return (
+                return(
                     <S.ContentWrapper elevation={10}>
                         <ArtistMenu albunsList={props.albuns} />
                     </S.ContentWrapper>)
             default:
-                return (
+                return(
                     <Box display='flex' flexDirection='column' alignItems='center'>
                         <S.StyledLogo src={alternativeLogo} />
                         <Box mt={3}>
@@ -64,13 +68,14 @@ function Home(props) {
 
     }
 
+    let screen = defineContent()
 
     return (
         <S.PageWrapper>
             <Header
-                showSearch={role === 'OUVINTE NÃO PAGANTE'? true : null}
+                showSearch={window.localStorage.getItem('role') === 'OUVINTE NÃO PAGANTE' ? true : null}
                 logoutIcon={null} />
-            {defineContent()}
+            {screen}
             <Footer />
         </S.PageWrapper>
     )

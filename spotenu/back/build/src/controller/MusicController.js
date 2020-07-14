@@ -184,6 +184,24 @@ class MusicController {
             }
         });
     }
+    getMusicByName(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const result = yield MusicController.musicBusiness.getMusicByName(req.query.name);
+                res.status(200).send({
+                    message: result
+                });
+            }
+            catch (err) {
+                res.status(400).send({
+                    message: err.message
+                });
+            }
+            finally {
+                yield BaseDataBase_1.default.destroy();
+            }
+        });
+    }
 }
 exports.MusicController = MusicController;
 MusicController.musicBusiness = new MusicBusiness_1.MusicBusiness(new MusicDataBase_1.MusicDataBase(), new IdGenerator_1.default());
