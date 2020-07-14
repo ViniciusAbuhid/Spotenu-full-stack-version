@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import * as S from './style'
 import Header from '../../components/header/index'
 import Footer from '../../components/footer/index'
@@ -8,40 +8,62 @@ import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
 import { searchMusic } from '../../actions/musicsAction'
+import logo from '../../assets/SPOTENU.png'
 
 function MusicSession(props) {
 
+    useEffect(() => {
+        console.log(props.searchedTerm)
+    }, [])
+
     return (
         <S.PageWrapper>
-            <Header/>
+            <Header />
             <S.ContentWrapper elevation={10}>
-            <Typography variant='h4' align='center'>
-                Resultado da busca
-            </Typography>
-            <S.StyledList>
-            {props.searchedMusics.length? props.searchedMusics.map((music, index) => {
-                        return (
-                            <Box
-                                key={index}
-                                mb={2}
-                                display='flex'
-                                justifyContent='space-between'>
-                                <Box display='flex'>
-                                    <PlayCircleFilledIcon />
-                                    <Typography>{music.name}</Typography>
-                                </Box>
-                            </Box>
-                            )
-                    }) : 
-                    <Typography>
-                        Nenhum resultado encontrado para 
+                <Box mb={props.searchedTerm ? 2 : 0}>
+                    <S.ImgWrapper src={logo}></S.ImgWrapper>
+                    <Typography align='center' variant='h4' >
+                        Pesquisar músicas
                     </Typography>
-                    }
-            </S.StyledList>
-            <Box mb={2}>
-            <S.ClickedTypog>Use a barra de pesquisa acima para uma nova busca</S.ClickedTypog>
-            </Box>
-            <S.ClickedTypog onClick={()=>props.goToHomePage()}>Voltar</S.ClickedTypog>
+                </Box>
+                {props.searchedTerm ? (
+                    <div>
+                        <Typography align='center'>
+                            Resultado da busca para '{props.searchedTerm}'
+                        </Typography>
+                        <S.StyledList>
+                            {props.searchedMusics.length ? props.searchedMusics.map((music, index) => {
+                                return (
+                                    <Box
+                                        key={index}
+                                        mb={2}
+                                        display='flex'
+                                        justifyContent='space-between'>
+                                        <Box display='flex'>
+                                            <PlayCircleFilledIcon />
+                                            <Typography>{music.name}</Typography>
+                                        </Box>
+                                    </Box>
+                                )
+                            }) :
+                                <Typography align='center'>
+                                    Nenhum registro...
+                                </Typography>
+                            }
+                        </S.StyledList>
+                        <Box mb={2}>
+                            <Typography align='center'>
+                                Use a barra de pesquisa acima para uma nova busca
+                            </Typography>
+                        </Box>
+                    </div>) :
+                    <Box mb={3} mt={3}>
+                        <Typography align='center'>
+                            Use a barra de pesquisa acima para fazer a sua busca
+                        </Typography>
+                    </Box>
+                }
+                <S.ClickedTypog onClick={() => props.goToHomePage()}>Voltar</S.ClickedTypog>
             </S.ContentWrapper>
             <Footer />
         </S.PageWrapper>
@@ -50,7 +72,8 @@ function MusicSession(props) {
 
 const mapStateToProps = state => {
     return {
-        searchedMusics: state.research.searchedMusics
+        searchedMusics: state.research.searchedMusics,
+        searchedTerm: state.query.searchedTerm
     }
 }
 

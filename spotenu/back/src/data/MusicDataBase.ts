@@ -88,7 +88,6 @@ export class MusicDataBase extends BaseDataBase {
     }
 
     public async getMusicByName(name:string){
-        console.log(name)
         const result = await this.getConnection().raw(`
         select Musics_Spotenu.link, Albums_Spotenu.name, Musics_Spotenu.name from Musics_Spotenu
         join Albums_Spotenu

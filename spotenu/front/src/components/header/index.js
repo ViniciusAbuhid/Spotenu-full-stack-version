@@ -50,7 +50,8 @@ function Header(props) {
                                 placeholder="O que você gostaria de escutar?"
                                 value={search.input || ''}
                                 color='secondary'
-                                autoFocus={props.focus} />
+                                autoFocus={props.focus}
+                                required={true} />
                             <IconButton
                                 type="submit"
                                 aria-label="search"

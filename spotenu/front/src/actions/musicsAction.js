@@ -23,6 +23,15 @@ export const setSearchedMusics = (searchedMusics) => {
     }
 }
 
+export const setSearchedTerm = (searchedTerm) => {
+    return {
+        type: 'SEARCH_FOR',
+        payload: {
+            searchedTerm
+        }
+    }
+}
+
 export const getMusicList = (componentInfo) => async (dispatch) => {
     try {
         const result = await axios.get(`${baseURL}/allMusics/${componentInfo.componentId}`)
@@ -64,6 +73,7 @@ export const searchMusic = (musicName) => async (dispatch) => {
     try{
         const result = await axios.get(`${baseURL}/search?name=${musicName}`)
         dispatch(setSearchedMusics(result.data))
+        dispatch(setSearchedTerm(musicName))
     }
     catch (err) {
         console.log(err.message)

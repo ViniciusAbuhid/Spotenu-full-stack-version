@@ -29,3 +29,9 @@ export const ClickedTypog = styled(Typography)`
 export const StyledList = styled.ul`
     list-style: none;
 `
+export const ImgWrapper = styled.img`
+    width: 300px;
+    height: 100px;
+    display: block;
+    margin: 0 auto
+`
