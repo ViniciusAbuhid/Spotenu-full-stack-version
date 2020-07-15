@@ -6,7 +6,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
-import { Box, IconButton } from '@material-ui/core'
+import { Box, IconButton, TextField } from '@material-ui/core'
 import { searchMusic } from '../../actions/musicsAction'
 
 function Header(props) {
@@ -43,7 +43,15 @@ function Header(props) {
             </S.Header>
             {props.showSearch || (
                 <S.BarWrapper>
-                    <Box padding={2}>
+                    <Box padding={2}
+                        display='flex'
+                        alignItems='center'
+                        justifyContent='center'>
+                        <IconButton
+                            aria-label="search"
+                            color='secondary'>
+                            <SearchIcon />
+                        </IconButton>
                         <form onSubmit={goSearch}>
                             <S.StyledTextField
                                 onChange={saveInput}
@@ -51,13 +59,8 @@ function Header(props) {
                                 value={search.input || ''}
                                 color='secondary'
                                 autoFocus={props.focus}
-                                required={true} />
-                            <IconButton
-                                type="submit"
-                                aria-label="search"
-                                onClick={goSearch} >
-                                <SearchIcon />
-                            </IconButton>
+                                required
+                            />
                         </form>
                     </Box>
                 </S.BarWrapper>
@@ -70,7 +73,7 @@ const mapDispatchToProps = dispatch => {
     return {
         goToHomePage: () => dispatch(push(routes.home)),
         logout: () => dispatch(push(routes.login)),
-        searchMusic: (musicName) => dispatch(searchMusic(musicName))
+        searchMusic: (musicName) => dispatch(searchMusic(musicName, null))
     }
 }
 

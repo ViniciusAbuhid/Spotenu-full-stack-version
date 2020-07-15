@@ -8,6 +8,9 @@ import { Typography, Box, Button, TextField } from '@material-ui/core'
 import logo from '../../assets/SPOTENU.png'
 import DeleteIcon from '@material-ui/icons/Delete';
 import { genres } from '../../reducers/music'
+import { push } from 'connected-react-router'
+import { routes } from '../../router/index'
+import { history } from '../../App'
 
 function Genres(props) {
     useEffect(() => {
@@ -89,6 +92,11 @@ function Genres(props) {
                         />
                     </Box>
                 )}
+                <S.ClickedTypog  
+                align='center' 
+                onClick={() => history.goBack()}>
+                    Voltar
+                </S.ClickedTypog>
             </S.ContentWrapper>
             <Footer />
         </S.PageWrapper>

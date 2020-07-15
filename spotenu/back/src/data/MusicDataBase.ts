@@ -87,12 +87,15 @@ export class MusicDataBase extends BaseDataBase {
         await this.getConnection().delete().from('Musics_Spotenu').where({ id })
     }
 
-    public async getMusicByName(name:string){
+    public async getMusicByName(name:string, limit:number = 10){
+        console.log('cheguei ao cume', limit)
         const result = await this.getConnection().raw(`
         select Musics_Spotenu.link, Albums_Spotenu.name, Musics_Spotenu.name from Musics_Spotenu
         join Albums_Spotenu
         on Musics_Spotenu.album_id = Albums_Spotenu.id
-        where Musics_Spotenu.name like '%${name}%';
+        where Musics_Spotenu.name like '%${name}%'
+        order by Musics_Spotenu.name
+        limit ${limit + 1};
         `)
         return result[0]
     }

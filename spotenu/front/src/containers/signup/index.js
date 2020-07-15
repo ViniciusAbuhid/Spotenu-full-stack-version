@@ -8,6 +8,7 @@ import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
 import Header from '../../components/header/index'
 import Footer from '../../components/footer/index'
+import { history } from '../../App'
 
 function Signup(props) {
 
@@ -37,8 +38,8 @@ function Signup(props) {
     return (
         <S.PageWrapper>
             <Header
-                showSearch={true}
-                logoutIcon={true} />
+                showSearch={window.localStorage.getItem('role') === 'ADMIN' ? null : true}
+                logoutIcon={window.localStorage.getItem('role') === 'ADMIN' ? null : true} />
             <S.ContentWrapper elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 {role === 'ADMIN' ?
@@ -118,7 +119,7 @@ function Signup(props) {
                         </Box>
                     </S.FormWrapper>
                     : ''}
-                <S.ClickedTypog onClick={()=> props.goHome()}>Voltar</S.ClickedTypog>
+                <S.ClickedTypog onClick={() => history.goBack()}>Voltar</S.ClickedTypog>
             </S.ContentWrapper>
             <Footer />
         </S.PageWrapper>
@@ -127,9 +128,7 @@ function Signup(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        sendSignupData: (updatedUserData) => dispatch(sendSignupData(updatedUserData)),
-        goToLogin: () => dispatch(push(routes.login)),
-        goHome: () => dispatch(push(routes.home))
+        sendSignupData: (updatedUserData) => dispatch(sendSignupData(updatedUserData))
     }
 }
 

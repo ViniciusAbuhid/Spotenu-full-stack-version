@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Paper, Button, TextField } from '@material-ui/core'
+import { Paper, Button, TextField, Typography } from '@material-ui/core'
 
 export const PageWrapper = styled.div`
     box-sizing: border-box;
@@ -28,4 +28,10 @@ export const StyledList = styled.ul`
 `
 export const StyledTextField = styled(TextField)`
     width: 300px
+`
+export const ClickedTypog = styled(Typography)`
+    &:hover {
+    color: #0063a5;
+    cursor: pointer
+        }
 `

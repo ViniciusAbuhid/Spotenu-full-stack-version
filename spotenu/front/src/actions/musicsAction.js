@@ -68,10 +68,15 @@ export const deleteMusic = (musicData) => async (dispatch) => {
     }
 }
 
-export const searchMusic = (musicName) => async (dispatch) => {
-    dispatch(push(routes.musicSession))
+export const searchMusic = (musicName, limit) => async (dispatch) => {
+    dispatch(push(routes.searchSession))
     try{
-        const result = await axios.get(`${baseURL}/search?name=${musicName}`)
+        console.log(limit)
+        const body = {
+            limit
+        }
+        console.log(body)
+        const result = await axios.post(`${baseURL}/search?name=${musicName}`, body)
         dispatch(setSearchedMusics(result.data))
         dispatch(setSearchedTerm(musicName))
     }

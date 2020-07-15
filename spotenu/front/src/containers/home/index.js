@@ -14,6 +14,7 @@ import alternativeLogo from '../../assets/SPOTENU3.png'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
 import { albuns } from '../../reducers/music'
+import { searchMusic } from '../../actions/musicsAction'
 
 function Home(props) {
 
@@ -30,37 +31,59 @@ function Home(props) {
         defineContent()
     }, [])
 
+    const [search, setSearch] = useState({})
+
+    const goSearch = (e) => {
+        e.preventDefault()
+        props.searchMusic(search.input)
+    }
+
+    const saveInput = (e) => {
+        setSearch({ ...search, input: e.target.value })
+        console.log(search)
+    }
 
     const defineContent = () => {
         switch (window.localStorage.getItem('role')) {
             case 'ADMIN':
-                return(
+                return (
                     <S.ContentWrapper elevation={10}>
                         <MenuAdmin />
                     </S.ContentWrapper>
                 )
             case 'OUVINTE PAGANTE':
-                return(
+                return (
                     <S.ContentWrapper elevation={10}>
                         <UserMenu playlitsList={props.playLists} role='payer-user' />
                     </S.ContentWrapper>)
             case 'BANDA':
-                return(
+                return (
                     <S.ContentWrapper elevation={10}>
                         <ArtistMenu albunsList={props.albuns} />
                     </S.ContentWrapper>)
             default:
-                return(
+                return (
                     <Box display='flex' flexDirection='column' alignItems='center'>
                         <S.StyledLogo src={alternativeLogo} />
-                        <Box mt={3}>
-                            <S.StyledTextField
-                                color='secondary'
-                                defaultValue='O que você quer escutar?'
-                                autoFocus='true' />
-                            <IconButton type="submit" aria-label="search" color='secondary'>
+                        <Box 
+                            mt={3} 
+                            display='flex' 
+                            alignItems='center' 
+                            justifyContent='center'>
+                            <IconButton
+                                aria-label="search"
+                                color='secondary'>
                                 <SearchIcon />
                             </IconButton>
+                            <form onSubmit={goSearch}>
+                                <S.StyledTextField
+                                    placeholder='O que você quer escutar?'
+                                    onChange={saveInput}
+                                    value={search.input || ''}
+                                    color='secondary'
+                                    autoFocus='true'
+                                    required />
+                            </form>
                         </Box>
                     </Box>
                 )
@@ -92,7 +115,8 @@ const mapDispatchToProps = dispatch => {
     return {
         getAllPls: () => dispatch(getAllPls()),
         getAllAlbuns: () => dispatch(getAllAlbuns()),
-        goToLogin: () => dispatch(push(routes.login))
+        goToLogin: () => dispatch(push(routes.login)),
+        searchMusic: (musicName) => dispatch(searchMusic(musicName, null))
     }
 }
 

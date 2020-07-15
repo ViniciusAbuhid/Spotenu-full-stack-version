@@ -99,7 +99,8 @@ export class MusicBusiness {
         await this.musicDataBase.deleteMusic(id)
     }
 
-    public async getMusicByName(name:string) {
-        return await this.musicDataBase.getMusicByName(name)
+    public async getMusicByName(name:string, limit:number = 10) {
+        console.log('limit que chega para mim', limit)
+        return await this.musicDataBase.getMusicByName(name, limit)
     }
 }
