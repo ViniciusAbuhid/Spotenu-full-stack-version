@@ -21,7 +21,7 @@ Projeto Final: Spotenu
   </a>
 </p>
 
-Site do projeto: [link](http://spotenu.s3-website-us-east-1.amazonaws.com/)
+Site do projeto: em manutenção
 
 <img src="./assets/login.png" alt="login-page"></img>
 <br>
