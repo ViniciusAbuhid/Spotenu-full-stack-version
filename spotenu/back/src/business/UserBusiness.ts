@@ -42,11 +42,11 @@ export default class UserBusiness {
 
     public async getUserByCredential(credential: string, password: string) {
         const result = await this.userDataBase.getUserByCredential(credential)
-        if (!result[0].approved){
-            throw new Error('Usuário aguardando aprovação')
-        }
         if (result.length <= 0) {
             throw new Error('infomações inválidas')
+        }
+        if (!result[0].approved){
+            throw new Error('Usuário aguardando aprovação')
         }
         const checkingPassword = await this.hashGenerator.verify(password, result[0].password)
         if (!checkingPassword) {
