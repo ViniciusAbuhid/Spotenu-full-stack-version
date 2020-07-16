@@ -34,10 +34,16 @@ class MusicBusiness {
     }
     deleteGenre(id) {
         return __awaiter(this, void 0, void 0, function* () {
+            yield this.musicDataBase.deleteRelationBetweenGenreAndAlbum(id);
+            const checkingRelation = yield this.musicDataBase.getRelationAlbumAndGenre(id);
+            if (checkingRelation.length > 0) {
+                throw new Error(`Não foi possível deletar as relações entre este gênero e os albuns
+            , tente novamente mais tarde...`);
+            }
             yield this.musicDataBase.deleteGenre(id);
             const checkingDel = yield this.musicDataBase.getGenreById(id);
             if (checkingDel.length > 0) {
-                throw new Error('Não foi possível reprovar este gênero agora, tente novamente mais tarde...');
+                throw new Error('Não foi possível deletar este gênero agora, tente novamente mais tarde...');
             }
         });
     }
@@ -69,8 +75,20 @@ class MusicBusiness {
     }
     deleteAlbum(id) {
         return __awaiter(this, void 0, void 0, function* () {
+            yield this.musicDataBase.deleteRelationAlbumMusic(id);
+            const checkingRelation = yield this.musicDataBase.getAllMusicsFromCertainAlbum(id);
+            if (checkingRelation.length > 0) {
+                throw new Error('Não foi possível apagar as relações entre este album e suas músicas');
+            }
+            yield this.musicDataBase.deleteRelationBetweenGenreAndAlbum(null, id);
+            const checkingAnotherRelation = yield this.musicDataBase.getRelationAlbumAndGenre(id);
+            if (checkingAnotherRelation.length > 0) {
+                throw new Error(`Não foi possível deletar as relações entre este albuns e seus gêneros
+            , tente novamente mais tarde...`);
+            }
+            yield this.musicDataBase.deleteAlbum(id);
             const checkingDel = yield this.musicDataBase.getAlbumById(id);
-            if (!checkingDel[0]) {
+            if (checkingDel.length > 0) {
                 throw new Error('Este album não existe');
             }
             yield this.musicDataBase.deleteAlbum(id);
@@ -99,6 +117,11 @@ class MusicBusiness {
                 throw new Error('Essa música não existe');
             }
             yield this.musicDataBase.deleteMusic(id);
+        });
+    }
+    getMusicByName(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.musicDataBase.getMusicByName(name);
         });
     }
 }

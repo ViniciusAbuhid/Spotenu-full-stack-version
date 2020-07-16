@@ -29,9 +29,9 @@ function MusicMenu(props) {
     return (
 
         <div>
-            {props.MusicList.length >= 1 ? (
+            {props.musicList.length >= 1 ? (
                 <div>
-                    {props.MusicList.map((music, index) => {
+                    {props.musicList.map((music, index) => {
                         return (
                             <Box
                                 key={index}
@@ -95,7 +95,7 @@ function MusicMenu(props) {
 
 const mapStateToProps = state => {
     return {
-        MusicList: state.music.MusicList
+        musicList: state.music.musicList
     }
 }
 

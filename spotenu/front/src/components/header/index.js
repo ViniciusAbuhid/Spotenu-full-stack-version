@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
 import { Box, IconButton } from '@material-ui/core'
+import { searchMusic } from '../../actions/musicsAction'
 
 function Header(props) {
 
@@ -21,14 +22,11 @@ function Header(props) {
 
     const goSearch = (e) => {
         e.preventDefault()
-        if(!e.keyCode || e.keyCode === 13){
-            console.log('ola')
-        }
+        props.searchMusic(search.input)
     }
 
     const saveInput = (e) => {
         setSearch({ ...search, input: e.target.value })
-        console.log(search)
     }
 
 
@@ -44,20 +42,24 @@ function Header(props) {
             </S.Header>
             {props.showSearch || (
                 <S.BarWrapper>
-                    <Box padding={2}>
+                    <Box padding={2}
+                        display='flex'
+                        alignItems='center'
+                        justifyContent='center'>
+                        <IconButton
+                            aria-label="search"
+                            color='secondary'>
+                            <SearchIcon />
+                        </IconButton>
                         <form onSubmit={goSearch}>
                             <S.StyledTextField
                                 onChange={saveInput}
                                 placeholder="O que você gostaria de escutar?"
                                 value={search.input || ''}
-                                onKeyDown={goSearch}
-                                color='secondary' />
-                            <IconButton
-                                type="submit"
-                                aria-label="search"
-                                onClick={goSearch} >
-                                <SearchIcon />
-                            </IconButton>
+                                color='secondary'
+                                autoFocus={props.focus}
+                                required
+                            />
                         </form>
                     </Box>
                 </S.BarWrapper>
@@ -69,7 +71,8 @@ function Header(props) {
 const mapDispatchToProps = dispatch => {
     return {
         goToHomePage: () => dispatch(push(routes.home)),
-        logout: () => dispatch(push(routes.login))
+        logout: () => dispatch(push(routes.login)),
+        searchMusic: (musicName) => dispatch(searchMusic(musicName, null))
     }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import * as S from './style'
-import { Typography, Box, Button, ButtonGroup } from '@material-ui/core'
+import { Typography, Box } from '@material-ui/core'
 import logo from '../../assets/SPOTENU.png'
 import { connect } from 'react-redux'
 import { routes } from '../../router'
@@ -14,9 +14,11 @@ function MenuAdmin(props) {
             <Typography variant='h4' align='center'>
                 Olá, administrador, o que deseja fazer?
             </Typography>
-            <Box mt={2} mb={3} display='flex' justifyContent='space-evenly' >
+            <Box mt={2} mb={3} display='flex' justifyContent='space-evenly' alignItems='center' >
                     <S.ClickedTypog onClick={props.goToBandsApprovals}>Gerenciar bandas</S.ClickedTypog>
+                    <Typography>|</Typography>
                     <S.ClickedTypog onClick={props.goToGenresPage} >Gerenciar gêneros</S.ClickedTypog>
+                    <Typography>|</Typography>
                     <S.ClickedTypog onClick={props.goToSignupAdmin}>Cadastrar administrador</S.ClickedTypog>
             </Box>
         </div>

@@ -13,6 +13,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import alternativeLogo from '../../assets/SPOTENU3.png'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
+import { searchMusic } from '../../actions/musicsAction'
 
 function Home(props) {
 
@@ -20,13 +21,28 @@ function Home(props) {
         if (!window.localStorage.getItem('role')) {
             props.goToLogin()
         }
-        setRole(window.localStorage.getItem('role'))
+        if (window.localStorage.getItem('role') === 'OUVINTE PAGANTE') {
+            props.getAllPls()
+        }
+        if (window.localStorage.getItem('role') === 'BANDA') {
+            props.getAllAlbuns()
+        }
+        defineContent()
     }, [])
 
-    const [role, setRole] = useState('')
+    const [search, setSearch] = useState({})
+
+    const goSearch = (e) => {
+        e.preventDefault()
+        props.searchMusic(search.input)
+    }
+
+    const saveInput = (e) => {
+        setSearch({ ...search, input: e.target.value })
+    }
 
     const defineContent = () => {
-        switch (role) {
+        switch (window.localStorage.getItem('role')) {
             case 'ADMIN':
                 return (
                     <S.ContentWrapper elevation={10}>
@@ -34,13 +50,11 @@ function Home(props) {
                     </S.ContentWrapper>
                 )
             case 'OUVINTE PAGANTE':
-                props.getAllPls()
                 return (
                     <S.ContentWrapper elevation={10}>
                         <UserMenu playlitsList={props.playLists} role='payer-user' />
                     </S.ContentWrapper>)
             case 'BANDA':
-                props.getAllAlbuns()
                 return (
                     <S.ContentWrapper elevation={10}>
                         <ArtistMenu albunsList={props.albuns} />
@@ -49,14 +63,25 @@ function Home(props) {
                 return (
                     <Box display='flex' flexDirection='column' alignItems='center'>
                         <S.StyledLogo src={alternativeLogo} />
-                        <Box mt={3}>
-                            <S.StyledTextField
-                                color='secondary'
-                                defaultValue='O que você quer escutar?'
-                                autoFocus='true' />
-                            <IconButton type="submit" aria-label="search" color='secondary'>
+                        <Box 
+                            mt={3} 
+                            display='flex' 
+                            alignItems='center' 
+                            justifyContent='center'>
+                            <IconButton
+                                aria-label="search"
+                                color='secondary'>
                                 <SearchIcon />
                             </IconButton>
+                            <form onSubmit={goSearch}>
+                                <S.StyledTextField
+                                    placeholder='O que você quer escutar?'
+                                    onChange={saveInput}
+                                    value={search.input || ''}
+                                    color='secondary'
+                                    autoFocus={true}
+                                    required />
+                            </form>
                         </Box>
                     </Box>
                 )
@@ -64,13 +89,14 @@ function Home(props) {
 
     }
 
+    let screen = defineContent()
 
     return (
         <S.PageWrapper>
             <Header
-                showSearch={role === 'OUVINTE NÃO PAGANTE'? true : null}
+                showSearch={window.localStorage.getItem('role') === 'OUVINTE NÃO PAGANTE' ? true : null}
                 logoutIcon={null} />
-            {defineContent()}
+            {screen}
             <Footer />
         </S.PageWrapper>
     )
@@ -87,7 +113,8 @@ const mapDispatchToProps = dispatch => {
     return {
         getAllPls: () => dispatch(getAllPls()),
         getAllAlbuns: () => dispatch(getAllAlbuns()),
-        goToLogin: () => dispatch(push(routes.login))
+        goToLogin: () => dispatch(push(routes.login)),
+        searchMusic: (musicName) => dispatch(searchMusic(musicName, null))
     }
 }
 

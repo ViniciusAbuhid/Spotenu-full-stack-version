@@ -61,10 +61,8 @@ export class MusicController {
 
     public async getAllAlbuns(req: Request, res: Response) {
         try {
-            console.log(req.headers.authorization as string || req.headers.Authorization as string)
             const verifyToken = new TokenGenerator().
             verifyToken(req.headers.authorization as string || req.headers.Authorization as string) as any
-            console.log(verifyToken.id)
             const result = await new MusicDataBase().getAllAlbunsById(verifyToken.id)
             res.status(200).send(result)
         }
@@ -167,9 +165,7 @@ export class MusicController {
     public async getMusicByName(req: Request, res: Response) {
         try {
             const result = await MusicController.musicBusiness.getMusicByName(req.query.name as string)
-            res.status(200).send({
-                message: result
-            })
+            res.status(200).send(result)
         }
         catch (err) {
             res.status(400).send({

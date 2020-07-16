@@ -47,6 +47,24 @@ class MusicDataBase extends BaseDataBase_1.default {
             yield this.getConnection().delete().from(this.tableName).where({ id });
         });
     }
+    createAlbumAndGenreRelation(id_album, id_genre) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.getConnection().insert({ id_album, id_genre }).into('Albumns_Genres_Spotenu');
+        });
+    }
+    getRelationAlbumAndGenre(id_genre) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield this.getConnection().select('*').where({ id_genre })
+                .from('Albumns_Genres_Spotenu');
+            return result;
+        });
+    }
+    deleteRelationBetweenGenreAndAlbum(id_genre, id_album) {
+        return __awaiter(this, void 0, void 0, function* () {
+            id_genre ? yield this.getConnection().delete().from('Albumns_Genres_Spotenu').where({ id_genre }) :
+                yield this.getConnection().delete().from('Albumns_Genres_Spotenu').where({ id_album });
+        });
+    }
     getAllAlbunsById(artist_id) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield this.getConnection().select("*").where({ artist_id }).from('Albums_Spotenu');
@@ -76,9 +94,9 @@ class MusicDataBase extends BaseDataBase_1.default {
             yield this.getConnection().delete().from('Albums_Spotenu').where({ artist_id });
         });
     }
-    createAlbumAndGenreRelation(id_album, id_genre) {
+    deleteRelationAlbumMusic(album_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.getConnection().insert({ id_album, id_genre }).into('Albumns_Genres_Spotenu');
+            yield this.getConnection().delete().from('Musics_Spotenu').where({ album_id });
         });
     }
     getAllMusicsFromCertainAlbum(album_id) {
@@ -101,6 +119,11 @@ class MusicDataBase extends BaseDataBase_1.default {
     deleteMusic(id) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.getConnection().delete().from('Musics_Spotenu').where({ id });
+        });
+    }
+    getMusicByName(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.getConnection().select('*').where('Musics_Spotenu', 'like', `%${name}%`);
         });
     }
 }

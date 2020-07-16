@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { TextField, Typography, Button, ButtonGroup, Box } from '@material-ui/core'
+import { TextField, Typography, Button, Box } from '@material-ui/core'
 import * as S from './style'
 import logo from '../../assets/SPOTENU.png'
 import { connect } from 'react-redux'
 import { sendSignupData } from '../../actions/usersActions'
-import { push } from 'connected-react-router'
-import { routes } from '../../router/index'
 import Header from '../../components/header/index'
 import Footer from '../../components/footer/index'
+import { history } from '../../App'
 
 function Signup(props) {
 
@@ -23,7 +22,6 @@ function Signup(props) {
     function saveUserData(e) {
         const { name, value } = e.target
         setUserData({ ...userData, [name]: value })
-        console.log(userData)
     }
 
     function sendSignupData(e) {
@@ -37,8 +35,8 @@ function Signup(props) {
     return (
         <S.PageWrapper>
             <Header
-                showSearch={true}
-                logoutIcon={true} />
+                showSearch={window.localStorage.getItem('role') === 'ADMIN' ? null : true}
+                logoutIcon={window.localStorage.getItem('role') === 'ADMIN' ? null : true} />
             <S.ContentWrapper elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 {role === 'ADMIN' ?
@@ -50,17 +48,20 @@ function Signup(props) {
                         mt={2} mb={role === '' ? 5 : 1} 
                         display='flex' 
                         justifyContent="space-evenly"
+                        alignItems = 'center'
                         >
                             <S.ClickedTypog
                                 color={role === 'OUVINTE PAGANTE' ? 'secondary' : ''}
                                 onClick={() => setRole('OUVINTE PAGANTE')}>
                                 Ouvinte pagante
                                 </S.ClickedTypog>
+                                <Typography>|</Typography>
                             <S.ClickedTypog
                                 color={role === 'OUVINTE NAO PAGANTE' ? 'secondary' : ''}
                                 onClick={() => setRole('OUVINTE NAO PAGANTE')}>
                                 Ouvinte não pagante
                                 </S.ClickedTypog>
+                                <Typography>|</Typography>
                             <S.ClickedTypog
                                 color={role === 'BANDA' ? 'secondary' : ''}
                                 onClick={() => setRole('BANDA')}>
@@ -118,7 +119,7 @@ function Signup(props) {
                         </Box>
                     </S.FormWrapper>
                     : ''}
-                <S.ClickedTypog onClick={()=> props.goHome()}>Voltar</S.ClickedTypog>
+                <S.ClickedTypog onClick={() => history.goBack()}>Voltar</S.ClickedTypog>
             </S.ContentWrapper>
             <Footer />
         </S.PageWrapper>
@@ -127,9 +128,7 @@ function Signup(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        sendSignupData: (updatedUserData) => dispatch(sendSignupData(updatedUserData)),
-        goToLogin: () => dispatch(push(routes.login)),
-        goHome: () => dispatch(push(routes.home))
+        sendSignupData: (updatedUserData) => dispatch(sendSignupData(updatedUserData))
     }
 }
 

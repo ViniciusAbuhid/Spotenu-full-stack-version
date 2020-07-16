@@ -1,8 +1,23 @@
 const initialState = {
+    bands: [],
     albunsList: [],
     allPlayLists: [],
     allGenres: [],
-    MusicList: []
+    musicList: [],
+    searchedMusics: [],
+    searchedTerm: ''
+}
+
+export const bands = (state = initialState, action) => {
+    switch (action.type) {
+        case 'SET_BANDS':
+            return {
+                ...state,
+                bands: action.payload.bands
+            }
+        default:
+            return state
+    }
 }
 
 export const albuns = (state = initialState, action) => {
@@ -44,9 +59,30 @@ export const genres = (state = initialState, action) => {
 export const music = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_MUSIC_ALBUM_RELATIONS':
-            console.log(action.payload.musicsList)
         return {
-            ...state, MusicList: action.payload.musicsList
+            ...state, musicList: action.payload.musicsList
+        }
+        default:
+            return state
+    }
+}
+
+export const research = (state = initialState, action) => {
+    switch (action.type) {
+        case 'SET_SEARCHED_MUSICS':
+        return {
+            ...state, searchedMusics: action.payload.searchedMusics
+        }
+        default:
+            return state
+    }
+}
+
+export const query = (state = initialState, action) => {
+    switch(action.type) {
+        case 'SEARCH_FOR':
+        return {
+            ...state, searchedTerm: action.payload.searchedTerm
         }
         default:
             return state

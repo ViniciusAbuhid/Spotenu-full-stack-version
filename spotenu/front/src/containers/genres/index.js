@@ -7,6 +7,7 @@ import { getAllGenres, deleteGenre, addNewGenre } from '../../actions/genresActi
 import { Typography, Box, Button, TextField } from '@material-ui/core'
 import logo from '../../assets/SPOTENU.png'
 import DeleteIcon from '@material-ui/icons/Delete';
+import { history } from '../../App'
 
 function Genres(props) {
     useEffect(() => {
@@ -87,6 +88,11 @@ function Genres(props) {
                         />
                     </Box>
                 )}
+                <S.ClickedTypog  
+                align='center' 
+                onClick={() => history.goBack()}>
+                    Voltar
+                </S.ClickedTypog>
             </S.ContentWrapper>
             <Footer />
         </S.PageWrapper>

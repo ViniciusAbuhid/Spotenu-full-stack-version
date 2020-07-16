@@ -18,7 +18,6 @@ export const getAllGenres = () => async (dispatch) => {
                 authorization: window.localStorage.getItem('token')
             }
         })
-        console.log(result)
         dispatch(setAllGenres(result.data))
     }
     catch (err) {
@@ -28,7 +27,7 @@ export const getAllGenres = () => async (dispatch) => {
 
 export const deleteGenre = (genreId) => async (dispatch) => {
     try {
-        const result = await axios.delete(`${baseURL}/delete/genre/${genreId}`)
+        await axios.delete(`${baseURL}/delete/genre/${genreId}`)
         dispatch(getAllGenres())
     }
     catch (err) {
@@ -38,8 +37,7 @@ export const deleteGenre = (genreId) => async (dispatch) => {
 
 export const addNewGenre = (genreName) => async (dispatch) => {
     try {
-        const result = await axios.put(`${baseURL}/addGenre`, genreName)
-        console.log(result)
+        await axios.put(`${baseURL}/addGenre`, genreName)
         dispatch(getAllGenres())
     }
     catch (err) {

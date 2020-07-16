@@ -30,28 +30,26 @@ function UserMenu(props) {
                             </Box>
                             {plId === pl.id ? (
                                 <div>
-                                    <Button
-                                        color='primary'
+                                    <S.ClickedTypog
                                         size='small'
                                         onClick={() => setPlId('')}>
                                         Recolher Playlist
-                                </Button>
+                                </S.ClickedTypog>
                                     <Box
                                         display="flex"
                                         alignItems='center'
                                         mb={2}>
                                         <Typography>Tornar Playlist pública</Typography>
-                                        <Switch color='primary' />
+                                        <Switch color='secondary' />
                                     </Box>
                                     <MusicMenu componentInfo={{ component: 'pl', componentName: pl.name }} />
                                 </div>
                             ) : (
-                                    <Button
-                                        color='primary'
+                                    <S.ClickedTypog
                                         size='small'
                                         onClick={() => setPlId(pl.id)}>
                                         Ver músicas
-                                    </Button>
+                                    </S.ClickedTypog>
                                 )}
                         </li>)
                 }) :

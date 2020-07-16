@@ -5,7 +5,6 @@ import axios from 'axios'
 const baseURL = ' http://localhost:3001/music'
 
 export const setAlbuns = (albunsList) => {
-    console.log(albunsList)
     return {
         type: 'SET_ALBUNS',
         payload: {
@@ -15,7 +14,6 @@ export const setAlbuns = (albunsList) => {
 }
 
 export const getAllAlbuns = () => async (dispatch) => {
-    console.log('to sendo chamada aqui na action')
     try {
         const result = await axios.get(`${baseURL}/allAlbuns`, {
             headers: {
@@ -26,19 +24,17 @@ export const getAllAlbuns = () => async (dispatch) => {
     }
     catch (err) {
         console.log(err.message)
-        // alert('Não foi possível carregar os seus álbuns, tente novamente mais tarde...')
+        alert('Não foi possível carregar os seus álbuns, tente novamente mais tarde...')
     }
 }
 
 export const createAlbum = (albumData) => async (dispatch) => {
-    console.log(albumData)
     try {
-        const result = await axios.post(`${baseURL}/create/album`, albumData, {
+        await axios.post(`${baseURL}/create/album`, albumData, {
             headers: {
                 authorization: window.localStorage.getItem('token')
             }
         })
-        console.log(result.data)
         alert('Álbum adicionado com sucesso')
         dispatch(push(routes.home))
     }
@@ -48,9 +44,8 @@ export const createAlbum = (albumData) => async (dispatch) => {
 }
 
 export const deleteAlbuns = (albumId) => async (dispatch)=>{
-    console.log('to no action de delete')
     try{
-        const result = axios.delete(`${baseURL}/delete/album/${albumId}`)
+        axios.delete(`${baseURL}/delete/album/${albumId}`)
         dispatch(getAllAlbuns())
     }
     catch (err) {
