@@ -2,7 +2,6 @@ import IdGenerator from '../services/IdGenerator'
 import UserDataBase from '../data/UserDataBase'
 import HashGenarator from '../services/HashGenerator'
 import TokenGenerator from '../services/TokenGenerator'
-import { MusicBusiness } from './MusicBusiness'
 import { MusicDataBase } from '../data/MusicDataBase'
 
 export default class UserBusiness {
@@ -17,13 +16,11 @@ export default class UserBusiness {
         const id = this.idGenerator.idGenerator()
         const hash = await this.hashGenerator.hashGenerator(password)
         await this.userDataBase.addUser(name, email, nickname, hash, id, role, description)
-        const result = await this.userDataBase.getUserById(id)
         const accessToken = this.tokenGenerator.generateToken({ id, role })
         return { accessToken, role }
     }
 
     public async getAllBands() {
-        console.log('to no bisnes')
         return await this.userDataBase.getAllBands()
     }
 
@@ -45,7 +42,6 @@ export default class UserBusiness {
 
     public async getUserByCredential(credential: string, password: string) {
         const result = await this.userDataBase.getUserByCredential(credential)
-        console.log(result[0])
         if (!result[0].approved){
             throw new Error('Usuário aguardando aprovação')
         }

@@ -80,7 +80,6 @@ export default class UserController {
     }
 
     public async getAllBands(req: Request, res: Response) {
-        console.log('to no controler')
         try {
             const verifyToken = new TokenGenerator().verifyToken(req.headers.authorization || req.headers.Authorization as string) as any
             if(verifyToken.role !== UserRoles.ADMIN){
@@ -118,7 +117,6 @@ export default class UserController {
 
     public async reproveBand(req: Request, res: Response) {
         try {
-            console.log('to no controleer paaai')
             await UserController.userBusiness.reproveBand(req.params.id)
             res.status(200).send("banda reprovada com sucesso")
         }

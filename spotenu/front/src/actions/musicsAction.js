@@ -5,7 +5,6 @@ import { routes } from '../router/index'
 const baseURL = 'http://localhost:3001/music'
 
 export const setMusicList = (musicsList) => {
-    console.log('cheguei no role do actino com', musicsList)
     return {
         type: 'SET_MUSIC_ALBUM_RELATIONS',
         payload: {
@@ -68,15 +67,10 @@ export const deleteMusic = (musicData) => async (dispatch) => {
     }
 }
 
-export const searchMusic = (musicName, limit) => async (dispatch) => {
+export const searchMusic = (musicName) => async (dispatch) => {
     dispatch(push(routes.searchSession))
     try{
-        console.log(limit)
-        const body = {
-            limit
-        }
-        console.log(body)
-        const result = await axios.post(`${baseURL}/search?name=${musicName}`, body)
+        const result = await axios.post(`${baseURL}/search?name=${musicName}`)
         dispatch(setSearchedMusics(result.data))
         dispatch(setSearchedTerm(musicName))
     }

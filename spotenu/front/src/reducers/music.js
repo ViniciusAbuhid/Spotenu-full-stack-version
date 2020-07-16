@@ -59,7 +59,6 @@ export const genres = (state = initialState, action) => {
 export const music = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_MUSIC_ALBUM_RELATIONS':
-            console.log('cheguei no reducer certo com', )
         return {
             ...state, musicList: action.payload.musicsList
         }

@@ -13,7 +13,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import alternativeLogo from '../../assets/SPOTENU3.png'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
-import { albuns } from '../../reducers/music'
 import { searchMusic } from '../../actions/musicsAction'
 
 function Home(props) {
@@ -40,7 +39,6 @@ function Home(props) {
 
     const saveInput = (e) => {
         setSearch({ ...search, input: e.target.value })
-        console.log(search)
     }
 
     const defineContent = () => {
@@ -81,7 +79,7 @@ function Home(props) {
                                     onChange={saveInput}
                                     value={search.input || ''}
                                     color='secondary'
-                                    autoFocus='true'
+                                    autoFocus={true}
                                     required />
                             </form>
                         </Box>

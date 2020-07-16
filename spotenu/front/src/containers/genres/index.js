@@ -7,14 +7,10 @@ import { getAllGenres, deleteGenre, addNewGenre } from '../../actions/genresActi
 import { Typography, Box, Button, TextField } from '@material-ui/core'
 import logo from '../../assets/SPOTENU.png'
 import DeleteIcon from '@material-ui/icons/Delete';
-import { genres } from '../../reducers/music'
-import { push } from 'connected-react-router'
-import { routes } from '../../router/index'
 import { history } from '../../App'
 
 function Genres(props) {
     useEffect(() => {
-        console.log(props.genres)
         props.getAllGenres()
         window.localStorage.getItem('role') === 'ADIMN' || setRole('ADMIN')
     }, [])

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import * as S from './style'
 import Header from '../../components/header/index'
 import Footer from '../../components/footer/index'
@@ -9,33 +9,8 @@ import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
 import logo from '../../assets/SPOTENU.png'
 import { history } from '../../App'
-import { searchMusic } from '../../actions/musicsAction'
 
 function SearchSession(props) {
-
-    useEffect(() => {
-        // let newLimit = props.searchedMusics.length
-        // if (newLimit <= 10) {
-        //     setLimit(10)
-        // }
-        // else {
-        //     while (newLimit % 10 !== 0) {
-        //         newLimit = newLimit - 1
-        //     }
-        //     setLimit(newLimit)
-        // }
-        // console.log(props.searchedMusics.length, limit)
-    })
-
-    // const [limit, setLimit] = useState(10)
-
-    // const getMoreResults = () => {
-    //     props.searchMusic(props.searchedTerm)
-    // }
-
-    // const getLessResults = () => {
-    //     props.searchMusic(props.searchedTerm)
-    // }
 
     return (
         <S.PageWrapper>
@@ -55,7 +30,13 @@ function SearchSession(props) {
                         {props.searchedMusics.length ? (
                             <div>
                                 {props.searchedMusics.map((music, index) => {
-                                    // if (index < props.searchedMusics.length - 1) {
+                                    if ((props.searchedMusics.length - 1) % 10 === 0 
+                                        && 
+                                        index === (props.searchedMusics.length - 1) 
+                                        &&
+                                        props.searchedMusics.length >= 10
+                                        ){}
+                                    else {
                                         return (
                                             <Box
                                                 key={index}
@@ -66,30 +47,10 @@ function SearchSession(props) {
                                                     <PlayCircleFilledIcon />
                                                     <Typography>{music.name}</Typography>
                                                 </Box>
-                                                <p>{index}</p>
                                             </Box>
                                         )
-                                    // }
+                                    }
                                 })}
-                                {/* <Box
-                                    display={limit > 10 ? 'flex' : 'none'}
-                                    justifyContent='center'
-                                    alignItems='center'
-                                    mb={2} >
-                                    <S.ClickedTypog
-                                        onClick={getLessResults}
-                                    >Mostrar menos</S.ClickedTypog>
-                                </Box>
-                                <Box
-                                    display={limit === 10 ? props.searchedMusics.length === limit + 1 ? 'flex' :
-                                        'none' : props.searchedMusics.length === limit + 11 ? 'flex' : 'none'}
-                                    justifyContent='center'
-                                    alignItems='center'
-                                    mb={2} >
-                                    <S.ClickedTypog
-                                        onClick={getMoreResults}
-                                    >Mostrar mais</S.ClickedTypog>
-                                </Box> */}
                             </div>)
                             : (
                                 <Typography align='center'>
@@ -124,8 +85,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        goToHomePage: () => dispatch(push(routes.home)),
-        searchMusic: (musicName) => dispatch(searchMusic(musicName))
+        goToHomePage: () => dispatch(push(routes.home))
     }
 }
 

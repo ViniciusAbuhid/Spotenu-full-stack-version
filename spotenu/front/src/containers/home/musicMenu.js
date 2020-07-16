@@ -10,7 +10,6 @@ function MusicMenu(props) {
 
     useEffect(() => {
         props.getMusicList(props.componentInfo)
-        console.log(props.musicList)
     }, [])
 
     const [musicData, setMusicData] = useState({})

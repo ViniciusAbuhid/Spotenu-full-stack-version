@@ -45,12 +45,11 @@ function ArtistMenu(props) {
                                     <MusicMenu componentInfo={{ component: 'album', componentId: album.id }} />
                                 </Box>
                             ) : (
-                                    <Button
-                                        color='secondary'
+                                    <S.ClickedTypog
                                         size='small'
                                         onClick={() => setAlbumId(album.id)}>
                                         Ver músicas
-                                    </Button>
+                                    </S.ClickedTypog>
                                 )}
                         </li>)
                 }) :

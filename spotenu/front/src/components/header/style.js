@@ -4,7 +4,6 @@ import { TextField } from '@material-ui/core'
 export const ComponentWrapper = styled.div`
     width: 100%
 `
-
 export const Header = styled.div`
     width: 100%;
     display: flex;

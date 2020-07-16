@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Paper, Button, TextField, Typography } from '@material-ui/core'
+import { Paper, TextField, Typography } from '@material-ui/core'
 
 export const PageWrapper = styled.div`
     box-sizing: border-box;

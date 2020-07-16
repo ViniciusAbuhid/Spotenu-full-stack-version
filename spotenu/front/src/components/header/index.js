@@ -6,7 +6,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
-import { Box, IconButton, TextField } from '@material-ui/core'
+import { Box, IconButton } from '@material-ui/core'
 import { searchMusic } from '../../actions/musicsAction'
 
 function Header(props) {
@@ -27,7 +27,6 @@ function Header(props) {
 
     const saveInput = (e) => {
         setSearch({ ...search, input: e.target.value })
-        console.log(search)
     }
 
 

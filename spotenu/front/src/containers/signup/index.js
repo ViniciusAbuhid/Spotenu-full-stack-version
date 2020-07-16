@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { TextField, Typography, Button, ButtonGroup, Box } from '@material-ui/core'
+import { TextField, Typography, Button, Box } from '@material-ui/core'
 import * as S from './style'
 import logo from '../../assets/SPOTENU.png'
 import { connect } from 'react-redux'
 import { sendSignupData } from '../../actions/usersActions'
-import { push } from 'connected-react-router'
-import { routes } from '../../router/index'
 import Header from '../../components/header/index'
 import Footer from '../../components/footer/index'
 import { history } from '../../App'
@@ -24,7 +22,6 @@ function Signup(props) {
     function saveUserData(e) {
         const { name, value } = e.target
         setUserData({ ...userData, [name]: value })
-        console.log(userData)
     }
 
     function sendSignupData(e) {
@@ -51,17 +48,20 @@ function Signup(props) {
                         mt={2} mb={role === '' ? 5 : 1} 
                         display='flex' 
                         justifyContent="space-evenly"
+                        alignItems = 'center'
                         >
                             <S.ClickedTypog
                                 color={role === 'OUVINTE PAGANTE' ? 'secondary' : ''}
                                 onClick={() => setRole('OUVINTE PAGANTE')}>
                                 Ouvinte pagante
                                 </S.ClickedTypog>
+                                <Typography>|</Typography>
                             <S.ClickedTypog
                                 color={role === 'OUVINTE NAO PAGANTE' ? 'secondary' : ''}
                                 onClick={() => setRole('OUVINTE NAO PAGANTE')}>
                                 Ouvinte não pagante
                                 </S.ClickedTypog>
+                                <Typography>|</Typography>
                             <S.ClickedTypog
                                 color={role === 'BANDA' ? 'secondary' : ''}
                                 onClick={() => setRole('BANDA')}>

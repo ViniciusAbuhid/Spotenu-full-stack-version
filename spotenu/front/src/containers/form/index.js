@@ -30,11 +30,9 @@ function Form(props) {
 
     function saveAlbumName(e) {
         setAlbumData({ ...albumData, name: e.target.value })
-        console.log(albumData)
     }
 
     function sendAlbumData(e) {
-        console.log(albumData)
         e.preventDefault()
         props.createAlbum(albumData)
     }

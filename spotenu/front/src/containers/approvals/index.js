@@ -15,7 +15,6 @@ function Approvals(props) {
             props.goToHomePage()
         }
         props.getAllBands()
-        console.log(props.bandsList)
     }, [])
 
     const [filter, setFilter] = useState('')

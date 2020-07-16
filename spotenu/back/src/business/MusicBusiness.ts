@@ -8,7 +8,6 @@ export class MusicBusiness {
         const id = this.idGenerator.idGenerator()
         await this.musicDataBase.addGenre(name, id)
         const checkingGenre = await this.musicDataBase.getGenreById(id)
-        console.log(checkingGenre[0])
         if (!checkingGenre[0]) {
             throw new Error('Não foi possível adicionar este gênero agora, tente novamente mais tarde...')
         }
@@ -99,8 +98,7 @@ export class MusicBusiness {
         await this.musicDataBase.deleteMusic(id)
     }
 
-    public async getMusicByName(name:string, limit:number = 10) {
-        console.log('limit que chega para mim', limit)
-        return await this.musicDataBase.getMusicByName(name, limit)
+    public async getMusicByName(name:string) {
+        return await this.musicDataBase.getMusicByName(name)
     }
 }

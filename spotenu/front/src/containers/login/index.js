@@ -33,7 +33,6 @@ function Login(props) {
                 password: userData.password
             }
         }
-        console.log(updatedUserData)
         props.sendLoginData(updatedUserData)
     }
 
