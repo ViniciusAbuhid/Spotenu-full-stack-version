@@ -22,8 +22,8 @@ export class MusicBusiness {
         await this.musicDataBase.deleteRelationBetweenGenreAndAlbum(id)
         const checkingRelation = await this.musicDataBase.getRelationAlbumAndGenre(id)
         if (checkingRelation.length > 0) {
-            throw new Error(`Não foi possível deletar as relações entre este gênero e os albuns
-            , tente novamente mais tarde...`)
+            throw new Error
+            (`Não foi possível deletar as relações entre este gênero e os albuns, tente novamente mais tarde`)
         }
         await this.musicDataBase.deleteGenre(id)
         const checkingDel = await this.musicDataBase.getGenreById(id)
