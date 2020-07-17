@@ -2,7 +2,7 @@ import { push } from 'connected-react-router'
 import { routes } from '../router/index'
 import axios from 'axios'
 
-const baseURL = ' http://localhost:3001/music'
+export const baseURL = ' http://localhost:3001/music'
 
 export const setAlbuns = (albunsList) => {
     return {
