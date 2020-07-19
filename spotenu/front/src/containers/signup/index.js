@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { TextField, Typography, Button, Box } from '@material-ui/core'
+import { TextField, Typography, Button, Box, Select, MenuItem, InputLabel } from '@material-ui/core'
 import * as S from './style'
 import logo from '../../assets/SPOTENU.png'
 import { connect } from 'react-redux'
@@ -24,6 +24,11 @@ function Signup(props) {
         setUserData({ ...userData, [name]: value })
     }
 
+    function handleRoleChange(e){
+        setRole(e.target.value)
+        console.log('testeee', role)
+    }
+
     function sendSignupData(e) {
         e.preventDefault()
         const updatedUserData = {
@@ -42,35 +47,39 @@ function Signup(props) {
                 {role === 'ADMIN' ?
                     <Typography variant='h4'>Cadastro de novo administrador</Typography> :
                     <S.RolesWrapper>
+                        <Box mb={2}>
                         <Typography variant='h3' align='center'>Cadastro</Typography>
-                        <Typography align='center'>Quero me cadastrar como:</Typography>
+                        </Box>
                         <Box
-                        mt={2} mb={role === '' ? 5 : 1} 
+                        mt={2}
                         display='flex' 
                         justifyContent="space-evenly"
                         alignItems = 'center'
                         >
-                            <S.ClickedTypog
-                                color={role === 'OUVINTE PAGANTE' ? 'secondary' : ''}
-                                onClick={() => setRole('OUVINTE PAGANTE')}>
+                            <InputLabel id='user type'>Tipo de usuário</InputLabel>
+                            <Select
+                            labelId ='user type'
+                            id='user type pp'
+                            value={role}
+                            placeholder='teste'
+                            onChange={handleRoleChange}
+                            >
+                            <MenuItem
+                                value = 'OUVINTE PAGANTE'>
                                 Ouvinte pagante
-                                </S.ClickedTypog>
-                                <Typography>|</Typography>
-                            <S.ClickedTypog
-                                color={role === 'OUVINTE NAO PAGANTE' ? 'secondary' : ''}
-                                onClick={() => setRole('OUVINTE NAO PAGANTE')}>
+                                </MenuItem>
+                            <MenuItem
+                                value= 'OUVINTE NAO PAGANTE'>
                                 Ouvinte não pagante
-                                </S.ClickedTypog>
-                                <Typography>|</Typography>
-                            <S.ClickedTypog
-                                color={role === 'BANDA' ? 'secondary' : ''}
-                                onClick={() => setRole('BANDA')}>
+                                </MenuItem>
+                            <MenuItem
+                                value= 'BANDA'>
                                 Banda
-                                </S.ClickedTypog>
+                                </MenuItem>
+                                </Select>
                         </Box>
                     </S.RolesWrapper>
                 }
-                {role !== '' ?
                     <S.FormWrapper onSubmit={sendSignupData}>
                         <TextField
                             color='secondary'
@@ -118,7 +127,6 @@ function Signup(props) {
                             <Button variant="contained" color='secondary' type='onSubmit'>cadastrar</Button>
                         </Box>
                     </S.FormWrapper>
-                    : ''}
                 <S.ClickedTypog onClick={() => history.goBack()}>Voltar</S.ClickedTypog>
             </S.ContentWrapper>
             <Footer />

@@ -8,7 +8,7 @@ import Footer from '../../components/footer'
 import { routes } from '../../router'
 import { push } from 'connected-react-router'
 
-function Approvals(props) {
+export function Approvals(props) {
 
     useEffect(() => {
         if (window.localStorage.getItem('role') !== "ADMIN") {

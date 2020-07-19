@@ -40,7 +40,7 @@ function Login(props) {
         <S.PageWrapper>
             <Header
                 showSearch={true}
-                logoutIcon={true} />
+                logoutIcon={true}/>
             <S.ContentWrapper elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 <S.FormWrapper onSubmit={sendLoginData}>
@@ -64,7 +64,7 @@ function Login(props) {
                         <Button variant="contained" color='secondary' type='onSubmit'>Enviar</Button>
                     </Box>
                 </S.FormWrapper>
-                <S.Invitation onClick={props.goToSignup}>Não tem cadastro? Clique aqui para fazer parte da nossa jam</S.Invitation>
+                <S.Invitation onClick={props.goToSignup}>Não tem cadastro? Clique aqui</S.Invitation>
             </S.ContentWrapper>
             <Footer />
         </S.PageWrapper>

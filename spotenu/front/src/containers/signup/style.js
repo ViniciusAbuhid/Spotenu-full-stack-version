@@ -14,13 +14,22 @@ export const PageWrapper = styled.div`
 
 export const ContentWrapper = styled(Paper)`
     box-sizing: border-box;
-    width: 40%;
+    width: 30%;
     padding: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 50px 0
+    margin: 50px 0;
+    @media only screen and (max-width: 1100px){
+        width: 40%;
+    }
+    @media only screen and (max-width: 767px){
+        width: 50%;
+    }
+    @media only screen and (max-width: 480px){
+        width: 60%;
+    }
 `
 export const RolesWrapper = styled.div`
     width: 100%
@@ -35,7 +44,11 @@ export const FormWrapper = styled.form`
 
 export const ImgWrapper = styled.img`
     width: 300px;
-    height: 100px
+    height: 100px;
+    display: block;
+    @media only screen and (max-width: 767px){
+        display: none;
+    }
 `
 export const ClickedTypog = styled(Typography)`
     &:hover {
