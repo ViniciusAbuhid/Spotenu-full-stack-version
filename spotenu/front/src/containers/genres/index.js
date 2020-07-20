@@ -38,7 +38,9 @@ function Genres(props) {
         <S.PageWrapper>
             <Header />
             <S.ContentWrapper>
-                <S.ImgWrapper src={logo}></S.ImgWrapper>
+                <Box display='flex' justifyContent='center' alignContent='center'>
+                    <S.ImgWrapper src={logo}></S.ImgWrapper>
+                </Box>
                 <Typography variant='h4' align='center'>Gêneros musicais</Typography>
                 <S.StyledList>
                     {props.genres ? props.genres.map((genre, index) => {

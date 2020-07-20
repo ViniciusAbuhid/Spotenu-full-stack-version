@@ -41,6 +41,13 @@ export const BarWrapper = styled.div`
     justify-content: center;
     align-items: center;
 `
+
 export const StyledTextField = styled(TextField)`
     width: 300px;
+    @media only screen and (max-width: 767px){
+        width: 235px
+    };
+    @media only screen and (max-width: 480px){
+        width: 235px
+    };
 `

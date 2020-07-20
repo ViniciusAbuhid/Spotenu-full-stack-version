@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { Paper, Typography } from '@material-ui/core'
 
 export const PageWrapper = styled.div`
-    box-sizing: border-box
     max-width: 100%;
     min-height: 100vh;
     display: flex;
@@ -13,7 +12,6 @@ export const PageWrapper = styled.div`
 `
 
 export const ContentWrapper = styled(Paper)`
-    box-sizing: border-box;
     width: 30%;
     padding: 15px;
     display: flex;

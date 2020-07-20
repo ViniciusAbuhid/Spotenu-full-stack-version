@@ -12,13 +12,22 @@ export const PageWrapper = styled.div`
     background-color: #FE7E02
 `
 export const ContentWrapper = styled(Paper)`
-    box-sizing: border-box;
-    width: 40%;
+    width: 30%;
     padding: 15px;
     display: flex;
     flex-direction: column;
-    margin: 50px 0
+    margin: 50px 0;
+    @media only screen and (max-width: 1100px){
+        width: 40%;
+    }
+    @media only screen and (max-width: 767px){
+        width: 50%;
+    }
+    @media only screen and (max-width: 480px){
+        width: 60%;
+    }
 `
+
 export const ClickedTypog = styled(Typography)`
     text-align: center;
     &:hover {
@@ -33,5 +42,8 @@ export const ImgWrapper = styled.img`
     width: 300px;
     height: 100px;
     display: block;
-    margin: 0 auto
+    margin: 0 auto;
+    @media only screen and (max-width: 767px){
+        display: none;
+    }
 `

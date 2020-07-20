@@ -7,6 +7,7 @@ import { getAllBands, approveBand, disapproveBand } from '../../actions/bandsAct
 import Footer from '../../components/footer'
 import { routes } from '../../router'
 import { push } from 'connected-react-router'
+import logo from '../../assets/SPOTENU.png'
 
 export function Approvals(props) {
 
@@ -47,10 +48,13 @@ export function Approvals(props) {
         <S.PageWrapper>
             <Header />
             <S.ContentWrapper elevation={10}>
+                <Box display='flex' justifyContent='center' alignContent='center'>
+                    <S.ImgWrapper src={logo}></S.ImgWrapper>
+                </Box>
                 <Typography variant='h4' align='center'>
                     Bandas cadastradas
                 </Typography>
-                <Box display='flex' justifyContent='space-evenly' mt={2}>
+                <S.FilterWrapper>
                     <S.ClickedTypog
                         onClick={() => setFilter('approved')}
                         color={filter === 'approved' ? 'secondary' : ''} >
@@ -66,7 +70,7 @@ export function Approvals(props) {
                         color={filter === '' ? 'secondary' : ''} >
                         Todas
                     </S.ClickedTypog>
-                </Box>
+                </S.FilterWrapper>
                 <S.StyledList>
                     {props.bandsList.length > 0 ? filterBands(props.bandsList).map((band, index) => {
                         return <li key={index}>
@@ -97,9 +101,11 @@ export function Approvals(props) {
                         </Typography>
                     }
                 </S.StyledList>
-                <S.ClickedTypog 
-                align='center'
-                onClick={()=> props.goToHomePage()}>Voltar</S.ClickedTypog>
+                <Box mt={2}>
+                    <S.ClickedTypog 
+                    align='center'
+                    onClick={()=> props.goToHomePage()}>Voltar</S.ClickedTypog>
+                </Box>
             </S.ContentWrapper>
             <Footer />
         </S.PageWrapper>

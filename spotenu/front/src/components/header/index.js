@@ -43,6 +43,7 @@ function Header(props) {
             {props.showSearch || (
                 <S.BarWrapper>
                     <Box padding={2}
+                        width= '100%'
                         display='flex'
                         alignItems='center'
                         justifyContent='center'>

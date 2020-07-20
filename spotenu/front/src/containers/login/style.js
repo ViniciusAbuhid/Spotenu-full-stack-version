@@ -12,7 +12,6 @@ export const PageWrapper = styled.div`
     background-color: #FE7E02
 `
 export const ContentWrapper = styled(Paper)`
-    box-sizing: border-box;
     width: 30%;
     padding: 15px;
     display: flex;
