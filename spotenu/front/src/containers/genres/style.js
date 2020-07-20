@@ -13,15 +13,26 @@ export const PageWrapper = styled.div`
 `
 export const ContentWrapper = styled(Paper)`
     box-sizing: border-box;
-    width: 40%;
+    width: 30%;
     padding: 15px;
-    margin: 50px 0
+    margin: 50px 0;
+    @media only screen and (max-width: 1100px){
+        width: 40%;
+    }
+    @media only screen and (max-width: 767px){
+        width: 50%;
+    }
+    @media only screen and (max-width: 480px){
+        width: 60%;
+    }
 `
 export const ImgWrapper = styled.img`
     width: 300px;
     height: 100px;
     display: block;
-    margin: 0 auto
+    @media only screen and (max-width: 767px){
+        display: none;
+    }
 `
 export const StyledList = styled.ul`
     list-style: none;

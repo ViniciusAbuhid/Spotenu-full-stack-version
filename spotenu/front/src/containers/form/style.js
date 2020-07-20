@@ -12,26 +12,36 @@ export const PageWrapper = styled.div`
     background-color: #FE7E02
 `
 export const ContentWrapper = styled(Paper)`
-    box-sizing: border-box;
-    width: 40%;
+    width: 30%;
     padding: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 50px 0
+    margin: 50px 0;
+    
+    @media only screen and (max-width: 1100px){
+        width: 40%;
+    }
+    @media only screen and (max-width: 767px){
+        width: 50%;
+    }
+    @media only screen and (max-width: 480px){
+        width: 60%;
+    }
 `
 export const ImgWrapper = styled.img`
     width: 300px;
-    height: 100px
+    height: 100px;
+    @media only screen and (max-width: 767px){
+        display: none;
+    }
 `
 export const FormWrapper = styled.form`
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
 `
 export const ClickedTypog = styled(Typography)`
+    text-align: center;
     &:hover {
     color: #0063a5;
     cursor: pointer

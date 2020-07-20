@@ -53,10 +53,11 @@ function Form(props) {
                         display='flex'
                         flexDirection='row'
                         alignItems='center'
-                        justifyContent='center'
+                        mt={2}
                     >
                         <Typography>Nome*:</Typography>
                         <TextField
+                            placeholder=' Nome do álbum'
                             color='secondary'
                             name='name'
                             required
@@ -67,8 +68,7 @@ function Form(props) {
                         <Box
                             mt={2}
                             display='flex'
-                            flexDirection='column'
-                            alignItems='flex-start' >
+                            flexDirection='column' >
                             <Typography>Escolha pelo menos um gênero*</Typography>
                             {props.genres.map((genre, index) => {
                                 return (
@@ -85,7 +85,11 @@ function Form(props) {
                         </Box >)
                     }
 
-                    <Box mt={4} mb={3} >
+                    <Box 
+                    mt={4} 
+                    mb={3} 
+                    display='flex'
+                    justifyContent='center' >
                         <Button variant="contained" color='secondary' type='onSubmit'>Adicionar</Button>
                     </Box>
                 </S.FormWrapper>

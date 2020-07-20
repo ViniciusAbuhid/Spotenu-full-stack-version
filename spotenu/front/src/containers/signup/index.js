@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { TextField, Typography, Button, Box, Select, MenuItem, InputLabel } from '@material-ui/core'
+import { TextField, Typography, Button, Box, Select, MenuItem, InputLabel, NativeSelect } from '@material-ui/core'
 import * as S from './style'
 import logo from '../../assets/SPOTENU.png'
 import { connect } from 'react-redux'
@@ -24,17 +24,22 @@ function Signup(props) {
         setUserData({ ...userData, [name]: value })
     }
 
-    function handleRoleChange(e){
+    function handleRoleChange(e) {
         setRole(e.target.value)
         console.log('testeee', role)
     }
 
     function sendSignupData(e) {
         e.preventDefault()
+        if(role === ''){
+            alert('Por favor, especifique um tipo de usuário')
+        }
+        else{
         const updatedUserData = {
             ...userData, role
         }
         props.sendSignupData(updatedUserData)
+        }
     }
 
     return (
@@ -45,88 +50,91 @@ function Signup(props) {
             <S.ContentWrapper elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 {role === 'ADMIN' ?
-                    <Typography variant='h4'>Cadastro de novo administrador</Typography> :
+                    <Typography variant='h4' align='center'>Cadastro de novo administrador</Typography> :
                     <S.RolesWrapper>
                         <Box mb={2}>
-                        <Typography variant='h3' align='center'>Cadastro</Typography>
+                            <Typography variant='h3' align='center'>Cadastro</Typography>
                         </Box>
                         <Box
-                        mt={2}
-                        display='flex' 
-                        justifyContent="space-evenly"
-                        alignItems = 'center'
+                            mt={2}
+                            display='flex'
+                            flexDirection='column'
+                            justifyContent="center"
+                            alignItems='center'
                         >
-                            <InputLabel id='user type'>Tipo de usuário</InputLabel>
-                            <Select
-                            labelId ='user type'
-                            id='user type pp'
-                            value={role}
-                            placeholder='teste'
-                            onChange={handleRoleChange}
+                            <Typography id='user type'>Desejo me cadastrar como:</Typography>
+                            <NativeSelect
+                                color='secondary'
+                                value={role}
+                                onChange={handleRoleChange}
+                                required
                             >
-                            <MenuItem
-                                value = 'OUVINTE PAGANTE'>
-                                Ouvinte pagante
-                                </MenuItem>
-                            <MenuItem
-                                value= 'OUVINTE NAO PAGANTE'>
-                                Ouvinte não pagante
-                                </MenuItem>
-                            <MenuItem
-                                value= 'BANDA'>
-                                Banda
-                                </MenuItem>
-                                </Select>
+                                <option value="" disabled>
+                                    selecione
+                                </option>
+                                <option
+                                    value='OUVINTE PAGANTE'>
+                                    Ouvinte pagante
+                                </option>
+                                <option
+                                    value='OUVINTE NAO PAGANTE'>
+                                    Ouvinte não pagante
+                                </option>
+                                <option
+                                    value='BANDA'>
+                                    Banda
+                                </option>
+                            </NativeSelect>
                         </Box>
                     </S.RolesWrapper>
                 }
-                    <S.FormWrapper onSubmit={sendSignupData}>
+                <S.FormWrapper onSubmit={sendSignupData}>
+                    <TextField
+                        color='secondary'
+                        label='Nome'
+                        name='name'
+                        required
+                        value={userData.name || ''}
+                        onChange={saveUserData} />
+                    <TextField
+                        color='secondary'
+                        label='E-mail'
+                        type='email'
+                        name='email'
+                        required
+                        value={userData.email || ''}
+                        onChange={saveUserData} />
+                    <TextField
+                        color='secondary'
+                        label='Nickname'
+                        name='nickname'
+                        required
+                        inputProps={{ pattern: "^[a-zA-Z0-9]*$" }}
+                        value={userData.nickname || ''}
+                        onChange={saveUserData} />
+                    <TextField
+                        color='secondary'
+                        label='Senha'
+                        type='password'
+                        name='password'
+                        required
+                        value={userData.password || ''}
+                        onChange={saveUserData}
+                        inputProps={role === 'ADMIN' ? { minLength: 10 } : { minLength: 6 }}
+                    />
+                    {role === 'BANDA' ?
                         <TextField
                             color='secondary'
-                            label='Nome'
-                            name='name'
-                            required
-                            value={userData.name || ''}
-                            onChange={saveUserData} />
-                        <TextField
-                            color='secondary'
-                            label='E-mail'
-                            type='email'
-                            name='email'
-                            required
-                            value={userData.email || ''}
-                            onChange={saveUserData} />
-                        <TextField
-                            color='secondary'
-                            label='Nickname'
-                            name='nickname'
-                            required
-                            inputProps={{ pattern: "^[a-zA-Z0-9]*$" }}
-                            value={userData.nickname || ''}
-                            onChange={saveUserData} />
-                        <TextField
-                            color='secondary'
-                            label='Senha'
-                            type='password'
-                            name='password'
-                            required
-                            value={userData.password || ''}
-                            onChange={saveUserData}
-                            inputProps={role === 'ADMIN' ? { minLength: 10 } : { minLength: 6 }}
-                        />
-                        {role === 'BANDA' ?
-                            <TextField
-                                color='secondary'
-                                label='Descrição'
-                                name='description'
-                                value={userData.description || ''}
-                                onChange={saveUserData}>
-                            </TextField> : ''
-                        }
-                        <Box mt={4} mb={2} >
-                            <Button variant="contained" color='secondary' type='onSubmit'>cadastrar</Button>
-                        </Box>
-                    </S.FormWrapper>
+                            label='Descrição'
+                            name='description'
+                            value={userData.description || ''}
+                            onChange={saveUserData}>
+                        </TextField> : ''
+                    }
+                    <Box mt={4} mb={2} >
+                        <Button variant="contained" color='secondary' type='onSubmit'>cadastrar</Button>
+                    </Box>
+                </S.FormWrapper>
                 <S.ClickedTypog onClick={() => history.goBack()}>Voltar</S.ClickedTypog>
             </S.ContentWrapper>
             <Footer />

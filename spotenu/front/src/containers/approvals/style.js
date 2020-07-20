@@ -13,9 +13,38 @@ export const PageWrapper = styled.div`
 `
 export const ContentWrapper = styled(Paper)`
     box-sizing: border-box;
-    width: 40%;
+    width: 30%;
     padding: 15px;
-    margin: 50px 0
+    margin: 50px 0;
+    @media only screen and (max-width: 1100px){
+        width: 40%;
+    }
+    @media only screen and (max-width: 767px){
+        width: 50%;
+    }
+    @media only screen and (max-width: 480px){
+        width: 60%;
+    }
+`
+export const FilterWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 5px;
+    @media only screen and (max-width: 1100px){
+        flex-direction: column;
+        justify-content: center;
+        align-items: left;
+    }
+`
+
+export const ImgWrapper = styled.img`
+    width: 300px;
+    height: 100px;
+    display: block;
+    @media only screen and (max-width: 767px){
+        display: none;
+    }
 `
 export const StyledList = styled.ul`
     list-style: none;

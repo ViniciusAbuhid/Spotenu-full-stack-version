@@ -12,7 +12,9 @@ function UserMenu(props) {
 
     return (
         <div>
-            <S.ImgWrapper src={logo}></S.ImgWrapper>
+            <Box display='flex' justifyContent='center' alignContent='center'>
+                <S.ImgWrapper src={logo}></S.ImgWrapper>
+            </Box>
             <Typography variant='h4' align='center'>
                 Minhas playlists
             </Typography>
