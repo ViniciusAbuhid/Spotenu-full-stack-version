@@ -9,7 +9,7 @@ export const PageWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #FE7E02
+    background-color: #FE7E02;
 `
 export const ContentWrapper = styled(Paper)`
     width: 30%;
@@ -26,6 +26,7 @@ export const ContentWrapper = styled(Paper)`
     }
     @media only screen and (max-width: 480px){
         width: 60%;
+        margin: 50px 0 100px 0;
     }
 `
 export const ImgWrapper = styled.img`
@@ -43,7 +44,7 @@ export const FormWrapper = styled.form`
 export const ClickedTypog = styled(Typography)`
     text-align: center;
     &:hover {
-    color: #0063a5;
+    color: #FE7E02;
     cursor: pointer
         }
 `

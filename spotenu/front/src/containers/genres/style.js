@@ -24,6 +24,7 @@ export const ContentWrapper = styled(Paper)`
     }
     @media only screen and (max-width: 480px){
         width: 60%;
+        margin: 50px 0 100px 0;
     }
 `
 export const ImgWrapper = styled.img`
@@ -42,7 +43,7 @@ export const StyledTextField = styled(TextField)`
 `
 export const ClickedTypog = styled(Typography)`
     &:hover {
-    color: #0063a5;
+    color: #FE7E02;
     cursor: pointer
         }
 `

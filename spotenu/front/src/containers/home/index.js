@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import * as S from './style'
 import Header from '../../components/header/index'
 import Footer from '../../components/footer/index'
+import music from '../../assets/listening.png'
 import MenuAdmin from './menuAdmin'
 import { connect } from 'react-redux'
 import { getAllPls } from '../../actions/playListsAction'
 import { getAllAlbuns } from '../../actions/albunsAction'
 import UserMenu from './userMenu'
 import ArtistMenu from './artistMenu'
-import { Box, IconButton } from '@material-ui/core'
+import { Box, IconButton, Typography } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import alternativeLogo from '../../assets/SPOTENU3.png'
 import { push } from 'connected-react-router'
@@ -63,6 +64,9 @@ function Home(props) {
                 return (
                     <Box display='flex' flexDirection='column' alignItems='center'>
                         <S.StyledLogo src={alternativeLogo} />
+                        <Box mt={2}>
+                            <Typography align='center'>O que você quer escutar?</Typography>
+                        </Box>
                         <Box 
                             mt={3} 
                             display='flex' 
@@ -75,13 +79,13 @@ function Home(props) {
                             </IconButton>
                             <form onSubmit={goSearch}>
                                 <S.StyledTextField
-                                    placeholder='O que você quer escutar?'
                                     onChange={saveInput}
                                     value={search.input || ''}
                                     color='secondary'
                                     autoFocus={true}
                                     required />
                             </form>
+                            {/* <S.StyledBackGround src={music}/> */}
                         </Box>
                     </Box>
                 )

@@ -7,6 +7,7 @@ import { sendSignupData } from '../../actions/usersActions'
 import Header from '../../components/header/index'
 import Footer from '../../components/footer/index'
 import { history } from '../../App'
+import logoHeader from '../../assets/SPOTENU-HEADER.png'
 
 function Signup(props) {
 
@@ -31,23 +32,26 @@ function Signup(props) {
 
     function sendSignupData(e) {
         e.preventDefault()
-        if(role === ''){
+        if (role === '') {
             alert('Por favor, especifique um tipo de usuário')
         }
-        else{
-        const updatedUserData = {
-            ...userData, role
-        }
-        props.sendSignupData(updatedUserData)
+        else {
+            const updatedUserData = {
+                ...userData, role
+            }
+            props.sendSignupData(updatedUserData)
         }
     }
 
     return (
         <S.PageWrapper>
-            <Header
-                showSearch={window.localStorage.getItem('role') === 'ADMIN' ? null : true}
-                logoutIcon={window.localStorage.getItem('role') === 'ADMIN' ? null : true} />
-            <S.ContentWrapper elevation={10}>
+            {role === 'ADMIN' ? <Header /> :(
+                <S.Header>
+                    <S.LogoWrapper src={logoHeader} />
+                </S.Header>)}
+            <S.ContentWrapper
+                margin={role === 'ADMIN' ? '50px 0 100px 0' : '50px 0'}
+                elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 {role === 'ADMIN' ?
                     <Typography variant='h4' align='center'>Cadastro de novo administrador</Typography> :
@@ -137,7 +141,13 @@ function Signup(props) {
                 </S.FormWrapper>
                 <S.ClickedTypog onClick={() => history.goBack()}>Voltar</S.ClickedTypog>
             </S.ContentWrapper>
-            <Footer />
+            {role === 'ADMIN' ? (
+                <Footer />) : (
+                    <S.Footer align='center'>
+                        <Typography color='primary' align='center' variant='h6' >
+                            Feito por Vinícius Abuhid
+                </Typography>
+                    </S.Footer>)}
         </S.PageWrapper>
     )
 }

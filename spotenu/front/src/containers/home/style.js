@@ -9,9 +9,11 @@ export const PageWrapper = styled.div`
     align-items: center;
     background-color: #FE7E02;
     justify-content: space-between;
+    @media only screen and (max-width: 480px){
+        justify-content: flex-start;
+    }
 `
 export const ContentWrapper = styled(Paper)`
-    box-sizing: border-box;
     width: 30%;
     padding: 15px;
     margin: 50px 0;
@@ -23,6 +25,7 @@ export const ContentWrapper = styled(Paper)`
     }
     @media only screen and (max-width: 480px){
         width: 60%;
+        margin: 50px 0 100px 0;
     }
 `
 export const ImgWrapper = styled.img`
@@ -38,6 +41,7 @@ export const StyledList = styled.ul`
 `
 export const StyledTextField = styled(TextField)`
     width: 300px;
+    color: red;
 `
 export const FormWrapper = styled.form`
     display: flex;
@@ -45,11 +49,13 @@ export const FormWrapper = styled.form`
 `
 export const StyledLogo = styled.img`
     width: 400px;
-    height: 133px
+    height: 133px;
+    @media only screen and (max-width: 767px){
+        display: none;
 `
 export const ClickedTypog = styled(Typography)`
     &:hover {
-    color: #0063a5;
+    color: #FE7E02;
     cursor: pointer
         }
 `
@@ -59,4 +65,11 @@ export const AnotherFormWrapper = styled.form`
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+`
+export const StyledBackGround = styled.img`
+        display: none;
+        @media only screen and (max-width: 767px){
+            display: block;
+            width: 70%
+        }
 `

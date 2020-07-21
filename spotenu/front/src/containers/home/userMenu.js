@@ -26,7 +26,7 @@ function UserMenu(props) {
                                 display="flex"
                                 justifyContent='space-between'
                                 mt={3}>
-                                <Typography variant='h5'>{pl.name}</Typography>
+                                <Typography variant='h5' color='secondary'>{pl.name}</Typography>
                                 <DeleteIcon size='big'
                                     color='disabled' />
                             </Box>
@@ -42,7 +42,7 @@ function UserMenu(props) {
                                         alignItems='center'
                                         mb={2}>
                                         <Typography>Tornar Playlist pública</Typography>
-                                        <Switch color='secondary' />
+                                        <Switch color='primary' />
                                     </Box>
                                     <MusicMenu componentInfo={{ component: 'pl', componentName: pl.name }} />
                                 </div>

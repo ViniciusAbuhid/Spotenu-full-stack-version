@@ -4,6 +4,7 @@ import Header from '../../components/header/index'
 import Footer from '../../components/footer/index'
 import { TextField, Typography, Box, Button } from '@material-ui/core'
 import logo from '../../assets/SPOTENU.png'
+import logoHeader from '../../assets/SPOTENU-HEADER.png'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
@@ -38,9 +39,9 @@ function Login(props) {
 
     return (
         <S.PageWrapper>
-            <Header
-                showSearch={true}
-                logoutIcon={true}/>
+            <S.Header>
+                <S.LogoWrapper src={logoHeader}/>
+            </S.Header>
             <S.ContentWrapper elevation={10}>
                 <S.ImgWrapper src={logo}></S.ImgWrapper>
                 <S.FormWrapper onSubmit={sendLoginData}>
@@ -66,7 +67,11 @@ function Login(props) {
                 </S.FormWrapper>
                 <S.Invitation onClick={props.goToSignup}>Não tem cadastro? Clique aqui</S.Invitation>
             </S.ContentWrapper>
-            <Footer />
+            <S.Footer align='center'>
+                <Typography color='primary' align='center'  variant='h6' >
+                    Feito por Vinícius Abuhid
+                </Typography>
+            </S.Footer>
         </S.PageWrapper>
     )
 }
