@@ -33,11 +33,11 @@ function Header(props) {
     return (
         <S.ComponentWrapper>
             <S.Header>
+                <S.InvisibleSpan/>
                 <S.ImgWrapper src={logo} onClick={props.goToHomePage} />
                 {props.logoutIcon || (
                     <S.Logout onClick={logout}>
                         <AccountCircleIcon fontSize="large" />
-                            Logout
                     </S.Logout>)}
             </S.Header>
             {props.showSearch || (

@@ -47,7 +47,7 @@ function MenuAdmin(props) {
             <Typography align='center'>O que deseja fazer?</Typography>
             </Box>
             <S.AnotherFormWrapper onSubmit={goDoTheTak}>
-            <NativeSelect onChange={handleTaskChange} value={task}>
+            <NativeSelect onChange={handleTaskChange} value={task} color='secondary'>
                     <option value="" disabled>selecione</option>
                     <option value='BANDS'>Gerenciar bandas</option>
                     <option value='GENRES'>Gerenciar gêneros</option>

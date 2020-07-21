@@ -65,6 +65,7 @@ function MusicMenu(props) {
             </Box>
             {toggleMusic && (
                 <S.FormWrapper onSubmit={sendMusicData}>
+                    <Box display='flex' flexDirection='column'>
                     <TextField
                         placeholder='Nome da música'
                         color='secondary'
@@ -73,14 +74,16 @@ function MusicMenu(props) {
                         required
                         value={musicData.name || ''}
                         onChange={saveMusicData} />
-                    <TextField
-                        color='secondary'
-                        placeholder='Link'
-                        size='small'
-                        name='link'
-                        required
-                        value={musicData.link || ''}
-                        onChange={saveMusicData} />
+                    <Box mb={1} mt={1}>
+                        <TextField
+                            color='secondary'
+                            placeholder='Link'
+                            size='small'
+                            name='link'
+                            required
+                            value={musicData.link || ''}
+                            onChange={saveMusicData} />
+                    </Box>
                     <Button
                         variant='contained'
                         color='secondary'
@@ -88,6 +91,7 @@ function MusicMenu(props) {
                         type='onSubmit' >
                         Adicionar
                     </Button>
+                    </Box>
                 </S.FormWrapper>)}
         </div>
     )

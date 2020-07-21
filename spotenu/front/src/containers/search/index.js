@@ -25,7 +25,7 @@ function SearchSession(props) {
                 {props.searchedTerm ? (
                     <div>
                         <Typography align='center'>
-                            Resultado da busca para '{props.searchedTerm}'
+                            Resultado da busca para '{props.searchedTerm}':
                         </Typography>
                         {props.searchedMusics.length ? (
                             <div>

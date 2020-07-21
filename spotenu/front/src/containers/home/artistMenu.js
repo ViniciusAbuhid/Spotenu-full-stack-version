@@ -29,7 +29,7 @@ function ArtistMenu(props) {
                                 display="flex"
                                 justifyContent='space-between'
                                 mt={3}>
-                                <Typography variant='h5'>{album.name}</Typography>
+                                <Typography variant='h5' color='secondary'>{album.name}</Typography>
                                 <DeleteIcon
                                     onClick={()=>props.deleteAlbum(album.id)}
                                     size='big'

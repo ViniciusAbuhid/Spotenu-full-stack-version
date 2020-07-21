@@ -57,17 +57,17 @@ export function Approvals(props) {
                 <S.FilterWrapper>
                     <S.ClickedTypog
                         onClick={() => setFilter('approved')}
-                        color={filter === 'approved' ? 'secondary' : ''} >
+                        color={filter === 'approved' ? 'primary' : ''} >
                         Aprovadas
                     </S.ClickedTypog>
                     <S.ClickedTypog
                         onClick={() => setFilter('not approved')}
-                        color={filter === 'not approved' ? 'secondary' : ''} >
+                        color={filter === 'not approved' ? 'primary' : ''} >
                         Aguardando aprovação
                     </S.ClickedTypog>
                     <S.ClickedTypog
                         onClick={() => setFilter('')}
-                        color={filter === '' ? 'secondary' : ''} >
+                        color={filter === '' ? 'primary' : ''} >
                         Todas
                     </S.ClickedTypog>
                 </S.FilterWrapper>
@@ -75,7 +75,7 @@ export function Approvals(props) {
                     {props.bandsList.length > 0 ? filterBands(props.bandsList).map((band, index) => {
                         return <li key={index}>
                             <Box mt={2}>
-                                <Typography variant='h5'>{band.name}</Typography>
+                                <Typography variant='h5' color='secondary'>{band.name}</Typography>
                             </Box>
                             <S.ListWrapper>
                                 <li><Typography>{band.nickname}</Typography></li>

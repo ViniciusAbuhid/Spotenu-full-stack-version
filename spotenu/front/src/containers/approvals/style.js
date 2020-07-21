@@ -24,6 +24,7 @@ export const ContentWrapper = styled(Paper)`
     }
     @media only screen and (max-width: 480px){
         width: 60%;
+        margin: 50px 0 100px 0;
     }
 `
 export const FilterWrapper = styled.div`
@@ -55,7 +56,7 @@ export const ListWrapper = styled.ul`
 `
 export const ClickedTypog = styled(Typography)`
     &:hover {
-    color: #0063a5;
+    color: #FE7E02;
     cursor: pointer
         }
 `
