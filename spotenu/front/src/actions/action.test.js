@@ -2,6 +2,7 @@ import { setAlbuns, getAllAlbuns, createAlbum, deleteAlbuns } from './albunsActi
 import { setBands, getAllBands, approveBand, disapproveBand, baseURL } from './bandsAction'
 import { addNewGenre, setAllGenres, deleteGenre, getAllGenres } from './genresAction'
 import { setMusicList, setSearchedMusics, setSearchedTerm } from './musicsAction'
+import { sendSignupData, sendLoginData } from './usersActions'
 import axios from 'axios'
 import { push } from 'connected-react-router'
 import { routes } from '../router/index'
@@ -126,5 +127,44 @@ describe('testing music actions', () => {
         const result = setSearchedTerm('term')
         expect(result.type).toBe('SEARCH_FOR')
         expect(result.payload.searchedTerm).toBe('term')
+    })
+})
+
+describe('testing usersAction', () => {
+    beforeEach(() => {
+        mockedDispatch = jest.fn()
+    })
+    it('testing signup', async () => {
+        let updatedUserData = { role: 'ADMIN' }
+        axios.post = jest.fn({
+            data: {
+                role: 'ADMIN',
+                accessToken: 'accessToken'
+            }
+        })
+        let headers = {
+            headers: {
+                authorization: window.localStorage.getItem('token')
+            }
+        }
+        await sendSignupData(updatedUserData)(mockedDispatch)
+        expect(axios.post).toHaveBeenCalledWith(`http://localhost:3001/user/signup`, updatedUserData, headers)
+        updatedUserData = { role: 'BANDA' }
+        await sendSignupData(updatedUserData)(mockedDispatch)
+        expect(axios.post).toHaveBeenCalledWith(`http://localhost:3001/user/signup`, updatedUserData)
+    })
+    it('testing login',  async ()=>{
+        let updatedUserData = { role: 'BANDA' }
+        axios.post = jest.fn(() => { 
+            return {
+                data: {
+                    accessToken: 'accessToken',
+                     role: 'role'
+                    }
+            }
+        })
+        await sendLoginData(updatedUserData)(mockedDispatch)
+        expect(axios.post).toHaveBeenCalled()
+        expect(mockedDispatch).toHaveBeenCalledWith(push(routes.home))
     })
 })

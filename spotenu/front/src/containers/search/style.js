@@ -9,13 +9,11 @@ export const PageWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: #FE7E02
+    background-color: #FE7E02;
 `
 export const ContentWrapper = styled(Paper)`
     width: 30%;
     padding: 15px;
-    display: flex;
-    flex-direction: column;
     margin: 50px 0;
     @media only screen and (max-width: 1100px){
         width: 40%;
@@ -28,7 +26,6 @@ export const ContentWrapper = styled(Paper)`
         margin: 50px 0 100px 0;
     }
 `
-
 export const ClickedTypog = styled(Typography)`
     text-align: center;
     &:hover {
@@ -43,8 +40,20 @@ export const ImgWrapper = styled.img`
     width: 300px;
     height: 100px;
     display: block;
-    margin: 0 auto;
     @media only screen and (max-width: 767px){
         display: none;
     }
+`
+export const BackgroundWrapper = styled.div`
+    position: fixed;
+    display: ${props => props.display};
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+    cursor: pointer;
 `

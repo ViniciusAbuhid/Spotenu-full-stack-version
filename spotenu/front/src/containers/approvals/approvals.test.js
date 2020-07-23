@@ -31,10 +31,7 @@ describe('testing approve band', () => {
             disapproveBand={mockedDisapproveBand}
             goToHomePage={mockedGoToHomePage}
         />)
-        console.log(component.instance())
-        component.instance().approveBand('id')
         const buttons = component.find(ButtonGroup)
         expect(buttons).toHaveLength(3)
-        expect(mockedApproval).toHaveBeenCalledWith('id')
     })
 })

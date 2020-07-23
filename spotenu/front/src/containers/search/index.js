@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import * as S from './style'
 import Header from '../../components/header/index'
 import Footer from '../../components/footer/index'
@@ -9,70 +9,114 @@ import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
 import logo from '../../assets/SPOTENU.png'
 import { history } from '../../App'
+import MusicInfo from '../../components/musicInfo'
 
 function SearchSession(props) {
 
+    const [pageMin, setPageMin] = useState(0)
+    const [pageMax, setPageMax] = useState(10)
+    const [toggle, setToggle] = useState(false)
+    const [musicInfo, setMusicInfo] = useState('')
+
+    function handleMusicInfo(music) {
+            console.log(music)
+            setMusicInfo(music)
+            setToggle(true)
+    }
+
+    function handleResultDisplay(page) {
+        setPageMin(page)
+        setPageMax(page + 10)
+        console.log(pageMin, pageMax)
+    }
+
     return (
-        <S.PageWrapper>
-            <Header />
-            <S.ContentWrapper elevation={10}>
-                <Box mb={props.searchedTerm ? 2 : 0}>
-                    <S.ImgWrapper src={logo}></S.ImgWrapper>
-                    <Typography align='center' variant='h4' >
-                        Pesquisar músicas
-                    </Typography>
-                </Box>
-                {props.searchedTerm ? (
-                    <div>
-                        <Typography align='center'>
-                            Resultado da busca para '{props.searchedTerm}':
-                        </Typography>
-                        {props.searchedMusics.length ? (
-                            <div>
-                                {props.searchedMusics.map((music, index) => {
-                                    if ((props.searchedMusics.length - 1) % 10 === 0 
-                                        && 
-                                        index === (props.searchedMusics.length - 1) 
-                                        &&
-                                        props.searchedMusics.length >= 10
-                                        ){}
-                                    else {
-                                        return (
-                                            <Box
-                                                key={index}
-                                                mb={2}
-                                                display='flex'
-                                                justifyContent='space-between'>
-                                                <Box display='flex'>
-                                                    <PlayCircleFilledIcon />
-                                                    <Typography>{music.name}</Typography>
-                                                </Box>
-                                            </Box>
-                                        )
-                                    }
-                                })}
-                            </div>)
-                            : (
-                                <Typography align='center'>
-                                    Nenhum registro...
-                                </Typography>)
-                        }
-                        <Box mb={2}>
-                            <Typography align='center'>
-                                Use a barra de pesquisa acima para uma nova busca
-                            </Typography>
+            <S.PageWrapper>
+                <S.BackgroundWrapper 
+                display={toggle? 'block' : 'none'}
+                onClick={()=>setToggle(false)}/>
+                <Header />
+                <S.ContentWrapper elevation={10}>
+                    <Box mb={props.searchedTerm ? 2 : 0} >
+                        <Box display='flex' justifyContent='center' alignContent='center'>
+                            <S.ImgWrapper src={logo}></S.ImgWrapper>
                         </Box>
-                    </div>) : (
-                        <Box mb={3} mt={3}>
+                        <Typography align='center' variant='h4' >
+                            Pesquisar músicas
+                    </Typography>
+                    </Box>
+                    {props.searchedTerm ? (
+                        <div>
                             <Typography align='center'>
-                                Use a barra de pesquisa acima para fazer a sua busca
+                                Resultado da busca para '{props.searchedTerm}':
                         </Typography>
-                        </Box>)
-                }
-                <S.ClickedTypog onClick={() => history.goBack()}>Voltar</S.ClickedTypog>
-            </S.ContentWrapper>
-            <Footer />
-        </S.PageWrapper>
+                            {props.searchedMusics.length ? (
+                                <div>
+                                    {props.searchedMusics.map((music, index) => {
+                                        if (index >= pageMin && index < pageMax) {
+                                            return (
+                                                <Box
+                                                    onClick={() => handleMusicInfo(music)}
+                                                    key={index}
+                                                    mt={2}
+                                                    display='flex'
+                                                    justifyContent='space-between'>
+                                                    <Box display='flex'>
+                                                        <PlayCircleFilledIcon />
+                                                        <Typography>{music.name}</Typography>
+                                                    </Box>
+                                                    <Box
+                                                        display=
+                                                        {toggle && musicInfo.name === music.name ? 'flex' : 'none'}>
+                                                        <MusicInfo
+                                                        name={music.name}
+                                                        link={music.link}
+                                                        />
+                                                    </Box>
+                                                </Box>
+                                            )
+                                        }
+                                    })}
+                                    <Box display='flex' justifyContent='center' mb={2} mt={2}>
+                                        <Typography>Página:</Typography>
+                                        {props.searchedMusics.map((music, index) => {
+                                            if (index % 10 === 0) {
+                                                return (
+                                                    <Box ml={2}>
+                                                        <S.ClickedTypog
+                                                            key={index}
+                                                            onClick={() => handleResultDisplay(index)}>
+                                                            {index === 0 ? 1 : (index / 10 + 1)}
+                                                        </S.ClickedTypog>
+                                                    </Box>
+                                                )
+                                            }
+                                        })}
+                                    </Box>
+                                </div>)
+                                : (
+                                    <Box mt={2} mb={2}>
+                                        <Typography align='center'>
+                                            Nenhum registro...
+                                </Typography>
+                                    </Box>)
+                            }
+                            <Box mb={2}>
+                                <Typography align='center'>
+                                    Use a barra de pesquisa acima para uma nova busca
+                            </Typography>
+                            </Box>
+                        </div>) : (
+                            <Box mb={3} mt={3}>
+                                <Typography align='center'>
+                                    Use a barra de pesquisa acima para fazer a sua busca
+                        </Typography>
+                            </Box>)
+                    }
+                    <S.ClickedTypog onClick={() => history.goBack()}>Voltar</S.ClickedTypog>
+                </S.ContentWrapper>
+                <Footer />
+            </S.PageWrapper>
     )
 }
 
