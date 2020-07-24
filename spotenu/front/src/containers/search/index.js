@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react'
 import * as S from './style'
 import Header from '../../components/header/index'
 import Footer from '../../components/footer/index'
-import { Typography, Button, Box, Grid } from '@material-ui/core'
+import { Typography, Box} from '@material-ui/core'
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import { routes } from '../../router/index'
 import logo from '../../assets/SPOTENU.png'
 import { history } from '../../App'
-import MusicInfo from '../../components/musicInfo'
+import MusicInfo, { ClickedTypog } from '../../components/musicInfo'
 
 function SearchSession(props) {
 
@@ -19,7 +19,6 @@ function SearchSession(props) {
     const [musicInfo, setMusicInfo] = useState('')
 
     function handleMusicInfo(music) {
-            console.log(music)
             setMusicInfo(music)
             setToggle(true)
     }
@@ -27,14 +26,17 @@ function SearchSession(props) {
     function handleResultDisplay(page) {
         setPageMin(page)
         setPageMax(page + 10)
-        console.log(pageMin, pageMax)
+    }
+
+    function turnOffToggle(){
+        setToggle(false)
     }
 
     return (
             <S.PageWrapper>
                 <S.BackgroundWrapper 
                 display={toggle? 'block' : 'none'}
-                onClick={()=>setToggle(false)}/>
+                onClick={turnOffToggle}/>
                 <Header />
                 <S.ContentWrapper elevation={10}>
                     <Box mb={props.searchedTerm ? 2 : 0} >
@@ -56,21 +58,27 @@ function SearchSession(props) {
                                         if (index >= pageMin && index < pageMax) {
                                             return (
                                                 <Box
-                                                    onClick={() => handleMusicInfo(music)}
                                                     key={index}
                                                     mt={2}
                                                     display='flex'
                                                     justifyContent='space-between'>
                                                     <Box display='flex'>
                                                         <PlayCircleFilledIcon />
-                                                        <Typography>{music.name}</Typography>
+                                                        <ClickedTypog
+                                                        onClick={() => handleMusicInfo(music)}>
+                                                        {music.name}
+                                                        </ClickedTypog>
                                                     </Box>
                                                     <Box
                                                         display=
-                                                        {toggle && musicInfo.name === music.name ? 'flex' : 'none'}>
+                                                        {toggle && musicInfo.name === music.name ?
+                                                        'flex' : 'none'}>
                                                         <MusicInfo
                                                         name={music.name}
                                                         link={music.link}
+                                                        album={music.album}
+                                                        artist={music.artist}
+                                                        goBack={turnOffToggle}
                                                         />
                                                     </Box>
                                                 </Box>
