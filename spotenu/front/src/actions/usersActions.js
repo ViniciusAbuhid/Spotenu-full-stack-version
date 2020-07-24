@@ -15,15 +15,15 @@ export const sendSignupData = (updatedUserData) => async (dispatch) => {
             await axios.post(`${baseURL}/signup`, updatedUserData, headers) :
             await axios.post(`${baseURL}/signup`, updatedUserData)
 
-        const { accessToken, role } = result.data
-        role !== 'ADMIN' && window.localStorage.setItem('token', accessToken)
-        role !== 'ADMIN' && window.localStorage.setItem('role', role)
-        role === 'ADMIN' && alert('Administrador cadastrado com sucesso')
         if (updatedUserData.role === 'BANDA') {
             alert('O seu cadastro foi enviado e será analisado em breve por nossa equipe')
             dispatch(push(routes.login))
         }
         else {
+            const { accessToken, role } = result.data
+            role !== 'ADMIN' && window.localStorage.setItem('token', accessToken)
+            role !== 'ADMIN' && window.localStorage.setItem('role', role)
+            role === 'ADMIN' && alert('Administrador cadastrado com sucesso')
             dispatch(push(routes.home))
         }
     }

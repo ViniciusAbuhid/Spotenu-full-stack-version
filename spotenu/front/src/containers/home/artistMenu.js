@@ -44,7 +44,8 @@ function ArtistMenu(props) {
                                         Recolher Álbum
                                     </S.ClickedTypog>
                                     </Box>
-                                    <MusicMenu componentInfo={{ component: 'album', componentId: album.id }} />
+                                    <MusicMenu 
+                                    componentInfo={{ component: 'album', componentId: album.id }}/>
                                 </Box>
                             ) : (
                                     <S.ClickedTypog

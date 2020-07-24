@@ -89,11 +89,14 @@ export class MusicDataBase extends BaseDataBase {
 
     public async getMusicByName(name:string){
         const result = await this.getConnection().raw(`
-        select Musics_Spotenu.link, Albums_Spotenu.name, Musics_Spotenu.name from Musics_Spotenu
-        join Albums_Spotenu
-        on Musics_Spotenu.album_id = Albums_Spotenu.id
-        where Musics_Spotenu.name like '%${name}%'
-        order by Musics_Spotenu.name;
+        select mus.link, a.name as album, mus.name, u.name as artist
+        from Musics_Spotenu as mus
+        join Albums_Spotenu as a
+        on mus.album_id = a.id
+        join Users_Spotenu as u
+        on a.artist_id = u.id
+        where mus.name like '%${name}%'
+        order by mus.name;
         `)
         return result[0]
     }
