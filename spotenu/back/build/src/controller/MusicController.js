@@ -76,10 +76,8 @@ class MusicController {
     getAllAlbuns(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log(req.headers.authorization || req.headers.Authorization);
                 const verifyToken = new TokenGenerator_1.default().
                     verifyToken(req.headers.authorization || req.headers.Authorization);
-                console.log(verifyToken.id);
                 const result = yield new MusicDataBase_1.MusicDataBase().getAllAlbunsById(verifyToken.id);
                 res.status(200).send(result);
             }
@@ -188,9 +186,7 @@ class MusicController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const result = yield MusicController.musicBusiness.getMusicByName(req.query.name);
-                res.status(200).send({
-                    message: result
-                });
+                res.status(200).send(result);
             }
             catch (err) {
                 res.status(400).send({

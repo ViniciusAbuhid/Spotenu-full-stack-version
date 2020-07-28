@@ -88,7 +88,6 @@ class UserController {
     }
     getAllBands(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('to no controler');
             try {
                 const verifyToken = new TokenGenerator_1.default().verifyToken(req.headers.authorization || req.headers.Authorization);
                 if (verifyToken.role !== UserModel_1.UserRoles.ADMIN) {
@@ -128,7 +127,6 @@ class UserController {
     reproveBand(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log('to no controleer paaai');
                 yield UserController.userBusiness.reproveBand(req.params.id);
                 res.status(200).send("banda reprovada com sucesso");
             }

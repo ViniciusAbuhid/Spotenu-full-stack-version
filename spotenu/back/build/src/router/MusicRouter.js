@@ -16,4 +16,4 @@ exports.musicRouter.delete('/delete/album/:id', new MusicController_1.MusicContr
 exports.musicRouter.put('/addMusic', new MusicController_1.MusicController().addMusic);
 exports.musicRouter.delete('/delete/music/:id', new MusicController_1.MusicController().deleteMusic);
 exports.musicRouter.get('/allMusics/:id', new MusicController_1.MusicController().getAllMusicsFromCertainAlbum);
-exports.musicRouter.get('/search/?name', new MusicController_1.MusicController().getMusicByName);
+exports.musicRouter.post('/search', new MusicController_1.MusicController().getMusicByName);

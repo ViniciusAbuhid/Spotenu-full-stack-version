@@ -123,7 +123,17 @@ class MusicDataBase extends BaseDataBase_1.default {
     }
     getMusicByName(name) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.getConnection().select('*').where('Musics_Spotenu', 'like', `%${name}%`);
+            const result = yield this.getConnection().raw(`
+        select mus.link, a.name as album, mus.name, u.name as artist
+        from Musics_Spotenu as mus
+        join Albums_Spotenu as a
+        on mus.album_id = a.id
+        join Users_Spotenu as u
+        on a.artist_id = u.id
+        where mus.name like '%${name}%'
+        order by mus.name;
+        `);
+            return result[0];
         });
     }
 }

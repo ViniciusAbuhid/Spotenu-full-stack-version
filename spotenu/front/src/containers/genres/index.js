@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import * as S from './style'
 import Header from '../../components/header/index'
 import Footer from '../../components/footer/index'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { getAllGenres, deleteGenre, addNewGenre } from '../../actions/genresAction'
 import { Typography, Box, Button, TextField } from '@material-ui/core'
 import logo from '../../assets/SPOTENU.png'
@@ -10,10 +10,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { history } from '../../App'
 
 function Genres(props) {
+    const transition = useDispatch()
     useEffect(() => {
-        props.getAllGenres()
+        transition(getAllGenres())
         window.localStorage.getItem('role') === 'ADIMN' || setRole('ADMIN')
     }, [])
+
+    const genres = useSelector((state) => state.genres)
 
     const [role, setRole] = useState('')
     const [toggleGenre, setToggleGenre] = useState(false)
@@ -43,7 +46,7 @@ function Genres(props) {
                 </Box>
                 <Typography variant='h4' align='center'>Gêneros musicais</Typography>
                 <S.StyledList>
-                    {props.genres ? props.genres.map((genre, index) => {
+                    {genres.allGenres ? genres.allGenres.map((genre, index) => {
                         return (
                             <li key={index}>
                                 <Box
@@ -53,7 +56,7 @@ function Genres(props) {
                                     <Typography variant='h5'>{genre.name}</Typography>
                                     {role === 'ADMIN' && <DeleteIcon
                                         size='small'
-                                        onClick={() => props.deleteGenre(genre.id)} />
+                                        onClick={() => transition(deleteGenre(genre.id))} />
                                     }
                                 </Box>
                             </li>
@@ -101,11 +104,11 @@ function Genres(props) {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        genres: state.genres.allGenres
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         genres: state.genres.allGenres
+//     }
+// }
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -115,4 +118,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Genres)
+export default connect(null, mapDispatchToProps)(Genres)

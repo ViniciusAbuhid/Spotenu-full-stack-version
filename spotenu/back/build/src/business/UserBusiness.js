@@ -22,14 +22,12 @@ class UserBusiness {
             const id = this.idGenerator.idGenerator();
             const hash = yield this.hashGenerator.hashGenerator(password);
             yield this.userDataBase.addUser(name, email, nickname, hash, id, role, description);
-            const result = yield this.userDataBase.getUserById(id);
             const accessToken = this.tokenGenerator.generateToken({ id, role });
             return { accessToken, role };
         });
     }
     getAllBands() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('to no bisnes');
             return yield this.userDataBase.getAllBands();
         });
     }
@@ -54,12 +52,11 @@ class UserBusiness {
     getUserByCredential(credential, password) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield this.userDataBase.getUserByCredential(credential);
-            console.log(result[0]);
-            if (!result[0].approved) {
-                throw new Error('Usuário aguardando aprovação');
-            }
             if (result.length <= 0) {
                 throw new Error('infomações inválidas');
+            }
+            if (!result[0].approved) {
+                throw new Error('Usuário aguardando aprovação');
             }
             const checkingPassword = yield this.hashGenerator.verify(password, result[0].password);
             if (!checkingPassword) {

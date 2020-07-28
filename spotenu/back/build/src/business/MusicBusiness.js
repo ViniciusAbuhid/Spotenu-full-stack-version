@@ -20,7 +20,6 @@ class MusicBusiness {
             const id = this.idGenerator.idGenerator();
             yield this.musicDataBase.addGenre(name, id);
             const checkingGenre = yield this.musicDataBase.getGenreById(id);
-            console.log(checkingGenre[0]);
             if (!checkingGenre[0]) {
                 throw new Error('Não foi possível adicionar este gênero agora, tente novamente mais tarde...');
             }
@@ -37,8 +36,7 @@ class MusicBusiness {
             yield this.musicDataBase.deleteRelationBetweenGenreAndAlbum(id);
             const checkingRelation = yield this.musicDataBase.getRelationAlbumAndGenre(id);
             if (checkingRelation.length > 0) {
-                throw new Error(`Não foi possível deletar as relações entre este gênero e os albuns
-            , tente novamente mais tarde...`);
+                throw new Error(`Não foi possível deletar as relações entre este gênero e os albuns, tente novamente mais tarde`);
             }
             yield this.musicDataBase.deleteGenre(id);
             const checkingDel = yield this.musicDataBase.getGenreById(id);
